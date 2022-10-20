@@ -1,1 +1,2 @@
 // TODO: content script
+export {}

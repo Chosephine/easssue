@@ -1,11 +1,15 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import './options.css'
+import '@root/index.css'
 
 const App: React.FC<{}> = () => {
   return (
     <div>
-      <h1>HEllo World!</h1>
-      <img src="biglogo.png" />
+      <img src="smalllogo.png" />
+      <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
     </div>
   )
 }

@@ -14,9 +14,9 @@
     "default_icon": "smalllogo.png"
   },
   "chrome_url_overrides": {
-    "newtab" : "newtab.html"
+    "newtab": "newTab.html"
   },
-  
+
   "permissions": ["storage"],
   "options_page": "options.html",
   "background": {
