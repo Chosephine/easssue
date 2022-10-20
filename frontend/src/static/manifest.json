@@ -1,0 +1,31 @@
+{
+  "name": "extension-test",
+  "description": "Chrome Extension test",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "smalllogo.png",
+    "48": "smalllogo.png",
+    "128": "biglogo.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "React Extension",
+    "default_icon": "smalllogo.png"
+  },
+  "chrome_url_overrides": {
+    "newtab" : "newtab.html"
+  },
+  
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
