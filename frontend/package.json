@@ -8,6 +8,7 @@
   },
   "author": "mintfrog",
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/chrome": "^0.0.181",
     "@types/lodash": "^4.14.186",
     "@types/react": "^18.0.6",

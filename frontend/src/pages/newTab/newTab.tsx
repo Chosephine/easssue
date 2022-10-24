@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { createRoot } from 'react-dom/client'
-import '@root/index.css'
 import KeywordModal from './Modals/Keywords/KeywordComponent';
+import '@root/index.css'
+import { Bookmark } from '@/components/Bookmark'
+import { Searchbar } from '@/components/Searchbar'
+import { NewsBoard } from '@/components/NewsBoard'
 
 const App: React.FC<{}> = () => {
   return (
-    <div>
-      <h1 className="text-3xl text-blue-500 font-bold underline">
-      Hello world!
-    </h1>
-      <img src="biglogo.png" />
+    <div className="flex justify-center bg-cover" style={{ width: "100vw", height: "100vh", backgroundImage: "url(tab-background.jpg)"}}>
+      <div className="w-1/2">
+        <Searchbar/>
+        <NewsBoard/>
+        <Bookmark/>
+      </div>
+      <div>
       <KeywordModal />
+      </div>
     </div>
   )
 }
