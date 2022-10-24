@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { createRoot } from 'react-dom/client'
-import KeywordModal from './Modals/Keywords/KeywordComponent';
+import KeywordModal from '@/components/Modals/Keywords/KeywordComponent';
 import '@root/index.css'
 import { Bookmark } from '@/components/Bookmark'
 import { Searchbar } from '@/components/Searchbar'
@@ -13,8 +13,6 @@ const App: React.FC<{}> = () => {
         <Searchbar/>
         <NewsBoard/>
         <Bookmark/>
-      </div>
-      <div>
       <KeywordModal />
       </div>
     </div>
