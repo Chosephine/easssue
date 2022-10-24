@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import '@root/index.css'
+import KeywordModal from './Modals/Keywords/KeywordComponent';
 
 const App: React.FC<{}> = () => {
   return (
@@ -9,6 +10,7 @@ const App: React.FC<{}> = () => {
       Hello world!
     </h1>
       <img src="biglogo.png" />
+      <KeywordModal />
     </div>
   )
 }
