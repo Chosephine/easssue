@@ -32,7 +32,8 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.css'],
     alias : {
       "@": path.resolve(__dirname, "./src/"),
-      "@root" : path.resolve(__dirname, "./")
+      "@root" : path.resolve(__dirname, "./"),
+      "@modules" : path.resolve(__dirname, "./src/modules/")
     },
   },
   plugins: [
