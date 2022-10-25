@@ -1,7 +1,5 @@
 package com.limemul.easssue.security.auth;
 
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.entity.user.User;
 import com.limemul.easssue.entity.Role;
 import com.limemul.easssue.entity.User;
 import lombok.AllArgsConstructor;

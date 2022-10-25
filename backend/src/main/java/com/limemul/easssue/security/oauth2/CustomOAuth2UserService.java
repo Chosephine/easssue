@@ -1,10 +1,10 @@
 package com.limemul.easssue.security.oauth2;
 
-import com.lemonmul.gamulgamul.entity.user.Gender;
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.entity.user.User;
-import com.lemonmul.gamulgamul.repo.UserRepo;
-import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
+import com.limemul.easssue.entity.Role;
+import com.limemul.easssue.entity.User;
+import com.limemul.easssue.repo.UserRepo;
+import com.limemul.easssue.security.auth.PrincipalDetails;
+import com.nimbusds.openid.connect.sdk.claims.Gender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -58,6 +58,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return PrincipalDetails.of(savedUser, user.getAttributes());
     }
 
+    // TODO
+    // user entity를 OAuth2UserInfo에 맞게 고치거나, OAuth2UserInfo를 바꾸거나...
     private User createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
         LocalDateTime now = LocalDateTime.now();
         User user = User.of(
@@ -72,6 +74,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return userRepository.saveAndFlush(user);
     }
 
+    // TODO
+    // user에 getter, setter 추가하고,
+    // 위와 마찬가지로 고쳐서 수정필요
     private User updateUser(User user, OAuth2UserInfo userInfo) {
         if (userInfo.getName() != null && !user.getName().equals(userInfo.getName())) {
             user.setName(userInfo.getName());

@@ -1,8 +1,8 @@
 package com.limemul.easssue.security.oauth2;
 
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.security.jwt.JwtProperties;
-import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
+import com.limemul.easssue.entity.Role;
+import com.limemul.easssue.security.jwt.JwtProperties;
+import com.limemul.easssue.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
-import static com.lemonmul.gamulgamul.security.oauth2.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.limemul.easssue.security.oauth2.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Component
 @RequiredArgsConstructor

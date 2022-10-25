@@ -1,10 +1,10 @@
 package com.limemul.easssue.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lemonmul.gamulgamul.api.dto.user.LoginRequestDto;
-import com.lemonmul.gamulgamul.api.dto.user.LoginResponseDto;
-import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
-import com.lemonmul.gamulgamul.security.redis.RedisService;
+import com.limemul.easssue.api.dto.user.LoginRequestDto;
+import com.limemul.easssue.api.dto.user.LoginResponseDto;
+import com.limemul.easssue.security.auth.PrincipalDetails;
+import com.limemul.easssue.security.redis.RedisService;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

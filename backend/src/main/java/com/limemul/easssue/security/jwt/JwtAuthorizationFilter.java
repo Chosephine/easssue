@@ -1,7 +1,7 @@
 package com.limemul.easssue.security.jwt;
 
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
+import com.limemul.easssue.entity.Role;
+import com.limemul.easssue.security.auth.PrincipalDetails;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;

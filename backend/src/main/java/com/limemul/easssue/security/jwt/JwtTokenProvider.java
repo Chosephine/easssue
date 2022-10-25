@@ -1,9 +1,9 @@
 package com.limemul.easssue.security.jwt;
 
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.entity.user.User;
-import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
-import com.lemonmul.gamulgamul.service.UserService;
+import com.limemul.easssue.entity.Role;
+import com.limemul.easssue.entity.User;
+import com.limemul.easssue.security.auth.PrincipalDetails;
+import com.limemul.easssue.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,7 +44,7 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public static User getUserFromJwtToken(UserService userService,HttpHeaders headers){
+    public static User getUserFromJwtToken(UserService userService, HttpHeaders headers){
         String token = Objects.requireNonNull(headers.get(JwtProperties.HEADER_STRING)).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
         String email = JwtTokenProvider.getEmail(token);
         return userService.getUserInfoByEmail(email);

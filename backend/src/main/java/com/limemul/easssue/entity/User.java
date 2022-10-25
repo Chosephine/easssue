@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,4 +34,20 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    private User(String profileId, String fullName, String givenName, String familyName, String profileImg, String email, String wordCloudImg, Role role) {
+        this.profileId = profileId;
+        this.fullName = fullName;
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.profileImg = profileImg;
+        this.email = email;
+        this.wordCloudImg = wordCloudImg;
+        this.role = role;
+
+    }
+
+    public static User of(String profileId, String fullName, String givenName, String familyName, String profileImg, String email, String wordCloudImg, Role role) {
+        return new User(profileId, fullName, givenName, familyName, profileImg, email,wordCloudImg, role);
+    }
 }
