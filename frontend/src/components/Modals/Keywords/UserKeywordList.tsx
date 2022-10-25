@@ -1,30 +1,58 @@
-import { RootState } from "@/modules/store";
-import { FC } from "react";
-import { useSelector, useDispatch } from "react-redux"
-import { removeKeyword } from "@modules/keyWordReducer";
+import { RootState } from '@/modules/store';
+import { FC, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { removeKeyword } from '@modules/keyWordReducer';
 
 const UserKeyword: FC = () => {
-  const { keywords } = useSelector(
-    (state : RootState) => {
-      // console.log(state);
-      return state.persistedReducer.keyWordReducer;
-    }
-  )
+  const { keywords } = useSelector((state: RootState) => {
+    // console.log(state);
+    return state.persistedReducer.keyWordReducer;
+  });
   console.log(keywords);
   const dispatch = useDispatch();
-  const removeKeywordButton = (keywordId :number) => {
-    dispatch(removeKeyword(keywordId))
-  }
-  return <>
-  <div>
-  {keywords.map(keyword => {
-    return(<div className="m-1" key={keyword.kwdId}>
-      {keyword.kwdName}
-      <button className="p-2" onClick={()=>removeKeywordButton(keyword.kwdId)}> 삭제 </button>
-    </div>)
-    })}
-  </div>
-  </>;
-}
- 
+  const removeKeywordButton = (keywordId: number) => {
+    dispatch(removeKeyword(keywordId));
+  };
+  return (
+    <DragDropContext onDragEnd={() => {}}>
+      <Droppable droppableId="keyword-list">
+        {(provided) => (
+          <ul {...provided.droppableProps} ref={provided.innerRef}>
+            {keywords.map((keyword, index) => {
+              return (
+                <Draggable
+                  draggableId={`${keyword.kwdId}`}
+                  index={index}
+                  key={keyword.kwdId}
+                >
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                      className="m-1"
+                      key={keyword.kwdId}
+                    >
+                      {keyword.kwdName}
+                      <button
+                        className="p-2"
+                        onClick={() => removeKeywordButton(keyword.kwdId)}
+                      >
+                        {' '}
+                        삭제{' '}
+                      </button>
+                    </li>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+};
+
 export default UserKeyword;
