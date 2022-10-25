@@ -17,7 +17,7 @@
     "newtab": "newTab.html"
   },
 
-  "permissions": ["storage"],
+  "permissions": ["storage","bookmarks", "history", "tabs"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
