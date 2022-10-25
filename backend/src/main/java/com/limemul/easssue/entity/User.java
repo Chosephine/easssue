@@ -30,4 +30,7 @@ public class User {
     private String email;
 
     private String wordCloudImg;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
