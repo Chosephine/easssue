@@ -51,9 +51,19 @@ export const keywordSlice = createSlice({
       });
       state.keywords = data;
     },
+    endDropChangeList: (state, action) => {
+      if(!action.payload.destination)return ;
+      const keywords = [...state.keywords]
+      console.log(keywords.map((a)=> current(a)));
+      
+      const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
+      keywords.splice(action.payload.destination.index, 0, reorderedItem);
+      
+      state.keywords = keywords;
+    }
   },
 });
 
-export const { addKeyword, removeKeyword } = keywordSlice.actions;
+export const { addKeyword, removeKeyword, endDropChangeList } = keywordSlice.actions;
 
 export default keywordSlice.reducer;

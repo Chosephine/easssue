@@ -2,7 +2,7 @@ import { RootState } from '@/modules/store';
 import { FC, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { removeKeyword } from '@modules/keyWordReducer';
+import { removeKeyword,endDropChangeList } from '@modules/keyWordReducer';
 
 const UserKeyword: FC = () => {
   const { keywords } = useSelector((state: RootState) => {
@@ -15,7 +15,7 @@ const UserKeyword: FC = () => {
     dispatch(removeKeyword(keywordId));
   };
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={(dndResult)=>dispatch(endDropChangeList(dndResult))}>
       <Droppable droppableId="keyword-list">
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
