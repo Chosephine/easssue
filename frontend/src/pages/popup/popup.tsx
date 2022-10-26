@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { createRoot } from 'react-dom/client'
 import './popup.css'
 import '@root/index.css'
 
 const App: React.FC<{}> = () => {
+  useEffect(() =>{
+    console.log('popup render');
+    
+  },[])
   return (
     <div>
       <img src="smalllogo.png" />
