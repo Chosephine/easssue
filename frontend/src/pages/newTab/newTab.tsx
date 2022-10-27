@@ -5,6 +5,7 @@ import '@root/index.css';
 import { Bookmark } from '@/components/Bookmark';
 import { Searchbar } from '@/components/Searchbar';
 import { NewsBoard } from '@/components/NewsBoard';
+import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 import { Provider, useSelector } from 'react-redux';
@@ -25,6 +26,7 @@ const App: React.FC<{}> = () => {
         <NewsBoard />
         <Bookmark />
         <KeywordModal />
+        <DashIndex/>
       </div>
     </div>
   );
