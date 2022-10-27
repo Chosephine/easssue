@@ -14,6 +14,7 @@ public class RecKwd {
 
     @Column(name = "rec_kwd_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private double score;

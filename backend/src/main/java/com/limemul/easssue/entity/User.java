@@ -19,11 +19,7 @@ public class User {
 
     private String profileId;
 
-    private String fullName;
-
-    private String givenName;
-
-    private String familyName;
+    private String profileName;
 
     private String profileImg;
 
