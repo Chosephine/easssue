@@ -26,4 +26,30 @@ public class User {
     private String email;
 
     private String wordCloudImg;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private User(String profileId, String profileName, String profileImg, String email, Role role) {
+        this.profileId = profileId;
+        this.profileName = profileName;
+        this.profileImg = profileImg;
+        this.email = email;
+        this.role = role;
+    }
+
+    public static User of(String profileId, String profileName, String profileImg, String email,  Role role) {
+        return new User(profileId, profileName, profileImg, email, role);
+    }
+
+    public User update(String name, String picture, String email) {
+        this.profileName = name;
+        this.profileImg = picture;
+        this.email = email;
+
+        return this;
+    }
+    public String getRoleKey() {
+        return this.role.toString();
+    }
 }
