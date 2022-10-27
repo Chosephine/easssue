@@ -37,6 +37,9 @@ dependencies {
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	// oauth
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 	//p6spy
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
 
