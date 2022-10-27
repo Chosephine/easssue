@@ -14,6 +14,7 @@ public class RelKwd {
 
     @Column(name = "rel_kwd_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate regDate;

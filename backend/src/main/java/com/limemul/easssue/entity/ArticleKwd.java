@@ -13,6 +13,7 @@ public class ArticleKwd {
 
     @Column(name = "article_kwd_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "kwd_count")
