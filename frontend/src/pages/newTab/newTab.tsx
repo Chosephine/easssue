@@ -77,4 +77,8 @@ const App: React.FC<{}> = () => {
 const container = document.createElement("div");
 document.body.appendChild(container);
 const root = createRoot(container);
-root.render(<App />);
+root.render(<Provider store={store}>
+  <PersistGate loading={null} persistor={persistor}>
+    <App />
+  </PersistGate>
+</Provider>);
