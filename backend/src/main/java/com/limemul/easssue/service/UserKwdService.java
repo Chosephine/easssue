@@ -1,10 +1,7 @@
 package com.limemul.easssue.service;
 
-import com.limemul.easssue.entity.Kwd;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.entity.UserKwd;
-import com.limemul.easssue.repo.KwdRepo;
-import com.limemul.easssue.repo.RecKwdRepo;
 import com.limemul.easssue.repo.UserKwdRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,19 +12,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class KwdService {
+public class UserKwdService {
 
-    private final KwdRepo kwdRepo;
     private final UserKwdRepo userKwdRepo;
-    private final RecKwdRepo recKwdRepo;
-
-
 
     /**
-     * 사용자 키워드 목록 갱신
+     * 사용자 키워드 조회
      */
-    @Transactional
-    public void updateUserKwdList(List<Kwd> kwdList){
-
+    public List<UserKwd> getUserKwdList(User user){
+        return userKwdRepo.findByUserOrderById(user);
     }
 }
