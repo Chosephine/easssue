@@ -10,7 +10,6 @@ import { NewsBoard } from "@/components/NewsBoard";
 import { RealtimeKeyword } from "@/components/RealtimeKeyword";
 import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
-import storage from 'redux-persist/lib/storage';
 import { Provider, useSelector } from 'react-redux';
 import { persistor, store } from '@/modules/store';
 import Scrollbars from "react-custom-scrollbars-2";

@@ -3,14 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './popup.css'
 import '@root/index.css'
 
+
+
 const App: React.FC<{}> = () => {
+  const now = new Date();
   useEffect(() =>{
-    console.log('popup render');
+    console.log('popup render', now);
     
   },[])
+
   return (
     <div>
-      <img src="smalllogo.png" />
       <h1 className="text-sm font-bold underline">
       Hello world!
     </h1>
