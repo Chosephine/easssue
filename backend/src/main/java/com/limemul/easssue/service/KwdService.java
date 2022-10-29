@@ -18,13 +18,16 @@ import java.util.List;
 public class KwdService {
 
     private final KwdRepo kwdRepo;
-    private final UserKwdRepo userKwdRepo;
-    private final RecKwdRepo recKwdRepo;
-
-
 
     /**
-     * 사용자 키워드 목록 갱신
+     * 랜덤 키워드 한개 조회
+     */
+    public List<Kwd> getRandomKwd(){
+        return kwdRepo.findByRandom();
+    }
+
+    /**
+     * 구독 키워드 목록 갱신
      */
     @Transactional
     public void updateUserKwdList(List<Kwd> kwdList){

@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface UserKwdRepo extends JpaRepository<UserKwd,Long> {
 
-    //todo 한번에 잘 불러와지는지 확인해야함
+    /**
+     * 해당 유저의 구독 키워드 리스트 반환
+     */
     @EntityGraph(attributePaths = {"kwd"})
     List<UserKwd> findByUserOrderById(User user);
 }

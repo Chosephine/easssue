@@ -7,10 +7,17 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpHeaders;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class JwtProvider {
 
+    /**
+     * access token, refresh token 생성
+     *  email을 토큰에 저장
+     *  토큰 종류에 따라 유효기간 지정
+     */
     public static String createToken(String email, long tokenInvalidTime) {
         Date now = new Date();
 
@@ -26,9 +33,17 @@ public class JwtProvider {
         return Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public static User getUserFromJwt(UserService userService, HttpHeaders headers){
-        String token = Objects.requireNonNull(headers.get(JwtProperties.HEADER_STRING)).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
+    /**
+     * jwt에서 email로 사용자 찾아서 반환
+     *  토큰 없으면 Optional.empty() 반환
+     */
+    public static Optional<User> getUserFromJwt(UserService userService, HttpHeaders headers){
+        List<String> auth = headers.get(JwtProperties.HEADER_STRING);
+        if(auth==null){
+            return Optional.empty();
+        }
+        String token = auth.get(0).replace(JwtProperties.TOKEN_PREFIX, "");
         String email = JwtProvider.getEmail(token);
-        return userService.getUserByEmail(email);
+        return Optional.of(userService.getUserByEmail(email));
     }
 }

@@ -26,7 +26,6 @@ public class UserService {
     }
 
     /**
-     *
      * google profile에서 email 찾아서 반환
      *  이메일로 회원가입 여부 판단 (강제 회원가입)
      */

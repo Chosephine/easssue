@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class KwdListDto {
 
-    private List<KwdDto> kwdList;
+    private List<KwdDto> kwdList=new ArrayList<>();
 
-    public KwdListDto(List<UserKwd> userKwdList) {
-        kwdList=userKwdList.stream().map(KwdDto::new).toList();
+    public KwdListDto(List<KwdDto> kwdList) {
+        this.kwdList=kwdList;
     }
 }

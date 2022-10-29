@@ -17,7 +17,7 @@ public class UserKwdService {
     private final UserKwdRepo userKwdRepo;
 
     /**
-     * 사용자 키워드 조회
+     * 해당 사용자의 구독 키워드 조회
      */
     public List<UserKwd> getUserKwdList(User user){
         return userKwdRepo.findByUserOrderById(user);
