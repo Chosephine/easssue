@@ -31,7 +31,7 @@ public class KwdApi {
     private final RecKwdService recKwdService;
 
     /**
-     * 구독 키워드
+     * 구독 키워드 조회
      *  [로그인 o] 해당 사용자의 구독 키워드 리스트 반환 (없으면 랜덤으로 하나)
      *  [로그인 x] 랜덤으로 하나
      */
@@ -65,7 +65,7 @@ public class KwdApi {
     }
 
     /**
-     * 추천 키워드
+     * 추천 키워드 조회
      *  [로그인 o] 해당 사용자의 추천 키워드 리스트 반환 (하루 이내 등록, 점수 내림차순)
      *  (로그인 했을때만 호출)
      */
@@ -91,14 +91,18 @@ public class KwdApi {
         return new KwdListDto(recKwdList.stream().map(KwdDto::new).toList());
     }
 
+    /**
+     * 구독 키워드 수정
+     */
+    @PutMapping("/user")
+    public boolean updateUserKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
+        log.info("[Starting request] PUT /keyword/user");
+        //사용자 정보 불러오기
+        Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
-//    @PutMapping("/update")
-//    public boolean updateUserKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
-//        //todo 본인 리스트인지 확인
-//
-//
-//
-//    }
+        List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
+
+    }
 
     /**
      * 랜덤 키워드 한개 조회

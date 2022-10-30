@@ -22,4 +22,12 @@ public class UserKwdService {
     public List<UserKwd> getUserKwdList(User user){
         return userKwdRepo.findByUserOrderById(user);
     }
+
+    /**
+     *
+     */
+    public void updateUserKwdList(User user,List<UserKwd> updatedUserKwdList){
+        userKwdRepo.deleteByUser(user);
+        userKwdRepo.saveAll(updatedUserKwdList);
+    }
 }
