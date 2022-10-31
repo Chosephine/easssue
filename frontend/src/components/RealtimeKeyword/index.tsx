@@ -30,8 +30,8 @@ export const RealtimeKeyword = () => {
           })}
         </Slider>
         ) : (
-          words.map((item) => {
-            return <div>
+          words.map((item, index) => {
+            return <div key={index}>
               <div className="text-lg text-white">{item}</div>
             </div>
         }))

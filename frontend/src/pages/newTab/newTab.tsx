@@ -12,35 +12,51 @@ import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider, useSelector } from 'react-redux';
 import { persistor, store } from '@/modules/store';
-import Scrollbars from 'react-custom-scrollbars-2';
+import Scrollbars from "react-custom-scrollbars-2";
+import { SettingModal } from "@/components/SettingModal";
+import { DashboardModal } from "@/components/DashboardModal";
+
 
 const App: React.FC<{}> = () => {
   const [BookmarkModalOpen, setBookmarkModalOpen] = useState(false);
+  const [settingModalOpen, setSettingModalOpen] = useState(false);
+  const [dashboardModalOpen, setDashboardModalOpen] = useState(false);
   const [bookmarkTree, setBookmarkTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
-  const [myToken, setToken] = useState<string>('');
+  const [imgUrl, setImgUrl] = useState("")
+  useEffect(() => {
+    fetchUrl()
+  },[])
   useEffect(() => {
     fetchBookmarks();
   }, [BookmarkModalOpen]);
+  useEffect(() => {
+  }, [])
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
       console.log(bookmarkTreeNodes);
       setBookmarkTree(bookmarkTreeNodes);
     });
   };
+  const fetchUrl = () => {
+    chrome.storage.local.get(['bgimg'], (result) => {
+      setImgUrl(result.bgimg)
+      console.log(result.bgimg)
+    })
+  }
   return (
     <>
       <div
         className="flex flex-col bg-cover"
         style={{
-          width: '100vw',
-          height: '100vh',
-          backgroundImage: 'url(tab-background.jpg)',
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: 'url(' + imgUrl + ')' || ""
         }}
       >
         <div className="h-8 p-2">
-          <Settingbar />
+          <Settingbar setSettingModalOpen={setSettingModalOpen} setDashboardModalOpen={setDashboardModalOpen}/>
         </div>
         <div className="flex flex-row h-full">
           <div className="w-1/4"></div>
@@ -69,26 +85,16 @@ const App: React.FC<{}> = () => {
           setBookmarkModalOpen={setBookmarkModalOpen}
         ></BookmarkModal>
       )}
-      {/* <button
-        onClick={() =>
-
-          chrome.identity.getAuthToken({ interactive: true }, resToken => {
-            alert(resToken)
-            setToken(()=> resToken)
-            console.log(myToken);
-            
-    })
-        }
-      >
-        구글로그인  
-      </button>
-      <button onClick={()=>{
-        chrome.identity.removeCachedAuthToken(
-          {token: myToken}, function (){
-            console.log("remove");
-          }
-      );
-      }}>로그아웃</button> */}
+      {settingModalOpen && (
+        <SettingModal
+          setSettingModalOpen={setSettingModalOpen}
+        ></SettingModal>
+      )}
+      {dashboardModalOpen && (
+        <DashboardModal
+        setDashboardModalOpen={setDashboardModalOpen}
+        ></DashboardModal>
+      )}
     </>
   );
 };

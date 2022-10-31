@@ -30,4 +30,15 @@ public class ArticleLog {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    private ArticleLog(User user, Article article) {
+        this.clickTime = LocalDateTime.now();
+        this.user = user;
+        this.article = article;
+        this.category = article.getCategory();
+    }
+
+    public static ArticleLog of(User user,Article article){
+        return new ArticleLog(user,article);
+    }
 }

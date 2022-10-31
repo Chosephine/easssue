@@ -1,8 +1,16 @@
-export const Settingbar = () => {
+import React from "react";
+import { SettingbarProps } from "./types";
+export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen}) => {
   const onHistoryClick = () => {
     chrome.tabs.create({
       url: "chrome://history"
     })
+  }
+  const onSettingClick = () => {
+    setSettingModalOpen(true)
+  }
+  const onDashboardClick = () => {
+    setDashboardModalOpen(true)
   }
   return (
     <>
@@ -10,8 +18,11 @@ export const Settingbar = () => {
         <button className="mx-2" onClick={onHistoryClick}>
           <img className="m-auto" src="history_32.png" />
         </button>
-        <button className="mx-2">
+        <button className="mx-2" onClick={onSettingClick}>
           <img src="setting_32.png" alt="" />
+        </button>
+        <button className="mx-2" onClick={onDashboardClick}>
+          <img src="hexagonal_32.png" alt="" />
         </button>
       </div>
     </>

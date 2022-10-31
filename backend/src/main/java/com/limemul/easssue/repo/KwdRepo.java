@@ -13,4 +13,9 @@ public interface KwdRepo extends JpaRepository<Kwd,Long> {
      */
     @Query(value = "select * from kwd order by rand() limit 1",nativeQuery = true)
     List<Kwd> findByRandom();
+
+    /**
+     * 검색한 단어 포함하는 키워드 리스트 반환
+     */
+    List<Kwd> findByNameContains(String searchStr);
 }
