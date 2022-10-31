@@ -93,6 +93,8 @@ public class KwdApi {
 
     /**
      * 구독 키워드 수정
+     *  [로그인 o] 인자로 받은 키워드 리스트로 해당 사용자의 구독 키워드 변경
+     *  (로그인 했을때만 호출)
      */
     @PutMapping("/user")
     public boolean updateUserKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
@@ -100,8 +102,18 @@ public class KwdApi {
         //사용자 정보 불러오기
         Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
-        List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
+        //로그인 안하면 예외 발생
+        //todo 예외 던질지 false 반환할지 프론트와 이야기
+        if(optionalUser.isEmpty()){
+            throw new IllegalArgumentException("로그인 후 사용할 수 있는 기능입니다.");
+        }
 
+        User user = optionalUser.get();
+        List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
+        //받아온 키워드 리스트로 업데이트
+        userKwdService.updateUserKwdList(user,kwdIds);
+
+        return true;
     }
 
     /**

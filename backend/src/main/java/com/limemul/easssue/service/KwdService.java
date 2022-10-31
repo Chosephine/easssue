@@ -25,12 +25,4 @@ public class KwdService {
     public List<Kwd> getRandomKwd(){
         return kwdRepo.findByRandom();
     }
-
-    /**
-     * 구독 키워드 목록 갱신
-     */
-    @Transactional
-    public void updateUserKwdList(List<Kwd> kwdList){
-
-    }
 }

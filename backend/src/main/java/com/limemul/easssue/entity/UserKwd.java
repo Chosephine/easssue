@@ -23,4 +23,13 @@ public class UserKwd {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kwd_id")
     private Kwd kwd;
+
+    private UserKwd(User user, Kwd kwd) {
+        this.user = user;
+        this.kwd = kwd;
+    }
+
+    public static UserKwd of(User user,Kwd kwd){
+        return new UserKwd(user,kwd);
+    }
 }
