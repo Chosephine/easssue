@@ -6,6 +6,8 @@ build/
 !**/src/test/**/build/
 
 application.yml
+application-oauth.yml
+JwtProperties.java
 
 ### STS ###
 .apt_generated
