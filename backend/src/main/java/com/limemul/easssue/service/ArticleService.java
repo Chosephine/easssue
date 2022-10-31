@@ -25,7 +25,7 @@ public class ArticleService {
 
     private final ArticleRepo articleRepo;
 
-    private Integer articlesSize = 6;
+    private final Integer articlesSize = 6;
 
     public PopularDto getPopularArticle(Integer page){
         LocalDateTime now = LocalDateTime.now();
