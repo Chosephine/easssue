@@ -24,12 +24,16 @@ public class UserKwd {
     @JoinColumn(name = "kwd_id")
     private Kwd kwd;
 
-    private UserKwd(User user, Kwd kwd) {
+    @Enumerated(EnumType.STRING)
+    private UserKwdType type;
+
+    private UserKwd(User user, Kwd kwd, UserKwdType type) {
         this.user = user;
         this.kwd = kwd;
+        this.type = type;
     }
 
-    public static UserKwd of(User user,Kwd kwd){
-        return new UserKwd(user,kwd);
+    public static UserKwd of(User user,Kwd kwd,UserKwdType type){
+        return new UserKwd(user,kwd,type);
     }
 }
