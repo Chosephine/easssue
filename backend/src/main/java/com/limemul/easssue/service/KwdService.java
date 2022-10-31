@@ -1,6 +1,7 @@
 package com.limemul.easssue.service;
 
 import com.limemul.easssue.entity.Kwd;
+import com.limemul.easssue.entity.RelKwd;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.entity.UserKwd;
 import com.limemul.easssue.repo.KwdRepo;

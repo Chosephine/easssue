@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +20,8 @@ public class Kwd {
 
     @Column(name = "kwd_name")
     private String name;
+
+    @OneToMany(mappedBy = "kwd")
+    private List<ArticleKwd> articleKwds = new ArrayList<>();
+
 }

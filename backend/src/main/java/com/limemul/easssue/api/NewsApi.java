@@ -1,10 +1,12 @@
 package com.limemul.easssue.api;
 
-import com.limemul.easssue.api.dto.news.ArticleDto;
+import com.limemul.easssue.api.dto.news.KwdArticleDto;
 import com.limemul.easssue.api.dto.news.PopularDto;
 import com.limemul.easssue.entity.ArticleLog;
+import com.limemul.easssue.entity.Kwd;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.jwt.JwtProvider;
+import com.limemul.easssue.repo.KwdRepo;
 import com.limemul.easssue.service.ArticleLogService;
 import com.limemul.easssue.service.ArticleService;
 import com.limemul.easssue.service.UserService;
@@ -13,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +26,8 @@ public class NewsApi {
     private final ArticleService articleService;
     private final UserService userService;
     private final ArticleLogService articleLogService;
+
+    private final KwdRepo kwdRepo;
 
     /**
      * 인기기사 page = 0
@@ -42,6 +45,16 @@ public class NewsApi {
     public PopularDto popularNews(@PathVariable Integer page){
         return articleService.getPopularArticle(page);
     }
+
+    /**
+     * 추천기사
+     */
+    @GetMapping("/keyword/{kwd}/page/{page}")
+    public KwdArticleDto kwdNews(@PathVariable Long kwd, @PathVariable Integer page){
+        Optional<Kwd> targetKwd = kwdRepo.findById(kwd);
+        return articleService.getSubsArticle(targetKwd, page);
+    }
+
 
     /**
      * 기사 로그 남기기
