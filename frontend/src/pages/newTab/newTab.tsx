@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import KeywordModal from "@/components/Modals/Keywords/KeywordComponent";
-import { BookmarkModal } from "@/components/BookmarkModal";
-import "@root/index.css";
-import { Bookmark } from "@/components/Bookmark";
-import { Searchbar } from "@/components/Searchbar";
-import { Settingbar } from "@/components/Settingbar";
-import { NewsBoard } from "@/components/NewsBoard";
-import { RealtimeKeyword } from "@/components/RealtimeKeyword";
+import React, { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import KeywordModal from '@/components/Modals/Keywords/KeywordComponent';
+import { BookmarkModal } from '@/components/BookmarkModal';
+import '@root/index.css';
+import { Bookmark } from '@/components/Bookmark';
+import { Searchbar } from '@/components/Searchbar';
+import { Settingbar } from '@/components/Settingbar';
+import { NewsBoard } from '@/components/NewsBoard';
+import { RealtimeKeyword } from '@/components/RealtimeKeyword';
 import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider, useSelector } from 'react-redux';
@@ -34,7 +34,7 @@ const App: React.FC<{}> = () => {
   useEffect(() => {
   }, [])
   const fetchBookmarks = () => {
-    chrome.bookmarks.getChildren("1", (bookmarkTreeNodes) => {
+    chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
       console.log(bookmarkTreeNodes);
       setBookmarkTree(bookmarkTreeNodes);
     });
@@ -99,11 +99,13 @@ const App: React.FC<{}> = () => {
   );
 };
 
-const container = document.createElement("div");
+const container = document.createElement('div');
 document.body.appendChild(container);
 const root = createRoot(container);
-root.render(<Provider store={store}>
-  <PersistGate loading={null} persistor={persistor}>
-    <App />
-  </PersistGate>
-</Provider>);
+root.render(
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>
+);
