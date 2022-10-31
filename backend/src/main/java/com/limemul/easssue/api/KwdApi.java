@@ -2,6 +2,7 @@ package com.limemul.easssue.api;
 
 import com.limemul.easssue.api.dto.kwd.KwdDto;
 import com.limemul.easssue.api.dto.kwd.KwdListDto;
+import com.limemul.easssue.entity.Kwd;
 import com.limemul.easssue.entity.RecKwd;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.entity.UserKwd;
@@ -117,6 +118,21 @@ public class KwdApi {
     }
 
     /**
+     * 검색 키워드 조회
+     *  검색한 문자열 포함하는 키워드 리스트 반환
+     */
+    @GetMapping("/search/{searchStr}")
+    public KwdListDto searchKwd(@PathVariable String searchStr){
+        log.info("[Starting request] GET /keyword/search/{}",searchStr);
+
+        List<Kwd> kwdList = kwdService.searchKwd(searchStr);
+        log.info("kwdList size: {}",kwdList.size());
+
+        log.info("[Finished request] GET /keyword/search/{}",searchStr);
+        return new KwdListDto(kwdList.stream().map(KwdDto::new).toList());
+    }
+
+    /**
      * 랜덤 키워드 한개 조회
      */
     private List<KwdDto> getRandomKwd() {
@@ -125,9 +141,8 @@ public class KwdApi {
 
     /**
      * 테스트용 사용자
-     * todo 로그인 기능 해결 후 지우기
      */
-    private User getUser1() {
-        return userService.getUserByEmail("user1@xx.xx");
+    private User getUser(Long userId) {
+        return userService.getUserByEmail("user"+userId+"@xx.xx");
     }
 }
