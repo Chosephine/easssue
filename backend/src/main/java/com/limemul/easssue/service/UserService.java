@@ -29,6 +29,13 @@ public class UserService {
     }
 
     /**
+     * 기본키로 사용자 조회
+     */
+    public User getUserById(Long id){
+        return userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+    }
+
+    /**
      * google profile에서 email 찾아서 반환
      *  이메일로 회원가입 여부 판단
      *  비회원이면 강제 회원가입
