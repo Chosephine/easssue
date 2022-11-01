@@ -3,6 +3,10 @@
   "description": "Chrome Extension test",
   "version": "1.0.0",
   "manifest_version": 3,
+  "oauth2": {
+    "client_id": "900377591657-g44asicjjvhlbibbhfuhjenosejli4ba.apps.googleusercontent.com",
+    "scopes":["https://www.googleapis.com/auth/userinfo.email"]
+  },
   "icons": {
     "16": "smalllogo.png",
     "48": "smalllogo.png",
@@ -17,7 +21,7 @@
     "newtab": "newTab.html"
   },
 
-  "permissions": ["storage", "bookmarks", "history", "tabs"],
+  "permissions": ["identity","storage", "bookmarks", "history", "tabs", "identity.email"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
@@ -28,5 +32,4 @@
       "js": ["contentScript.js"]
     }
   ]
-
 }

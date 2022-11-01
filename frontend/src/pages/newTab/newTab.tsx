@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-
 import { BookmarkModal } from "@/components/BookmarkModal";
 import "@root/index.css";
 import { Bookmark } from "@/components/Bookmark";
@@ -36,7 +35,7 @@ const App: React.FC<{}> = () => {
   useEffect(() => {
   }, [])
   const fetchBookmarks = () => {
-    chrome.bookmarks.getChildren("1", (bookmarkTreeNodes) => {
+    chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
       console.log(bookmarkTreeNodes);
       setBookmarkTree(bookmarkTreeNodes);
     });
@@ -106,11 +105,13 @@ const App: React.FC<{}> = () => {
   );
 };
 
-const container = document.createElement("div");
+const container = document.createElement('div');
 document.body.appendChild(container);
 const root = createRoot(container);
-root.render(<Provider store={store}>
-  <PersistGate loading={null} persistor={persistor}>
-    <App />
-  </PersistGate>
-</Provider>);
+root.render(
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>
+);
