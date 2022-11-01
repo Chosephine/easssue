@@ -1,5 +1,6 @@
 import React from "react";
 import { DashboardModalProps } from "./types";
+import { DashIndex } from "@/components/Modals/DashBoard"
 
 export const DashboardModal: React.FC<DashboardModalProps> = ({
   setDashboardModalOpen,
@@ -17,6 +18,7 @@ export const DashboardModal: React.FC<DashboardModalProps> = ({
               X
             </button>
           </div>
+          <DashIndex></DashIndex>
         </div>
       </div>
     </>
