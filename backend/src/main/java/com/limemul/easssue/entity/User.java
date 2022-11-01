@@ -1,5 +1,6 @@
 package com.limemul.easssue.entity;
 
+import com.limemul.easssue.api.dto.user.UserInfoDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,33 +20,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long oauthId;
-
-    @Column(name = "user_name")
-    private String name;
-
-    private String picture;
+    private String oauthId;
 
     private String email;
 
+    private String picture;
+
     private String wordCloudImg;
 
-    private User(Long oauthId, String name, String picture, String email, String wordCloudImg) {
+    public User(String oauthId, String email, String picture) {
         this.oauthId = oauthId;
-        this.name = name;
-        this.picture = picture;
         this.email = email;
-        this.wordCloudImg = wordCloudImg;
+        this.picture = picture;
     }
 
-    public static User from(HttpServletRequest request){
-        //todo request에서 정보 뽑아서 객체 생성
-        Long oauthId=0L;
-        String name="";
-        String picture="";
-        String email="";
-        String wordCloudImg="";
+    public static User from(UserInfoDto userInfoDto){
+        String oauthId= userInfoDto.getId();
+        String email= userInfoDto.getEmail();
+        String picture= userInfoDto.getPicture();
 
-        return new User(oauthId,name,picture,email,wordCloudImg);
+        return new User(oauthId,email,picture);
     }
 }
