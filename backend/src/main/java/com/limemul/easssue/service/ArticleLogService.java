@@ -1,5 +1,7 @@
 package com.limemul.easssue.service;
 
+import com.limemul.easssue.api.dto.dash.GraphValueDto;
+import com.limemul.easssue.api.dto.dash.GrassValueDto;
 import com.limemul.easssue.entity.Article;
 import com.limemul.easssue.entity.ArticleLog;
 import com.limemul.easssue.entity.User;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -16,6 +21,20 @@ public class ArticleLogService {
 
     private final ArticleLogRepo articleLogRepo;
     private final ArticleRepo articleRepo;
+
+    /**
+     *
+     */
+    public List<GraphValueDto> getRadialGraphInfo(User user){
+        return articleLogRepo.countByUserAndClickTimeAfterGroupByCategory(user, LocalDateTime.now().minusWeeks(1L));
+    }
+
+    /**
+     *
+     */
+    public List<GrassValueDto> getCalendarHeatMapInfo(User user){
+        return articleLogRepo.countByUserAndClickTimeAfterGroupByClickTime(user,LocalDateTime.now().minusMonths(1L));
+    }
 
     /**
      * 읽은 기사 로그 남기기

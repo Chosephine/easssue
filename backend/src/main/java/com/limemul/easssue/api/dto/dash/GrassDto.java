@@ -14,4 +14,9 @@ public class GrassDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private List<GrassValueDto> values;
+
+    public GrassDto(List<GrassValueDto> heatMapInfo) {
+
+        this.values=heatMapInfo;
+    }
 }

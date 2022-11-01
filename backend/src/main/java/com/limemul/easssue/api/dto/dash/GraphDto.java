@@ -14,4 +14,8 @@ public class GraphDto {
     private List<String> labels;
     /** 카테고리 별 최근 일주일 동안 읽은 기사 수 */
     private List<Integer> data;
+
+    public GraphDto(List<GraphValueDto> graphInfo) {
+//        this.labels=graphInfo.
+    }
 }
