@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import KeywordModal from '@/components/Modals/Keywords/KeywordComponent';
-import { BookmarkModal } from '@/components/BookmarkModal';
-import '@root/index.css';
-import { Bookmark } from '@/components/Bookmark';
-import { Searchbar } from '@/components/Searchbar';
-import { Settingbar } from '@/components/Settingbar';
-import { NewsBoard } from '@/components/NewsBoard';
-import { RealtimeKeyword } from '@/components/RealtimeKeyword';
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import { BookmarkModal } from "@/components/BookmarkModal";
+import "@root/index.css";
+import { Bookmark } from "@/components/Bookmark";
+import { Searchbar } from "@/components/Searchbar";
+import { Settingbar } from "@/components/Settingbar";
+import { NewsBoard } from "@/components/NewsBoard";
+import { RealtimeKeyword } from "@/components/RealtimeKeyword";
 import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider, useSelector } from 'react-redux';
@@ -15,19 +14,21 @@ import { persistor, store } from '@/modules/store';
 import Scrollbars from "react-custom-scrollbars-2";
 import { SettingModal } from "@/components/SettingModal";
 import { DashboardModal } from "@/components/DashboardModal";
+import { KeywordModal } from "@/components/KeywordModal";
 
 
 const App: React.FC<{}> = () => {
   const [BookmarkModalOpen, setBookmarkModalOpen] = useState(false);
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const [dashboardModalOpen, setDashboardModalOpen] = useState(false);
+  const [keywordModalOpen, setKeywordModalOpen] = useState(false);
   const [bookmarkTree, setBookmarkTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
   const [imgUrl, setImgUrl] = useState("")
   useEffect(() => {
     fetchUrl()
-  },[])
+  },[settingModalOpen])
   useEffect(() => {
     fetchBookmarks();
   }, [BookmarkModalOpen]);
@@ -56,7 +57,7 @@ const App: React.FC<{}> = () => {
         }}
       >
         <div className="h-8 p-2">
-          <Settingbar setSettingModalOpen={setSettingModalOpen} setDashboardModalOpen={setDashboardModalOpen}/>
+          <Settingbar setSettingModalOpen={setSettingModalOpen} setDashboardModalOpen={setDashboardModalOpen} setKeywordModalOpen={setKeywordModalOpen}/>
         </div>
         <div className="flex flex-row h-full">
           <div className="w-1/4"></div>
@@ -72,7 +73,7 @@ const App: React.FC<{}> = () => {
                 setBookmarkModalOpen={setBookmarkModalOpen}
                 bookmarkTree={bookmarkTree}
               />
-              <KeywordModal />
+
             </Scrollbars>
           </div>
           <div className="w-1/4">
@@ -94,6 +95,11 @@ const App: React.FC<{}> = () => {
         <DashboardModal
         setDashboardModalOpen={setDashboardModalOpen}
         ></DashboardModal>
+      )}
+      {keywordModalOpen && (
+        <KeywordModal
+        setKeywordModalOpen={setKeywordModalOpen}
+        ></KeywordModal>
       )}
     </>
   );
