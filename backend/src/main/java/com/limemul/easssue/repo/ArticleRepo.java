@@ -12,4 +12,5 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
 
     Slice<Article> findByPubDateAfterOrderByHitDesc(LocalDateTime pubDate, Pageable pageable);
 
+
 }

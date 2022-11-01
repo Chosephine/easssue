@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class PopularDto {
+public class PopularArticleDto {
 
-
+    // 인기 기사 리스트
     private List<ArticleDto> newsList;
 
     private Integer page;
