@@ -1,6 +1,6 @@
 import React from "react";
 import { SettingbarProps } from "./types";
-export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen}) => {
+export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen, setKeywordModalOpen}) => {
   const onHistoryClick = () => {
     chrome.tabs.create({
       url: "chrome://history"
@@ -11,6 +11,9 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
   }
   const onDashboardClick = () => {
     setDashboardModalOpen(true)
+  }
+  const onKeywordClick = () => {
+    setKeywordModalOpen(true)
   }
   return (
     <>
@@ -23,6 +26,9 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
         </button>
         <button className="mx-2" onClick={onDashboardClick}>
           <img src="hexagonal_32.png" alt="" />
+        </button>
+        <button className="mx-2" onClick={onKeywordClick}>
+          <img src="plus_32.png" alt="" />
         </button>
       </div>
     </>

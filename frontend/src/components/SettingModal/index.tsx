@@ -30,7 +30,7 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
             </button>
           </div>
           <input type="file" onChange={handleClickInput} />
-
+          
         </div>
       </div>
     </>

@@ -27,8 +27,6 @@
       "matches": ["<all_urls>"],
       "js": ["contentScript.js"]
     }
-  ],
-  "content_security_policy": {
-    "extension_pages":  "script-src 'self'; object-src 'self';script-src-elem 'unsafe-inline'"
-  }
+  ]
+
 }
