@@ -14,4 +14,5 @@ public interface ArticleKwdRepo extends JpaRepository<ArticleKwd, Long> {
     @EntityGraph(attributePaths = {"article"})
     Slice<ArticleKwd> findAllByKwdOrderByArticleDesc(Kwd kwd, Pageable pageable);
 
+
 }

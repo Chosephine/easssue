@@ -53,6 +53,7 @@ public class ArticleService {
 
     public KwdArticleDto getSubsArticle(Optional<Kwd> kwd, Integer page){
 
+
         // 연관키워드 리스트
         List<RelKwd> relKwds = relKwdRepo.findAllByFromKwd(kwd);
         List<KwdDto> relKwdDtoList = relKwds.stream().map(KwdDto::new).collect(Collectors.toList());
