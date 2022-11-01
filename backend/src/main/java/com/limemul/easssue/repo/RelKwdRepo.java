@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface RelKwdRepo extends JpaRepository<RelKwd, Long> {
 
-    List<RelKwd> findAllByFromKwd(Optional<Kwd> fromKwd);
+    List<RelKwd> findAllByFromKwd(Kwd fromKwd);
 
 }

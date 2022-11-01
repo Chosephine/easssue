@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -51,7 +50,7 @@ public class ArticleService {
 
     }
 
-    public KwdArticleDto getSubsArticle(Optional<Kwd> kwd, Integer page){
+    public KwdArticleDto getSubsArticle(Kwd kwd, Integer page){
 
 
         // 연관키워드 리스트
@@ -63,7 +62,7 @@ public class ArticleService {
 //        LocalDateTime now = LocalDateTime.now();
         Pageable pageable = PageRequest.of(page, articlesSize);
 
-        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByArticleDesc(kwd.get(), pageable);
+        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByArticleDesc(kwd, pageable);
         List<Article> kwdArticleList=new ArrayList<>();
         for (ArticleKwd articleKwd : articleKwdList) {
             kwdArticleList.add(articleKwd.getArticle());

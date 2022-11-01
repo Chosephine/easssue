@@ -58,7 +58,7 @@ public class NewsApi {
         if (targetKwd.isEmpty()){
             throw new IllegalArgumentException("존재하지 않는 키워드입니다.");
         }else {
-            return articleService.getSubsArticle(targetKwd, page);
+            return articleService.getSubsArticle(targetKwd.get(), page);
         }
     }
 
