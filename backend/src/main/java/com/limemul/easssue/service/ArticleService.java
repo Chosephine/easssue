@@ -3,7 +3,7 @@ package com.limemul.easssue.service;
 import com.limemul.easssue.api.dto.kwd.KwdDto;
 import com.limemul.easssue.api.dto.news.ArticleDto;
 import com.limemul.easssue.api.dto.news.KwdArticleDto;
-import com.limemul.easssue.api.dto.news.PopularDto;
+import com.limemul.easssue.api.dto.news.PopularArticleDto;
 import com.limemul.easssue.entity.Article;
 import com.limemul.easssue.entity.ArticleKwd;
 import com.limemul.easssue.entity.Kwd;
@@ -38,37 +38,36 @@ public class ArticleService {
 
     private final ArticleKwdRepo articleKwdRepo;
 
-    private final Integer articlesSize = 6;
+    private static final Integer articlesSize = 6;
 
-    public PopularDto getPopularArticle(Integer page){
+    public PopularArticleDto getPopularArticle(Integer page){
         LocalDateTime now = LocalDateTime.now();
-        log.info("now datetime is {}", now);
+        log.info("current datetime is {}", now);
         Pageable pageable= PageRequest.of(page, articlesSize);
         Slice<Article> articles = articleRepo.findByPubDateAfterOrderByHitDesc(now.minusDays(1),pageable);
-        List<ArticleDto> articleDtoList = articles.stream().map(ArticleDto::new).collect(Collectors.toList()); // ArticleDto
-        return new PopularDto(articleDtoList, page, articles.isLast());
+        List<ArticleDto> articleDtoList = articles.stream().map(ArticleDto::new).collect(Collectors.toList());
+        return new PopularArticleDto(articleDtoList, page, articles.isLast());
 
 
     }
 
     public KwdArticleDto getSubsArticle(Optional<Kwd> kwd, Integer page){
 
-        // 연관키워드
+        // 연관키워드 리스트
         List<RelKwd> relKwds = relKwdRepo.findAllByFromKwd(kwd);
         List<KwdDto> relKwdDtoList = relKwds.stream().map(KwdDto::new).collect(Collectors.toList());
 
 
         // 기사 리스트
-        // TODO: 변수명 정리, 성능 확인
-        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.now();
         Pageable pageable = PageRequest.of(page, articlesSize);
 
-        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwd(kwd.get(), pageable);
-        List<Article> articleList=new ArrayList<>();
+        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByArticleDesc(kwd.get(), pageable);
+        List<Article> kwdArticleList=new ArrayList<>();
         for (ArticleKwd articleKwd : articleKwdList) {
-            articleList.add(articleKwd.getArticle());
+            kwdArticleList.add(articleKwd.getArticle());
         }
-        List<ArticleDto> articleDtoList = articleList.stream().map(ArticleDto::new).collect(Collectors.toList()); // ArticleDto
+        List<ArticleDto> articleDtoList = kwdArticleList.stream().map(ArticleDto::new).collect(Collectors.toList());
 
         return new KwdArticleDto(relKwdDtoList, articleDtoList, page, articleKwdList.isLast());
     }

@@ -13,6 +13,7 @@ public class KwdArticleDto {
     // 연관 키워드 리스트
     private List<KwdDto> kwdList;
 
+    // 키워드 기사 리스트
     private List<ArticleDto> newsList;
 
     private Integer page;

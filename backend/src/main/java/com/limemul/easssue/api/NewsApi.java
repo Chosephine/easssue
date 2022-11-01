@@ -1,7 +1,7 @@
 package com.limemul.easssue.api;
 
 import com.limemul.easssue.api.dto.news.KwdArticleDto;
-import com.limemul.easssue.api.dto.news.PopularDto;
+import com.limemul.easssue.api.dto.news.PopularArticleDto;
 import com.limemul.easssue.entity.ArticleLog;
 import com.limemul.easssue.entity.Kwd;
 import com.limemul.easssue.entity.User;
@@ -30,29 +30,36 @@ public class NewsApi {
     private final KwdRepo kwdRepo;
 
     /**
-     * 인기기사 page = 0
+     * 인기기사리스트 반환
+     * 조건: page = 0
      */
     @GetMapping("/popular")
-    public PopularDto firstPopularNews(){
+    public PopularArticleDto firstPopularNews(){
         log.info("[Starting request] GET /popular");
         return articleService.getPopularArticle(0);
     }
 
     /**
-     * 인기기사 page > 0
+     * 인기 기사 리스트 반환 api
+     * 조건: page >= 0
+     * firstPopularNews api 필요없을지도..!
      */
     @GetMapping("/popular/page/{page}")
-    public PopularDto popularNews(@PathVariable Integer page){
+    public PopularArticleDto popularNews(@PathVariable Integer page){
         return articleService.getPopularArticle(page);
     }
 
     /**
-     * 추천기사
+     * 구독 키워드 기사 리스트 반환 api
      */
-    @GetMapping("/keyword/{kwd}/page/{page}")
-    public KwdArticleDto kwdNews(@PathVariable Long kwd, @PathVariable Integer page){
-        Optional<Kwd> targetKwd = kwdRepo.findById(kwd);
-        return articleService.getSubsArticle(targetKwd, page);
+    @GetMapping("/keyword/{kwdId}/page/{page}")
+    public KwdArticleDto kwdNews(@PathVariable Long kwdId, @PathVariable Integer page){
+        Optional<Kwd> targetKwd = kwdRepo.findById(kwdId);
+        if (targetKwd.isEmpty()){
+            throw new IllegalArgumentException("존재하지 않는 키워드입니다.");
+        }else {
+            return articleService.getSubsArticle(targetKwd, page);
+        }
     }
 
 
