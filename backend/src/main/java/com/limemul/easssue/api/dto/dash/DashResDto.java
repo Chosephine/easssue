@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DashResDto {
 
-    private ? graph;
+    private GraphDto graph;
     private String cloud;
     private GrassDto grass;
 }

@@ -27,18 +27,28 @@ public class DashApi {
      *  [로그인 o]
      *  [로그인 x]
      */
-    @GetMapping("/info")
-    public DashResDto getDashVisualization(@RequestHeader HttpHeaders headers){
-        log.info("[Starting request] GET /dash/info");
-
-        //사용자 정보 불러오기
-        Optional<User> optionalUser = JwtProvider.getUserFromJwt(userService, headers);
-
-        //로그인 안하면 todo...??
-        if(optionalUser.isEmpty()){
-
-        }
-
-
-    }
+//    @GetMapping("/info")
+//    public DashResDto getDashVisualization(@RequestHeader HttpHeaders headers){
+//        log.info("[Starting request] GET /dash/info");
+//
+//        //사용자 정보 불러오기
+//        Optional<User> optionalUser = JwtProvider.getUserFromJwt(userService, headers);
+//
+//        //로그인 안하면 todo...??
+//        if(optionalUser.isEmpty()){
+//
+//        }
+//
+//        User user = optionalUser.get();
+//        //방사형 그래프
+//
+//
+//        //워드 클라우드
+//        String cloud=user.getWordCloudImg();
+//
+//        //캘린더 히트맵
+//
+//        log.info("[Finished request] GET /dash/info");
+//        return new DashResDto();
+//    }
 }
