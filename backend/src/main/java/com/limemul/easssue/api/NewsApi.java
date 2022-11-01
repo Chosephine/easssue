@@ -26,11 +26,10 @@ public class NewsApi {
     private final ArticleService articleService;
     private final UserService userService;
     private final ArticleLogService articleLogService;
-
     private final KwdRepo kwdRepo;
 
     /**
-     * 인기기사리스트 반환
+     * 인기 기사 리스트 반환
      * 조건: page = 0
      */
     @GetMapping("/popular")

@@ -32,11 +32,8 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private final ArticleRepo articleRepo;
-
     private final RelKwdRepo relKwdRepo;
-
     private final ArticleKwdRepo articleKwdRepo;
-
     private static final Integer articlesSize = 6;
 
     public PopularArticleDto getPopularArticle(Integer page){
