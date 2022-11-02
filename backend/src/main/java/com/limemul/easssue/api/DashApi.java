@@ -68,7 +68,9 @@ public class DashApi {
     }
 
     /**
-     *
+     * 대시보드 읽은 기사 리스트 조회
+     *  [로그인 o] 캘린더 히트맵에서 선택한 날짜의 읽은 기사 리스트 반환
+     *  (로그인 했을때만 호출)
      */
     @GetMapping("/news/{date}")
     public NewsListDto getDashNewsList(@RequestHeader HttpHeaders headers, @PathVariable String date){

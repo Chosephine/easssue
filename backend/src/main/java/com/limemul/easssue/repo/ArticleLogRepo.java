@@ -36,7 +36,8 @@ public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
             @Param("user") User user, @Param("click_time") LocalDateTime clickTime);
 
     /**
-     *
+     * 해당 사용자의 해당 날짜에 읽은 기사 정보 조회
+     *  인자 clickTime 이후 읽은 기사 정보
      */
     @EntityGraph(attributePaths = {"article","category"})
     List<ArticleLog> findByUserAndClickTimeAfter(User user, LocalDateTime clickTime);

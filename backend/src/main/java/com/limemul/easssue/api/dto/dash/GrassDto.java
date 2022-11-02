@@ -9,6 +9,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.temporal.TemporalAdjusters.*;
 import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 
 @Data
@@ -25,7 +26,7 @@ public class GrassDto {
     public GrassDto(List<GrassValueDto> heatMapInfo) {
         LocalDate now = LocalDate.now();
         this.startDate=now.with(firstDayOfMonth()).toString();
-        this.endDate=now.with(TemporalAdjusters.lastDayOfMonth()).toString();
+        this.endDate=now.with(lastDayOfMonth()).toString();
         if(heatMapInfo.size()>0){
             this.values=heatMapInfo;
         }else{

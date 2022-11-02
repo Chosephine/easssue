@@ -45,7 +45,8 @@ public class ArticleLogService {
     }
 
     /**
-     *
+     * 읽은 기사 리스트 조회
+     *  해당 유저가 해당 날짜에 읽은 기사 정보 리스트 반환
      */
     public List<ArticleLog> getArticleLogByReadDate(User user,LocalDate date){
         return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN));
