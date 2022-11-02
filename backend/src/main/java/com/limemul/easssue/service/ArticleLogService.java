@@ -11,8 +11,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+
+import static java.time.temporal.TemporalAdjusters.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,17 +27,21 @@ public class ArticleLogService {
     private final ArticleRepo articleRepo;
 
     /**
-     *
+     * 방사형 그래프 정보 조회
+     *  해당 유저의 한 주간 카테고리별 읽은 기사 수 반환
      */
     public List<GraphValueDto> getRadialGraphInfo(User user){
-        return articleLogRepo.countByUserAndClickTimeAfterGroupByCategory(user, LocalDateTime.now().minusWeeks(1L));
+        LocalDateTime lastWeek = LocalDateTime.now().minusWeeks(1L);
+        return articleLogRepo.countByUserAndClickTimeAfterGroupByCategory(user, lastWeek);
     }
 
     /**
-     *
+     * 캘린더 히트맵 정보 조회
+     *  해당 유저의 이번 한 달 날짜별 읽은 기사 수 반환
      */
     public List<GrassValueDto> getCalendarHeatMapInfo(User user){
-        return articleLogRepo.countByUserAndClickTimeAfterGroupByClickTime(user,LocalDateTime.now().minusMonths(1L));
+        LocalDateTime firstDayOfMonth = LocalDateTime.now().with(firstDayOfMonth());
+        return articleLogRepo.countByUserAndClickTimeAfterGroupByClickTime(user, firstDayOfMonth);
     }
 
     /**

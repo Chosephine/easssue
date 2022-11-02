@@ -14,21 +14,23 @@ import java.util.List;
 public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
 
     /**
-     *
+     * 해당 사용자의 카테고리별 읽은 기사 수 조회
+     *  인자 clickTime 이후 읽은 기사 수
+     *  카테고리 기본키 오름차순 정렬
      */
-//    @Query(value = "select c.category_name as label,count(al.*) as data from article_log al " +
-//            "left outer join category c on c.category_id=al.category_id " +
-//            "where al.user_id=:user and al.click_time>:click_time group by al.category_id order by al.category_id",
-//            nativeQuery = true)
-    @Query(value = "select c.name as label,count(al) as data from ArticleLog al " +
-            "left outer join Category c on c.id=al.category.id " +
+    @Query(value = "select al.category.id as id,count(al) as data from ArticleLog al " +
             "where al.user=:user and al.clickTime>:clickTime group by al.category.id order by al.category.id")
-    List<GraphValueDto> countByUserAndClickTimeAfterGroupByCategory(@Param("user") User user, @Param("clickTime") LocalDateTime clickTime);
+    List<GraphValueDto> countByUserAndClickTimeAfterGroupByCategory(
+            @Param("user") User user, @Param("clickTime") LocalDateTime clickTime);
 
     /**
-     *
+     * 해당 사용자의 날짜별 읽은 기사 수 조회
+     *  인자 clickTime 이후 읽은 기사 수
+     *  날짜 오름차순 정렬
      */
     @Query(value = "select date_format(click_time,'%Y-%m-%d') as date, count(*) as count from article_log " +
-            "where user_id=:user and click_time>:click_time group by date order by date",nativeQuery = true)
-    List<GrassValueDto> countByUserAndClickTimeAfterGroupByClickTime(@Param("user") User user, @Param("click_time") LocalDateTime clickTime);
+            "where user_id=:user and click_time>:click_time group by date order by date",
+            nativeQuery = true)
+    List<GrassValueDto> countByUserAndClickTimeAfterGroupByClickTime(
+            @Param("user") User user, @Param("click_time") LocalDateTime clickTime);
 }
