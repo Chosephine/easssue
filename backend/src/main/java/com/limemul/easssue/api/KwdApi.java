@@ -66,6 +66,28 @@ public class KwdApi {
     }
 
     /**
+     * 금지 키워드 조회
+     */
+    @GetMapping("/ban")
+    public KwdListDto getBanKwd(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] GET /keyword/ban");
+
+        // 사용자 정보 불러오기
+        Optional<User> optionalUser = getUserFromJwt(userService, headers);
+
+        if (optionalUser.isEmpty()){
+            throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
+        }
+
+        User user = optionalUser.get();
+        List<UserKwd> banKwdList = userKwdService.getBanKwdList(user);
+        log.info("userId: {}, banKwdList size: {}",user.getId(),banKwdList.size());
+
+        log.info("[Finished request] GET /keyword/ban");
+        return new KwdListDto(banKwdList.stream().map(KwdDto::new).toList());
+    }
+
+    /**
      * 추천 키워드 조회
      *  [로그인 o] 해당 사용자의 추천 키워드 리스트 반환 (하루 이내 등록, 점수 내림차순, 금지 키워드 제외)
      *  (로그인 했을때만 호출)
@@ -174,12 +196,5 @@ public class KwdApi {
         List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
         //받아온 키워드 리스트로 업데이트
         userKwdService.updateKwdList(user,kwdIds,type);
-    }
-
-    /**
-     * 테스트용 사용자
-     */
-    private User getUser(Long userId) {
-        return userService.getUserByEmail("user"+userId+"@xx.xx");
     }
 }
