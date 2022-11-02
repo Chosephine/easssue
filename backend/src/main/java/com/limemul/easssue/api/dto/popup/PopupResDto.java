@@ -8,6 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PopupResDto {
 
-    private String cloud;
-    private String summary;
+    private boolean error=true;
+    private String cloud="";
+    private String summary="";
+
+    public PopupResDto(String cloud, String summary) {
+        this.error=false;
+        this.cloud = cloud;
+        this.summary = summary;
+    }
 }

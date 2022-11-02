@@ -21,20 +21,6 @@ import java.io.IOException;
 @Slf4j
 public class PopupApi {
 
-    public static void main(String[] args)  {
-        System.out.println("Python Call");
-        String[] command = new String[3];
-        command[0] = "python3";
-        command[1] = "/home/ubuntu/easssue/py/url_to_summary.py";
-        command[2] = "프론트에서 넘겨주는 url";
-        try {
-            execPython(command);
-        } catch (Exception e) {
-            e.printStackTrace();
-            //todo 파이썬 에러 났을때 프론트에 넘겨줄 값 이야기
-        }
-    }
-
     @GetMapping
     public PopupResDto getPopupInfo(@RequestBody PopupReqDto popupReqDto){
         log.info("[Starting request] GET /popup");
@@ -42,23 +28,33 @@ public class PopupApi {
         String url = popupReqDto.getUrl();
         log.info("Requested url is [{}]",url);
 
+        StringBuilder cloud=new StringBuilder("/home/ubuntu/easssue/resource/word_cloud/");
+        StringBuilder summary= new StringBuilder();
+
         String[] command = new String[3];
         command[0] = "python3";
         command[1] = "/home/ubuntu/easssue/py/url_to_summary.py";
         command[2] = url;
+
         try {
-            execPython(command);
+            String result=execPython(command);
+            String[] split = result.split("\n");
+            int len = split.length - 1;
+            cloud.append(split[len]).append(".png");
+            for(int i=0;i< len-1;i++){
+                summary.append(split[i]);
+            }
+            return new PopupResDto(cloud.toString(), summary.toString());
         } catch (Exception e) {
             e.printStackTrace();
             //todo 파이썬 에러 났을때 프론트에 넘겨줄 값 이야기
+            return new PopupResDto();
         }
-
-        return new PopupResDto();
     }
 
-    public static void execPython(String[] command) throws IOException {
+    public String execPython(String[] command) throws IOException {
         CommandLine commandLine = CommandLine.parse(command[0]);
-        for (int i = 1, n = command.length; i < n; i++) {
+        for (int i = 1; i < command.length; i++) {
             commandLine.addArgument(command[i]);
         }
 
@@ -66,10 +62,11 @@ public class PopupApi {
         PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
         DefaultExecutor executor = new DefaultExecutor();
         executor.setStreamHandler(pumpStreamHandler);
-        System.out.println(commandLine);
-        int result = executor.execute(commandLine);
-        System.out.println("result: " + result);
-        System.out.println("output: " + outputStream);
 
+        int result = executor.execute(commandLine);
+        log.info("result: {}",result);
+        log.info("output: {}",outputStream);
+
+        return outputStream.toString();
     }
 }
