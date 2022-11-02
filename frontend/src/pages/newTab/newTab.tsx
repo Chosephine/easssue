@@ -16,6 +16,9 @@ import { SettingModal } from "@/components/SettingModal";
 import { DashboardModal } from "@/components/DashboardModal";
 import { KeywordModal } from "@/components/KeywordModal";
 
+// apis
+import { getNews } from "@/modules/api";
+
 
 const App: React.FC<{}> = () => {
   const [BookmarkModalOpen, setBookmarkModalOpen] = useState(false);
@@ -33,17 +36,18 @@ const App: React.FC<{}> = () => {
     fetchBookmarks();
   }, [BookmarkModalOpen]);
   useEffect(() => {
+    getNews(0)
   }, [])
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
-      console.log(bookmarkTreeNodes);
+      // console.log(bookmarkTreeNodes);
       setBookmarkTree(bookmarkTreeNodes);
     });
   };
   const fetchUrl = () => {
     chrome.storage.local.get(['bgimg'], (result) => {
       setImgUrl(result.bgimg)
-      console.log(result.bgimg)
+      // console.log(result.bgimg)
     })
   }
   return (

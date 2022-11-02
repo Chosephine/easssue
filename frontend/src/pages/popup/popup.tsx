@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './popup.css'
 import '@root/index.css'
 
+import { login } from '@/modules/api';
+
 
 
 const App: React.FC<{}> = () => {
@@ -17,10 +19,10 @@ const App: React.FC<{}> = () => {
       <h1 className="text-sm font-bold underline">
       Hello world!
     </h1>
-    <button onClick={()=>{
-      chrome.identity.getAuthToken({interactive : true }, token =>{
-        return console.log(token);
-      })
+    <button onClick={async()=>{
+      const data = await login();
+      console.log("pop" + data);
+      
     }}>
       구글 로그인 버튼
     </button>

@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import keyWordReducer from './keyWordReducer';
+// import authReducer from './auth';
 
 const persistConfig = {
   key: 'root',

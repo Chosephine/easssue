@@ -43,7 +43,7 @@ const HeatMapCalendar: FC<HeatMapCalendarProps> = () => {
       tooltipDataAttrs={(somevlaue : {date : string } | null)=> {return {'data-tooltip' : somevlaue?.date}}}
       values={
         [
-          {date : '2022-11-01', count:12, article : ['ㅎㅇㅀ', 'ㄹㅇㅇㄹㅇ', 'ㄹㄻㅈㄷ']},
+          {date : '2022-10-31', count:12, article : ['ㅎㅇㅀ', 'ㄹㅇㅇㄹㅇ', 'ㄹㄻㅈㄷ']},
           {date : '2022-11-02', count:1, article : ['ㅎㅇㅀ', 'ㄹㅇㅇㄹㅇ', 'ㄹㄻㅈㄷ']}
         ]
       }
