@@ -4,6 +4,7 @@ import com.limemul.easssue.api.dto.dash.GraphValueDto;
 import com.limemul.easssue.api.dto.dash.GrassValueDto;
 import com.limemul.easssue.entity.ArticleLog;
 import com.limemul.easssue.entity.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,4 +34,10 @@ public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
             nativeQuery = true)
     List<GrassValueDto> countByUserAndClickTimeAfterGroupByClickTime(
             @Param("user") User user, @Param("click_time") LocalDateTime clickTime);
+
+    /**
+     *
+     */
+    @EntityGraph(attributePaths = {"article","category"})
+    List<ArticleLog> findByUserAndClickTimeAfter(User user, LocalDateTime clickTime);
 }

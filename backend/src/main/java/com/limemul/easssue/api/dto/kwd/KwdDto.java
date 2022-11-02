@@ -23,9 +23,4 @@ public class KwdDto {
         kwdId=kwd.getKwd().getId();
         kwdName=kwd.getKwd().getName();
     }
-
-    public KwdDto(RecKwd kwd){
-        kwdId=kwd.getKwd().getId();
-        kwdName=kwd.getKwd().getName();
-    }
 }

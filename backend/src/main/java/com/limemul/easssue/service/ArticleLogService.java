@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalTime;
 import java.util.List;
 
-import static java.time.temporal.TemporalAdjusters.*;
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +42,13 @@ public class ArticleLogService {
     public List<GrassValueDto> getCalendarHeatMapInfo(User user){
         LocalDateTime firstDayOfMonth = LocalDateTime.now().with(firstDayOfMonth());
         return articleLogRepo.countByUserAndClickTimeAfterGroupByClickTime(user, firstDayOfMonth);
+    }
+
+    /**
+     *
+     */
+    public List<ArticleLog> getArticleLogByReadDate(User user,LocalDate date){
+        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN));
     }
 
     /**
