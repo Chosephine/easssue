@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { method } from 'lodash';
 
-const BASE_URL = 'https://k7d102.p.ssafy.io/api';
+export const BASE_URL = 'https://k7d102.p.ssafy.io/api';
 
 //!user
 /**
@@ -202,3 +202,28 @@ export const getDashBoardInfo = async () => {
  * @method GET
  * @url /dash/news/{date}
  */
+
+//! API
+
+/**
+ * * GET nateTrend
+ * @params none
+ * @method GET
+ * @url /dash/news/{date}
+ */
+
+export const trendAPI = async () => {
+  try {
+    const { data } = await axios({
+      // url: 'https://www.nate.com/js/data/jsonLiveKeywordDataV1.js?v=202104300440',
+      url: 'https://www.nate.com/main/srv/news/data/keywordList.today.json?v=202104300430',
+      // responseType: 'json',
+      method: 'GET',
+      // charset: 'utf-8',
+      // responseEncodig: 'utf8'
+    });
+    console.log(data.data);
+  } catch (error) {
+    console.error('nate trend api error: ' + error);
+  }
+};

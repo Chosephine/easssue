@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { BookmarkModal } from "@/components/BookmarkModal";
-import "@root/index.css";
-import { Bookmark } from "@/components/Bookmark";
-import { Searchbar } from "@/components/Searchbar";
-import { Settingbar } from "@/components/Settingbar";
-import { NewsBoard } from "@/components/NewsBoard";
-import { RealtimeKeyword } from "@/components/RealtimeKeyword";
+import React, { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BookmarkModal } from '@/components/BookmarkModal';
+import '@root/index.css';
+import { Bookmark } from '@/components/Bookmark';
+import { Searchbar } from '@/components/Searchbar';
+import { Settingbar } from '@/components/Settingbar';
+import { NewsBoard } from '@/components/NewsBoard';
+import { RealtimeKeyword } from '@/components/RealtimeKeyword';
 import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Provider, useSelector } from 'react-redux';
-import { persistor, store } from '@/modules/store';
-import Scrollbars from "react-custom-scrollbars-2";
-import { SettingModal } from "@/components/SettingModal";
-import { DashboardModal } from "@/components/DashboardModal";
-import { KeywordModal } from "@/components/KeywordModal";
-
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, persistor, store, RootState } from '@/modules/store';
+import Scrollbars from 'react-custom-scrollbars-2';
+import { SettingModal } from '@/components/SettingModal';
+import { DashboardModal } from '@/components/DashboardModal';
+import { KeywordModal } from '@/components/KeywordModal';
 // apis
-import { getNews } from "@/modules/api";
-
+import { unwrapResult } from '@reduxjs/toolkit'
+import { getNews, trendAPI } from '@/modules/api';
+import { loginAuthToken } from '@/modules/auth';
+import axios from 'axios';
 
 const App: React.FC<{}> = () => {
   const [BookmarkModalOpen, setBookmarkModalOpen] = useState(false);
@@ -28,16 +29,30 @@ const App: React.FC<{}> = () => {
   const [bookmarkTree, setBookmarkTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
-  const [imgUrl, setImgUrl] = useState("")
+  const [imgUrl, setImgUrl] = useState('');
+  const { accessToken, isLogin } = useSelector((state: RootState) => {
+    return {
+      accessToken : state.persistedReducer.authReducer.token.accessToken,
+      isLogin : state.persistedReducer.authReducer.isLogin
+    };
+  });
+
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    fetchUrl()
-  },[settingModalOpen])
+    fetchUrl();
+  }, [settingModalOpen]);
   useEffect(() => {
     fetchBookmarks();
   }, [BookmarkModalOpen]);
   useEffect(() => {
-    getNews(0)
-  }, [])
+    if(accessToken !== ''){
+      axios.defaults.headers.common['Authorization'] = `${accessToken}`;
+    }
+    console.log(accessToken);
+    
+    getNews(0);
+    trendAPI();
+  }, []);
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
       // console.log(bookmarkTreeNodes);
@@ -46,22 +61,26 @@ const App: React.FC<{}> = () => {
   };
   const fetchUrl = () => {
     chrome.storage.local.get(['bgimg'], (result) => {
-      setImgUrl(result.bgimg)
+      setImgUrl(result.bgimg);
       // console.log(result.bgimg)
-    })
-  }
+    });
+  };
   return (
     <>
       <div
         className="flex flex-col bg-cover"
         style={{
-          width: "100vw",
-          height: "100vh",
-          backgroundImage: 'url(' + imgUrl + ')' || ""
+          width: '100vw',
+          height: '100vh',
+          backgroundImage: 'url(' + imgUrl + ')' || '',
         }}
       >
         <div className="h-8 p-2">
-          <Settingbar setSettingModalOpen={setSettingModalOpen} setDashboardModalOpen={setDashboardModalOpen} setKeywordModalOpen={setKeywordModalOpen}/>
+          <Settingbar
+            setSettingModalOpen={setSettingModalOpen}
+            setDashboardModalOpen={setDashboardModalOpen}
+            setKeywordModalOpen={setKeywordModalOpen}
+          />
         </div>
         <div className="flex flex-row h-full">
           <div className="w-1/4"></div>
@@ -77,7 +96,6 @@ const App: React.FC<{}> = () => {
                 setBookmarkModalOpen={setBookmarkModalOpen}
                 bookmarkTree={bookmarkTree}
               />
-
             </Scrollbars>
           </div>
           <div className="w-1/4">
@@ -91,20 +109,25 @@ const App: React.FC<{}> = () => {
         ></BookmarkModal>
       )}
       {settingModalOpen && (
-        <SettingModal
-          setSettingModalOpen={setSettingModalOpen}
-        ></SettingModal>
+        <SettingModal setSettingModalOpen={setSettingModalOpen}></SettingModal>
       )}
       {dashboardModalOpen && (
         <DashboardModal
-        setDashboardModalOpen={setDashboardModalOpen}
+          setDashboardModalOpen={setDashboardModalOpen}
         ></DashboardModal>
       )}
       {keywordModalOpen && (
-        <KeywordModal
-        setKeywordModalOpen={setKeywordModalOpen}
-        ></KeywordModal>
+        <KeywordModal setKeywordModalOpen={setKeywordModalOpen}></KeywordModal>
       )}
+      <button onClick={async()=>{
+        try {
+          const data = await dispatch(loginAuthToken());
+        } catch (error) {
+          
+        }
+      }}>
+        리덕스 구글 로그인
+      </button>
     </>
   );
 };
