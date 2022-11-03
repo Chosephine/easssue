@@ -1,14 +1,14 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState, AppDispatch } from './store';
-import axios from 'axios';
+import { getSubscribeKeywords } from './api';
 
 interface Initial {
-  keywords: { kwdId: number; kwdName: string }[];
+  kwdList: { kwdId: number; kwdName: string }[];
 }
 
 const initialState: Initial = {
-  keywords: [{
+  kwdList: [{
     kwdId : 1,
     kwdName : '0'
   },
@@ -30,38 +30,47 @@ const initialState: Initial = {
   }
 ],
 };
+export const getSubscribeKeywordsRedux = createAsyncThunk('getSubscribeKeywords',async()=>{
+  const data = await getSubscribeKeywords();
+  // console.log(data);
+  return data;
+})
 
 export const keywordSlice = createSlice({
   name: 'keyword',
   initialState,
   reducers: {
     addKeyword: (state, action) => {
-      const isDuplicate = state.keywords.find(
+      const isDuplicate = state.kwdList.find(
         (keyword) => keyword.kwdId === action.payload.kwdId
       );
       if (!isDuplicate) {
-        state.keywords.unshift(action.payload);
+        state.kwdList.unshift(action.payload);
       }
     },
     removeKeyword: (state, action) => {
-      const data = state.keywords.filter((keywords) => {
+      const data = state.kwdList.filter((keywords) => {
         console.log(keywords, action.payload.kwdId);
         
         return keywords.kwdId != action.payload;
       });
-      state.keywords = data;
+      state.kwdList = data;
     },
     endDropChangeList: (state, action) => {
       if(!action.payload.destination)return ;
-      const keywords = [...state.keywords]
+      const keywords = [...state.kwdList]
       console.log(keywords.map((a)=> current(a)));
-      
       const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
       keywords.splice(action.payload.destination.index, 0, reorderedItem);
-      
-      state.keywords = keywords;
+      state.kwdList = keywords;
     }
   },
+  extraReducers : builder => {
+    builder.addCase(getSubscribeKeywordsRedux.fulfilled, (state, action) => {
+      console.log(action.payload.kwdList);
+      state.kwdList = action.payload.kwdList;
+    })
+  }
 });
 
 export const { addKeyword, removeKeyword, endDropChangeList } = keywordSlice.actions;

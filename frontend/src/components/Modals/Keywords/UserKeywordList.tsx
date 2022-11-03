@@ -5,11 +5,11 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { removeKeyword,endDropChangeList } from '@modules/keyWordReducer';
 
 const UserKeyword: FC = () => {
-  const { keywords } = useSelector((state: RootState) => {
+  const kwdList = useSelector((state: RootState) => {
     // console.log(state);
-    return state.persistedReducer.keyWordReducer;
+    return state.persistedReducer.keyWordReducer.kwdList;
   });
-  console.log(keywords);
+  console.log("kwdList:", kwdList);
   const dispatch = useDispatch();
   const removeKeywordButton = (keywordId: number) => {
     dispatch(removeKeyword(keywordId));
@@ -19,7 +19,7 @@ const UserKeyword: FC = () => {
       <Droppable droppableId="keyword-list">
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {keywords.map((keyword, index) => {
+            {kwdList.map((keyword, index) => {
               return (
                 <Draggable
                   draggableId={`${keyword.kwdId}`}

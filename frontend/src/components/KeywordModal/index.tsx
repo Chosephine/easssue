@@ -1,5 +1,6 @@
 import React from "react";
 import { KeywordModalProps } from "./types";
+import { KeywordIndex } from "../Modals/Keywords/KeywordComponent";
 
 export const KeywordModal: React.FC<KeywordModalProps> = ({ setKeywordModalOpen }) => {
   const onCloseClick = () => {
@@ -15,6 +16,9 @@ export const KeywordModal: React.FC<KeywordModalProps> = ({ setKeywordModalOpen 
               X
             </button>
           </div>
+        <KeywordIndex />
+        // 버튼 컴포넌트 만들어서 put 요청 보낼것
+        <button className="absolute bottom-0 right-0">저장쓰</button>
         </div>
       </div>
     </>

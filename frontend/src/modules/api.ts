@@ -46,7 +46,8 @@ export const getSubscribeKeywords = async () => {
       url: BASE_URL + '/keyword/subscribe',
       method: 'GET',
     });
-    console.log(data);
+    // console.log(data);
+    return data;
   } catch (error) {
     console.error('subscribe keywords error : ', error);
   }

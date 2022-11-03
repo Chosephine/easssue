@@ -19,6 +19,7 @@ import { KeywordModal } from '@/components/KeywordModal';
 import { unwrapResult } from '@reduxjs/toolkit'
 import { getNews, trendAPI } from '@/modules/api';
 import { loginAuthToken } from '@/modules/auth';
+import { getSubscribeKeywordsRedux } from '@modules/keyWordReducer'
 import axios from 'axios';
 
 const App: React.FC<{}> = () => {
@@ -48,10 +49,9 @@ const App: React.FC<{}> = () => {
     if(accessToken !== ''){
       axios.defaults.headers.common['Authorization'] = `${accessToken}`;
     }
-    console.log(accessToken);
-    
     getNews(0);
     trendAPI();
+    dispatch(getSubscribeKeywordsRedux());
   }, []);
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
