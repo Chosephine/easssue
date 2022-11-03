@@ -90,12 +90,12 @@ public class PopupApi {
         Path path= Paths.get("");
         log.info("Current work space: {}", path.toAbsolutePath());
 
-        StringBuilder cloud=new StringBuilder("/home/ubuntu/easssue/resource/word_cloud/");
+        StringBuilder cloud=new StringBuilder("./src/main/resources/popup/wordcloud/");
         StringBuilder summary= new StringBuilder();
 
         List<String> command = new ArrayList<>();
         command.add("python3");
-        command.add("/home/ubuntu/easssue/py/url_to_summary.py");
+        command.add("./src/main/resources/popup/url_to_summary.py");
         command.add(url);
 
         ProcessBuilder builder=new ProcessBuilder(command);
