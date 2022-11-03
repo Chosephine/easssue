@@ -126,9 +126,15 @@ export const putBanKeywords = async (
  */
 
 export const searchKeyword = async (value: string) => {
+  console.log(value);
+  
+  const keyDecode = encodeURI(value);
+  const deUrl = decodeURI(BASE_URL + `keyword/${keyDecode}`)
+  console.log(deUrl);
+  
   try {
     const { data } = await axios({
-      url: BASE_URL + `keyword/${value}`,
+      url: deUrl,
       method: 'GET',
     });
     console.log(data);
@@ -147,10 +153,11 @@ export const searchKeyword = async (value: string) => {
 
 export const getNews = async (pageNumber: number) => {
   try {
-    const data = await axios({
+    const { data }= await axios({
       url: BASE_URL + `/news/popular/page/${pageNumber}`,
     });
     console.log(data);
+    return data
   } catch (error) {
     console.error('get news error: ' + error);
   }

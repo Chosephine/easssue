@@ -3,8 +3,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState, AppDispatch } from './store';
 import { getSubscribeKeywords } from './api';
 
+export type keyword = { kwdId: number; kwdName: string }
 interface Initial {
-  kwdList: { kwdId: number; kwdName: string }[];
+  kwdList: keyword[];
 }
 
 const initialState: Initial = {

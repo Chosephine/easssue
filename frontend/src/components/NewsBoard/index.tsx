@@ -1,8 +1,10 @@
+import { useEffect, useState, FC } from 'react'
 import { NewsCard } from "../NewsCard"
 import { KeywordBar } from "../KeywordBar"
-export const NewsBoard = () => {
+export const NewsBoard : FC = () => {
   const keywords = ["인기", "네이버", "비트코인", "이청아", "제페토"]
   const userKeywords = ["SSAFY", "카카오", "메타버스", "남궁민", "블록체인"]
+  useEffect(() => {},[])
   return (
     <div>
       <KeywordBar keywordList={userKeywords}/>

@@ -31,10 +31,11 @@ const App: React.FC<{}> = () => {
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
   const [imgUrl, setImgUrl] = useState('');
-  const { accessToken, isLogin } = useSelector((state: RootState) => {
+  const { accessToken, isLogin, kwdList } = useSelector((state: RootState) => {
     return {
       accessToken : state.persistedReducer.authReducer.token.accessToken,
-      isLogin : state.persistedReducer.authReducer.isLogin
+      isLogin : state.persistedReducer.authReducer.isLogin,
+      kwdList : state.persistedReducer.keyWordReducer.kwdList
     };
   });
 
@@ -51,6 +52,7 @@ const App: React.FC<{}> = () => {
     }
     getNews(0);
     trendAPI();
+    // 키워드 어디서부터 내려줄지? 
     dispatch(getSubscribeKeywordsRedux());
   }, []);
   const fetchBookmarks = () => {

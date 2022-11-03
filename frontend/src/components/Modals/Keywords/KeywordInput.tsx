@@ -2,11 +2,24 @@ import React , { FC, useMemo, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { debounce } from 'lodash'
 import { removeKeyword,addKeyword } from '@modules/keyWordReducer';
+import { searchKeyword } from '@/modules/api';
 const KeyInput : FC = () =>{
   const [inputKeyword, setInputKeyword] = useState<string>('');
   const onChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     debounceSearch(e.target.value);
   }
+
+ useEffect(() => {
+  if(inputKeyword !== ''){
+
+    const result = new Promise((resolve, reject) => { const res = searchKeyword(inputKeyword);
+      resolve(console.log(res))
+    })
+    console.log(result);
+    
+  }
+  
+ },[inputKeyword])
 
   const debounceSearch = useMemo(()=> debounce((keyword) => {
     setInputKeyword(()=> keyword);
