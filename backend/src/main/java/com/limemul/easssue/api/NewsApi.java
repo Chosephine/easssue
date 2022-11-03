@@ -35,7 +35,9 @@ public class NewsApi {
     @GetMapping("/popular")
     public PopularArticleDto firstPopularNews(){
         log.info("[Starting request] GET /popular");
-        return articleService.getPopularArticle(0);
+        PopularArticleDto result = articleService.getPopularArticle(0);
+        log.info("[Finished request] GET /popular");
+        return result;
     }
 
     /**
@@ -45,7 +47,10 @@ public class NewsApi {
      */
     @GetMapping("/popular/page/{page}")
     public PopularArticleDto popularNews(@PathVariable Integer page){
-        return articleService.getPopularArticle(page);
+        log.info("[Starting request] GET /popular/page/{}", page);
+        PopularArticleDto result = articleService.getPopularArticle(page);
+        log.info("[Finished request] GET /popular/page/{}", page);
+        return result;
     }
 
     /**
@@ -53,11 +58,14 @@ public class NewsApi {
      */
     @GetMapping("/keyword/{kwdId}/page/{page}")
     public KwdArticleDto kwdNews(@PathVariable Long kwdId, @PathVariable Integer page){
+        log.info("[Starting request] GET /keyword/{}/page/{}", kwdId, page);
         Optional<Kwd> targetKwd = kwdRepo.findById(kwdId);
         if (targetKwd.isEmpty()){
             throw new IllegalArgumentException("존재하지 않는 키워드입니다.");
         }else {
-            return articleService.getSubsArticle(targetKwd.get(), page);
+            KwdArticleDto result = articleService.getSubsArticle(targetKwd.get(), page);
+            log.info("[Finished request] GET /keyword/{}/page/{}", kwdId, page);
+            return result;
         }
     }
 
