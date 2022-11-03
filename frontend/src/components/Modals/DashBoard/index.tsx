@@ -2,10 +2,22 @@ import { FC, useEffect, useState } from 'react';
 import HeatMapCalendar from './HeatMapCalendar';
 import { RadarChart } from './RadarChart';
 import { DashBoardWordCloudImg } from './WordCloud';
-
-interface DashIndexProps {}
+import { getDashBoardInfo } from '@/modules/api';
+import { DashInfo } from './types';
+interface DashIndexProps {
+}
 
 export const DashIndex: FC<DashIndexProps> = () => {
+  const [dashBoardInfo, setDashBoardInfo] = useState<DashInfo>();
+  useEffect(() =>{
+    const getDashInfo = async () =>{
+      const data = await getDashBoardInfo();
+      setDashBoardInfo(()=>data);
+      console.log(dashBoardInfo);
+      
+    }
+    getDashInfo();
+  },[])
   return (
     <>
       <section className="flex-row w-[100%] h-[95%] border-blue-100 border-2">

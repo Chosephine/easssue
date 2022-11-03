@@ -113,7 +113,7 @@ const App: React.FC<{}> = () => {
       )}
       {dashboardModalOpen && (
         <DashboardModal
-          setDashboardModalOpen={setDashboardModalOpen}
+          setDashboardModalOpen={setDashboardModalOpen} isLogin={isLogin}
         ></DashboardModal>
       )}
       {keywordModalOpen && (

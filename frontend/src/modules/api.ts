@@ -191,6 +191,7 @@ export const getDashBoardInfo = async () => {
       method: 'GET',
     });
     console.log(data);
+    return data;
   } catch (error) {
     console.error('dash board info api error: ' + error);
   }
