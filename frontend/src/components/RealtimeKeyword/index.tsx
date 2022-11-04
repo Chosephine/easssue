@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { trendAPI } from "@/modules/api";
+
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
+  const [trend, setTrend] = useState('');
   const settings = {
+
     dots: false,
     infinite: true,
     arrows: false,
@@ -16,6 +20,7 @@ export const RealtimeKeyword = () => {
     speed: 1500,
     autoplaySpeed: 4000,
   }
+
   const words = ["1위", "2위", "3위", "4위", "5위", "6위", "7위", "8위", "9위", "10위"]
 
   return (

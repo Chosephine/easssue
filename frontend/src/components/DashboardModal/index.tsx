@@ -3,7 +3,7 @@ import { DashboardModalProps } from "./types";
 import { DashIndex } from "@/components/Modals/DashBoard"
 
 export const DashboardModal: React.FC<DashboardModalProps> = ({
-  setDashboardModalOpen,
+  setDashboardModalOpen, isLogin
 }) => {
   const onCloseClick = () => {
     setDashboardModalOpen(false)
