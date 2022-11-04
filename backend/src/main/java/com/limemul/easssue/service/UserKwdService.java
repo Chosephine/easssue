@@ -41,7 +41,7 @@ public class UserKwdService {
         userKwdRepo.deleteByUserAndType(user,type);
 
         //업데이트된 키워드
-        List<Kwd> kwdList = kwdRepo.findAllById(updatedKwdIds);
+        List<Kwd> kwdList = kwdRepo.findByIdIn(updatedKwdIds);
 
         //사용자의 구독 또는 금지 키워드 추가
         List<UserKwd> updatedKwdList=new ArrayList<>();
