@@ -2,6 +2,7 @@ package com.limemul.easssue.api;
 
 import com.limemul.easssue.api.dto.kwd.KwdDto;
 import com.limemul.easssue.api.dto.kwd.KwdListDto;
+import com.limemul.easssue.api.dto.kwd.KwdUpdateDto;
 import com.limemul.easssue.entity.*;
 import com.limemul.easssue.service.KwdService;
 import com.limemul.easssue.service.RecKwdService;
@@ -12,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.limemul.easssue.jwt.JwtProvider.getUserFromJwt;
@@ -48,7 +51,7 @@ public class KwdApi {
         }
 
         User user = optionalUser.get();
-        List<UserKwd> subscKwdList = userKwdService.getSubscKwdList(user);
+        List<UserKwd> subscKwdList = userKwdService.getUserKwdList(user,UserKwdType.s);
         log.info("userId: {}, subscKwdList size: {}",user.getId(),subscKwdList.size());
 
         //로그인 했는데 없으면 랜덤으로 하나
@@ -64,10 +67,31 @@ public class KwdApi {
     }
 
     /**
+     * 금지 키워드 조회
+     */
+    @GetMapping("/ban")
+    public KwdListDto getBanKwd(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] GET /keyword/ban");
+
+        // 사용자 정보 불러오기
+        Optional<User> optionalUser = getUserFromJwt(userService, headers);
+
+        if (optionalUser.isEmpty()){
+            throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
+        }
+
+        User user = optionalUser.get();
+        List<UserKwd> banKwdList = userKwdService.getUserKwdList(user,UserKwdType.b);
+        log.info("userId: {}, banKwdList size: {}",user.getId(),banKwdList.size());
+
+        log.info("[Finished request] GET /keyword/ban");
+        return new KwdListDto(banKwdList.stream().map(KwdDto::new).toList());
+    }
+
+    /**
      * 추천 키워드 조회
      *  [로그인 o] 해당 사용자의 추천 키워드 리스트 반환 (하루 이내 등록, 점수 내림차순, 금지 키워드 제외)
      *  (로그인 했을때만 호출)
-     *  todo 금지 키워드 제대로 지워지는지 체크
      */
     @GetMapping("/recommend")
     public KwdListDto getRecKwd(@RequestHeader HttpHeaders headers){
@@ -85,11 +109,13 @@ public class KwdApi {
 
         User user = optionalUser.get();
         //해당 사용자의 추천 키워드 리스트
-        List<RecKwd> recKwdList = recKwdService.getRecKwdList(user);
+        List<Kwd> recKwdList = new ArrayList<>(recKwdService
+                .getRecKwdList(user).stream().map(RecKwd::getKwd).toList());
         log.info("userId: {}, recKwdList size: {}",user.getId(),recKwdList.size());
 
         //해당 사용자의 금지 키워드 리스트
-        List<UserKwd> banKwdList = userKwdService.getBanKwdList(user);
+        List<Kwd> banKwdList = new ArrayList<>(userKwdService
+                .getUserKwdList(user,UserKwdType.b).stream().map(UserKwd::getKwd).toList());
         //추천 키워드에서 금지 키워드 제거
         boolean isRemoved = recKwdList.removeAll(banKwdList);
         if(isRemoved){
@@ -102,6 +128,22 @@ public class KwdApi {
     }
 
     /**
+     * 사용자 키워드 수정
+     *  [로그인 o] 인자로 받은 키워드 리스트로 해당 사용자의 키워드 변경
+     *  (로그인 했을때만 호출)
+     */
+    @PutMapping
+    public boolean updateUserKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdUpdateDto kwdUpdateDto){
+        log.info("[Starting request] PUT /keyword");
+
+        updateKwdList(headers, kwdUpdateDto.getSubscKwdList(), UserKwdType.s);
+        updateKwdList(headers, kwdUpdateDto.getBanKwdList(), UserKwdType.b);
+
+        log.info("[Finished request] PUT /keyword");
+        return true;
+    }
+
+    /**
      * 구독 키워드 수정
      *  [로그인 o] 인자로 받은 키워드 리스트로 해당 사용자의 구독 키워드 변경
      *  (로그인 했을때만 호출)
@@ -110,7 +152,7 @@ public class KwdApi {
     public boolean updateSubscKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/subscribe");
 
-        updateKwdList(headers, kwdListDto, UserKwdType.s);
+        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.s);
 
         log.info("[Finished request] PUT /keyword/subscribe");
         return true;
@@ -125,7 +167,7 @@ public class KwdApi {
     public boolean updateBanKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/ban");
 
-        updateKwdList(headers, kwdListDto, UserKwdType.b);
+        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.b);
 
         log.info("[Finished request] PUT /keyword/ban");
         return true;
@@ -159,26 +201,19 @@ public class KwdApi {
      * 사용자 키워드 수정
      *  UserKwdType에 따라 구독 또는 금지 키워드 변경
      */
-    private void updateKwdList(HttpHeaders headers, KwdListDto kwdListDto, UserKwdType type) {
+    private void updateKwdList(HttpHeaders headers, List<KwdDto> kwdListDto, UserKwdType type) {
         //사용자 정보 불러오기
         Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
         //로그인 안하면 예외 발생
         //todo 예외 던질지 false 반환할지 프론트와 이야기
         if(optionalUser.isEmpty()){
-            throw new IllegalArgumentException("로그인 후 사용할 수 있는 기능입니다.");
+            throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
         }
 
         User user = optionalUser.get();
-        List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
+        List<Long> kwdIds = kwdListDto.stream().map(KwdDto::getKwdId).toList();
         //받아온 키워드 리스트로 업데이트
-        userKwdService.updateKwdList(user,kwdIds,type);
-    }
-
-    /**
-     * 테스트용 사용자
-     */
-    private User getUser(Long userId) {
-        return userService.getUserByEmail("user"+userId+"@xx.xx");
+        userKwdService.updateUserKwdList(user,kwdIds,type);
     }
 }

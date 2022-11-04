@@ -20,10 +20,7 @@ export const RealtimeKeyword = () => {
     speed: 1500,
     autoplaySpeed: 4000,
   }
-  useEffect(()=>{
-    // setTrend(()=> trendAPI())
-  },[])
-  
+
   const words = ["1위", "2위", "3위", "4위", "5위", "6위", "7위", "8위", "9위", "10위"]
 
   return (

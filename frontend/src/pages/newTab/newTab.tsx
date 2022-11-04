@@ -9,18 +9,13 @@ import { NewsBoard } from '@/components/NewsBoard';
 import { RealtimeKeyword } from '@/components/RealtimeKeyword';
 import { DashIndex } from '@/components/Modals/DashBoard';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, persistor, store, RootState } from '@/modules/store';
-import Scrollbars from 'react-custom-scrollbars-2';
-import { SettingModal } from '@/components/SettingModal';
-import { DashboardModal } from '@/components/DashboardModal';
-import { KeywordModal } from '@/components/KeywordModal';
-// apis
-import { unwrapResult } from '@reduxjs/toolkit'
-import { getNews, trendAPI, getRecommendKeywords, newsLogApi } from '@/modules/api';
-import { loginAuthToken } from '@/modules/auth';
-import { getSubscribeKeywordsRedux } from '@modules/keyWordReducer'
-import axios from 'axios';
+import { Provider, useSelector } from 'react-redux';
+import { persistor, store } from '@/modules/store';
+import Scrollbars from "react-custom-scrollbars-2";
+import { SettingModal } from "@/components/SettingModal";
+import { DashboardModal } from "@/components/DashboardModal";
+import { KeywordModal } from "@/components/KeywordModal";
+
 
 const App: React.FC<{}> = () => {
   const [BookmarkModalOpen, setBookmarkModalOpen] = useState(false);

@@ -22,47 +22,26 @@ public class UserKwdService {
     private final KwdRepo kwdRepo;
 
     /**
-     * 해당 사용자의 구독 키워드 조회
+     * 해당 사용자의 키워드 조회
+     *  인자로 받은 type에 따라 구독 또는 금지 키워드 반환
      */
-    public List<UserKwd> getSubscKwdList(User user){
-        return userKwdRepo.findByUserAndTypeOrderById(user,UserKwdType.s);
+    public List<UserKwd> getUserKwdList(User user, UserKwdType type){
+        return userKwdRepo.findByUserAndTypeOrderById(user,type);
     }
 
     /**
-     * 해당 사용자의 금지 키워드 조회
-     */
-    public List<UserKwd> getBanKwdList(User user){
-        return userKwdRepo.findByUserAndTypeOrderById(user,UserKwdType.b);
-    }
-
-    /**
-     * 구독 키워드 업데이트
-     *  해당 사용자의 현재 구독 키워드 전체 삭제 후,
+     * 사용자 키워드 업데이트
+     *  해당 사용자의 현재 구독 또는 금지 키워드 전체 삭제 후,
      *  업데이트할 키워드 리스트 저장
+     *  인자로 받은 type에 따라 구독 또는 금지 키워드 업데이트
      */
     @Transactional
-    public void updateSubscKwdList(User user, List<Long> updatedKwdIds){
-        updateKwdList(user, updatedKwdIds, UserKwdType.s);
-    }
-
-    /**
-     * 금지 키워드 업데이트
-     *  해당 사용자의 현재 금지 키워드 전체 삭제 후,
-     *  업데이트할 키워드 리스트 저장
-     */
-    @Transactional
-    public void updateBanKwdList(User user, List<Long> updatedKwdIds){
-        updateKwdList(user, updatedKwdIds, UserKwdType.b);
-    }
-
-    //========================================================================
-
-    public void updateKwdList(User user, List<Long> updatedKwdIds, UserKwdType type) {
+    public void updateUserKwdList(User user, List<Long> updatedKwdIds, UserKwdType type) {
         //사용자의 구독 또는 금지 키워드 전체 삭제
         userKwdRepo.deleteByUserAndType(user,type);
 
         //업데이트된 키워드
-        List<Kwd> kwdList = kwdRepo.findAllById(updatedKwdIds);
+        List<Kwd> kwdList = kwdRepo.findByIdIn(updatedKwdIds);
 
         //사용자의 구독 또는 금지 키워드 추가
         List<UserKwd> updatedKwdList=new ArrayList<>();
