@@ -2,28 +2,30 @@ import { FC, useState, useEffect } from 'react';
 import ReactCalendarHeatmap from 'react-calendar-heatmap';
 import { CalendarHistory } from './CalendarHistory'
 import 'react-calendar-heatmap/dist/styles.css';
-interface HeatMapCalendarProps {
-  
-}
+import { GrassType } from './types'
+import { getNewsHistory } from '@modules/api'
+
 export interface News {
   category : string,
     newsTitle : string,
     newsLink : string
 }
 type NewsList = News[] | []
-const HeatMapCalendar: FC<HeatMapCalendarProps> = () => {
-  const now = new Date();
-  const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() - 28);
-  const startDateNewFormat = startDate.getFullYear() + '-' + `${startDate.getMonth() + 1}` + '-' + startDate.getDate();
-  const endDateNewFormat = now.getFullYear() + '-' + `${now.getMonth() + 1}` + '-' + now.getDate();
+const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values}) => {
+
+  // const startDateNewFormat = startDate.getFullYear() + '-' + `${startDate.getMonth() + 1}` + '-' + startDate.getDate();
+  // const endDateNewFormat = now.getFullYear() + '-' + `${now.getMonth() + 1}` + '-' + now.getDate();
   const [newsList, setNewsList] = useState<NewsList>([])
 
   useEffect(()=>{
-    setNewsList(() => [{
-      category: 'news',
-      newsTitle:'naver',
-      newsLink : "naver.com"
-        }])
+    const getNewsHistoryApi = async () =>{
+      const now = new Date();
+  const getToday = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`;
+      const data = await getNewsHistory(getToday);
+      console.log(data, getToday );
+      setNewsList(()=> data.newsList);
+    }
+    getNewsHistoryApi();
   },[])
   return <>
   <div className='h-[100%] flex'>
@@ -31,22 +33,17 @@ const HeatMapCalendar: FC<HeatMapCalendarProps> = () => {
   <div className='h-[120%] flex p-0 mr-3'>
 
     <ReactCalendarHeatmap
-      startDate={new Date('2022-11-01')}
-      endDate={new Date('2022-11-30')}
+      startDate={new Date(startDate)}
+      endDate={new Date(endDate)}
       showWeekdayLabels={true}
       // horizontal={false}
       onClick ={(value)=>console.log(value)}
       // onMouseOver={(event, value)=> console.log(event, value)}
       // titleForValue={(value) => `Date is ${value}`}
       // showOutOfRangeDays={true}
-      monthLabels={['01','02','03','04','05','06','07','08','09','10월','11월','12']}
+      monthLabels={['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']}
       tooltipDataAttrs={(somevlaue : {date : string } | null)=> {return {'data-tooltip' : somevlaue?.date}}}
-      values={
-        [
-          {date : '2022-10-31', count:12, article : ['ㅎㅇㅀ', 'ㄹㅇㅇㄹㅇ', 'ㄹㄻㅈㄷ']},
-          {date : '2022-11-02', count:1, article : ['ㅎㅇㅀ', 'ㄹㅇㅇㄹㅇ', 'ㄹㄻㅈㄷ']}
-        ]
-      }
+      values={ values }
       />
       </div>
       <div>

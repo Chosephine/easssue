@@ -17,7 +17,7 @@ import { DashboardModal } from '@/components/DashboardModal';
 import { KeywordModal } from '@/components/KeywordModal';
 // apis
 import { unwrapResult } from '@reduxjs/toolkit'
-import { getNews, trendAPI } from '@/modules/api';
+import { getNews, trendAPI, getRecommendKeywords, newsLogApi } from '@/modules/api';
 import { loginAuthToken } from '@/modules/auth';
 import { getSubscribeKeywordsRedux } from '@modules/keyWordReducer'
 import axios from 'axios';
@@ -31,11 +31,11 @@ const App: React.FC<{}> = () => {
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
   const [imgUrl, setImgUrl] = useState('');
-  const { accessToken, isLogin, kwdList } = useSelector((state: RootState) => {
+  const { accessToken, isLogin, subScribeKwdList } = useSelector((state: RootState) => {
     return {
       accessToken : state.persistedReducer.authReducer.token.accessToken,
       isLogin : state.persistedReducer.authReducer.isLogin,
-      kwdList : state.persistedReducer.keyWordReducer.kwdList
+      subScribeKwdList : state.persistedReducer.keyWordReducer.subScribeKwdList
     };
   });
 
@@ -53,6 +53,7 @@ const App: React.FC<{}> = () => {
     getNews(0);
     trendAPI();
     // 키워드 어디서부터 내려줄지? 
+    getRecommendKeywords()
     dispatch(getSubscribeKeywordsRedux());
   }, []);
   const fetchBookmarks = () => {
@@ -123,13 +124,13 @@ const App: React.FC<{}> = () => {
       )}
       <button onClick={async()=>{
         try {
-          const data = await dispatch(loginAuthToken());
+          await newsLogApi(1)
         } catch (error) {
           
         }
       }}>
-        리덕스 구글 로그인
-      </button>
+        뉴스로그 증가
+              </button>
     </>
   );
 };

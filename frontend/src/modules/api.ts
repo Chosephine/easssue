@@ -65,7 +65,7 @@ export const getRecommendKeywords = async () => {
       url: BASE_URL + '/keyword/recommend',
       method: 'GET',
     });
-    console.log(data);
+    console.log("recommend", data);
   } catch (error) {
     console.error('recommend keywords error : ', error);
   }
@@ -128,14 +128,18 @@ export const putBanKeywords = async (
 export const searchKeyword = async (value: string) => {
   console.log(value);
   
-  const keyDecode = encodeURI(value);
-  const deUrl = decodeURI(BASE_URL + `keyword/${keyDecode}`)
+  // const keyDecode = encodeURI(value);
+  const deUrl = encodeURI(BASE_URL + `/keyword/search/${value}`)
   console.log(deUrl);
   
   try {
     const { data } = await axios({
       url: deUrl,
       method: 'GET',
+      headers: {
+        'charset' : 'utf-8',
+        'Content-type': 'application/json'
+      }
     });
     console.log(data);
   } catch (error) {
@@ -167,7 +171,7 @@ export const getNews = async (pageNumber: number) => {
  * * get news by keyword
  * @params KeywordNumber, PagerNumber
  * @method GET
- * @url /keyword/{keywordNumber}/page/{pageNumber}
+ * @url /news/subscribe/{keywordNumber}/page/{pageNumber}
  */
 
 export const getKeyWordNews = async (
@@ -176,7 +180,7 @@ export const getKeyWordNews = async (
 ) => {
   try {
     const { data } = await axios({
-      url: BASE_URL + `/keyword/${keywordNumber}/page/${pageNumber}`,
+      url: BASE_URL + `/news/subscribe/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
     console.log(data);
@@ -185,7 +189,28 @@ export const getKeyWordNews = async (
   }
 };
 
+/**
+ * * news log api
+ * @param newsId 
+ * @method POST
+ * @url /news/log/{newsId}
+ * TODO : login required
+ */
+export const newsLogApi = async (newsId : number) =>{
+  try {
+    const { data } = await axios({
+      url: BASE_URL + `/news/log/${newsId}`,
+      method : 'POST'
+    });
+    console.log(data);
+    
+  } catch (error) {
+    
+  }
+}
+
 //! dash
+// TODO : login required
 /**
  * * GET dash board information
  * @method GET
@@ -211,6 +236,20 @@ export const getDashBoardInfo = async () => {
  * @method GET
  * @url /dash/news/{date}
  */
+
+export const getNewsHistory = async (fullDate : string)=>{
+  try {
+    const {data} = await axios({
+      url : BASE_URL + `/dash/news/${fullDate}`,
+      method : 'GET'
+    })
+    console.log(data);
+    return data;
+    
+  } catch (error) {
+    console.error("get News history failed : ", error);
+  }
+}
 
 //! API
 

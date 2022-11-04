@@ -1,16 +1,19 @@
-import { RootState } from '@/modules/store';
-import { FC, useRef } from 'react';
+import { AppDispatch, RootState } from '@/modules/store';
+import { FC, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { removeKeyword,endDropChangeList } from '@modules/keyWordReducer';
+import { removeKeyword,endDropChangeList, getSubscribeKeywordsRedux } from '@modules/keyWordReducer';
 
 const UserKeyword: FC = () => {
-  const kwdList = useSelector((state: RootState) => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(()=>{
+    dispatch(getSubscribeKeywordsRedux())
+  },[])
+  const subScribeKwdList = useSelector((state: RootState) => {
     // console.log(state);
-    return state.persistedReducer.keyWordReducer.kwdList;
+    return state.persistedReducer.keyWordReducer.subScribeKwdList;
   });
-  console.log("kwdList:", kwdList);
-  const dispatch = useDispatch();
+  console.log("kwdList:", subScribeKwdList);
   const removeKeywordButton = (keywordId: number) => {
     dispatch(removeKeyword(keywordId));
   };
@@ -19,7 +22,7 @@ const UserKeyword: FC = () => {
       <Droppable droppableId="keyword-list">
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {kwdList.map((keyword, index) => {
+            {subScribeKwdList.map((keyword, index) => {
               return (
                 <Draggable
                   draggableId={`${keyword.kwdId}`}
