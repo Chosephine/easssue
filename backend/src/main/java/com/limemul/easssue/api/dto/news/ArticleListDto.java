@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class PopularArticleDto {
+public class ArticleListDto {
 
     // 인기 기사 리스트
     private List<ArticleDto> newsList;
