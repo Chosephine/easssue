@@ -1,9 +1,11 @@
 package com.limemul.easssue.service;
 
+import com.limemul.easssue.api.dto.user.UserInfoDto;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.jwt.JwtProvider;
 import com.limemul.easssue.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class UserService {
 
     private final UserRepo userRepo;
@@ -26,19 +29,30 @@ public class UserService {
     }
 
     /**
+     * 기본키로 사용자 조회
+     */
+    public User getUserById(Long id){
+        return userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+    }
+
+    /**
      * google profile에서 email 찾아서 반환
-     *  이메일로 회원가입 여부 판단 (강제 회원가입)
+     *  이메일로 회원가입 여부 판단
+     *  비회원이면 강제 회원가입
      */
     @Transactional
-    public String getEmail(HttpServletRequest request){
-        //todo request에서 이메일 뽑기
-        String email="";
+    public String getEmail(UserInfoDto userInfoDto){
+        String email= userInfoDto.getEmail();
+
+        if(!userInfoDto.isVerifiedEmail()){
+            log.info("{} is not verified email.",email);
+        }
 
         Optional<User> optionalUser = userRepo.findByEmail(email);
         if(optionalUser.isEmpty()){
             //회원가입
-            User user = User.from(request);
-            userRepo.save(user);
+            User user = userRepo.save(User.from(userInfoDto));
+            log.info("userId: {} (email: {}) signed up.",user.getId(),email);
         }
         return email;
     }

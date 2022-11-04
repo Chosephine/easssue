@@ -31,6 +31,7 @@ public class ArticleDto {
         link = article.getLink();
         pubDate = article.getPubDate();
         summary = article.getSummary();
+        img = article.getImg();
         keywords = new ArrayList<>();
         List<ArticleKwd> articleKwds = article.getArticleKwds();
         for (ArticleKwd articleKwd : articleKwds) {

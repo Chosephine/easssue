@@ -1,10 +1,12 @@
 package com.limemul.easssue.api;
 
-import com.limemul.easssue.api.dto.news.ArticleDto;
-import com.limemul.easssue.api.dto.news.PopularDto;
+import com.limemul.easssue.api.dto.news.KwdArticleDto;
+import com.limemul.easssue.api.dto.news.PopularArticleDto;
 import com.limemul.easssue.entity.ArticleLog;
+import com.limemul.easssue.entity.Kwd;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.jwt.JwtProvider;
+import com.limemul.easssue.repo.KwdRepo;
 import com.limemul.easssue.service.ArticleLogService;
 import com.limemul.easssue.service.ArticleService;
 import com.limemul.easssue.service.UserService;
@@ -13,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,23 +26,49 @@ public class NewsApi {
     private final ArticleService articleService;
     private final UserService userService;
     private final ArticleLogService articleLogService;
+    private final KwdRepo kwdRepo;
 
     /**
-     * 인기기사 page = 0
+     * 인기 기사 리스트 반환
+     * 조건: page = 0
      */
     @GetMapping("/popular")
-    public PopularDto firstPopularNews(){
+    public PopularArticleDto firstPopularNews(){
         log.info("[Starting request] GET /popular");
-        return articleService.getPopularArticle(0);
+        PopularArticleDto result = articleService.getPopularArticle(0);
+        log.info("[Finished request] GET /popular");
+        return result;
     }
 
     /**
-     * 인기기사 page > 0
+     * 인기 기사 리스트 반환 api
+     * 조건: page >= 0
+     * firstPopularNews api 필요없을지도..!
      */
     @GetMapping("/popular/page/{page}")
-    public PopularDto popularNews(@PathVariable Integer page){
-        return articleService.getPopularArticle(page);
+    public PopularArticleDto popularNews(@PathVariable Integer page){
+        log.info("[Starting request] GET /popular/page/{}", page);
+        PopularArticleDto result = articleService.getPopularArticle(page);
+        log.info("[Finished request] GET /popular/page/{}", page);
+        return result;
     }
+
+    /**
+     * 구독 키워드 기사 리스트 반환 api
+     */
+    @GetMapping("/keyword/{kwdId}/page/{page}")
+    public KwdArticleDto kwdNews(@PathVariable Long kwdId, @PathVariable Integer page){
+        log.info("[Starting request] GET /keyword/{}/page/{}", kwdId, page);
+        Optional<Kwd> targetKwd = kwdRepo.findById(kwdId);
+        if (targetKwd.isEmpty()){
+            throw new IllegalArgumentException("존재하지 않는 키워드입니다.");
+        }else {
+            KwdArticleDto result = articleService.getSubsArticle(targetKwd.get(), page);
+            log.info("[Finished request] GET /keyword/{}/page/{}", kwdId, page);
+            return result;
+        }
+    }
+
 
     /**
      * 기사 로그 남기기

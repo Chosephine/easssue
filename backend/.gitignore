@@ -8,6 +8,7 @@ build/
 application.yml
 application-oauth.yml
 JwtProperties.java
+!**/src/resources/popup/wordcloud/
 
 ### STS ###
 .apt_generated
