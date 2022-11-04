@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ArticleListDto {
 
-    // 인기 기사 리스트
+    // 인기/추천/연관 기사 리스트
     private List<ArticleDto> newsList;
 
     private Integer page;

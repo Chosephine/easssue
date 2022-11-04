@@ -64,33 +64,34 @@ public class NewsApi {
     @GetMapping("/subscribe/{kwdId}/page/{page}")
     public KwdArticleDto kwdNews(@RequestHeader HttpHeaders headers, @PathVariable Long kwdId, @PathVariable Integer page){
         log.info("[Starting request] GET /news/subscribe/{}/page/{}", kwdId, page);
-
-        Optional<User> user = JwtProvider.getUserFromJwt(userService, headers);
-        if (user.isEmpty()){
-            throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
-        }
-
-        log.info("user id is {}", user.get().getId());
-
         Optional<Kwd> targetKwd = kwdRepo.findById(kwdId);
-        List<UserKwd> userKwdList = userKwdService.getSubscKwdList(user.get());
-        Boolean flag = false;
-        for( UserKwd userKwd : userKwdList) {
-            if (targetKwd.get().equals(userKwd.getKwd())) {
-                flag = true;
-                break;
-            }
-        }
-        log.info("flag is {}", flag);
         if (targetKwd.isEmpty()) {
             throw new IllegalArgumentException("존재하지 않는 키워드입니다.");
-        } else if ( !flag ) {
-            throw new IllegalArgumentException("유저가 구독하지 않은 키워드입니다.");
-        } else {
-            KwdArticleDto result = articleService.getSubsArticle(targetKwd.get(), page);
-            log.info("[Finished request] GET /news/subscribe/{}/page/{}", kwdId, page);
-            return result;
         }
+
+        Optional<User> user = JwtProvider.getUserFromJwt(userService, headers);
+        if (user.isPresent()){
+            log.info("user id is {}", user.get().getId());
+
+            List<UserKwd> userKwdList = userKwdService.getSubscKwdList(user.get());
+            Boolean flag = false;
+            for( UserKwd userKwd : userKwdList) {
+                if (targetKwd.get().equals(userKwd.getKwd())) {
+                    flag = true;
+                    break;
+                }
+            }
+            log.info("flag is {}", flag);
+            if ( !flag ) {
+                throw new IllegalArgumentException("유저가 구독하지 않은 키워드입니다.");
+            }
+        }
+
+        KwdArticleDto result = articleService.getSubsArticle(targetKwd.get(), page);
+
+        log.info("[Finished request] GET /news/subscribe/{}/page/{}", kwdId, page);
+        return result;
+
     }
 
     /**
