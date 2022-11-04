@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { SettingModalProps } from "./types"
+import { Button } from "flowbite-react"
 export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen}) => {
-  
+  const [bgimg, setBgimg] = useState("")
   const onCloseClick = () => {
     setSettingModalOpen(false)
   }
   const onSaveClick = () => {
-    
+    chrome.storage.local.set({'bgimg': bgimg}, ()=> {
+    } )
+    setSettingModalOpen(false)
   }
   const handleClickInput = (event:any) => {
     const fr = new FileReader();
@@ -14,8 +17,7 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
     fr.readAsDataURL(file)
     fr.onload = (event:any) => {
       const url = event.target.result
-      chrome.storage.local.set({'bgimg': url}, ()=> {
-      } )
+      setBgimg(url)
     }
   }
   
@@ -30,7 +32,7 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
             </button>
           </div>
           <input type="file" onChange={handleClickInput} />
-          
+          <Button onClick={onSaveClick}>저장</Button>
         </div>
       </div>
     </>

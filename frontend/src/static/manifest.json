@@ -1,6 +1,6 @@
 {
-  "name": "extension-test",
-  "description": "Chrome Extension test",
+  "name": "easssue",
+  "description": "issue tracking extension",
   "version": "1.0.0",
   "manifest_version": 3,
   "oauth2": {

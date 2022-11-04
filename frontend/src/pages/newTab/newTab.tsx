@@ -15,6 +15,7 @@ import Scrollbars from "react-custom-scrollbars-2";
 import { SettingModal } from "@/components/SettingModal";
 import { DashboardModal } from "@/components/DashboardModal";
 import { KeywordModal } from "@/components/KeywordModal";
+import { BrowserKeyword } from "@/components/BrowserKeyword";
 
 
 const App: React.FC<{}> = () => {
