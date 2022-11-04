@@ -9,7 +9,7 @@ module.exports = {
     newTab: path.resolve('src/pages/newTab/newTab.tsx'),
     options: path.resolve('src/pages/options/options.tsx'),
     background: path.resolve('src/background/background.ts'),
-    contentScript: path.resolve('src/contentScript/contentScript.ts'),
+    contentScript: path.resolve('src/contentScript/contentScript.tsx'),
   },
   module: {
     rules: [
@@ -54,6 +54,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve('dist'),
+    publicPath: ""
   },
   optimization: {
     splitChunks: {
