@@ -2,6 +2,7 @@ package com.limemul.easssue.api;
 
 import com.limemul.easssue.api.dto.kwd.KwdDto;
 import com.limemul.easssue.api.dto.kwd.KwdListDto;
+import com.limemul.easssue.api.dto.kwd.KwdUpdateDto;
 import com.limemul.easssue.entity.*;
 import com.limemul.easssue.service.KwdService;
 import com.limemul.easssue.service.RecKwdService;
@@ -127,6 +128,22 @@ public class KwdApi {
     }
 
     /**
+     * 사용자 키워드 수정
+     *  [로그인 o] 인자로 받은 키워드 리스트로 해당 사용자의 키워드 변경
+     *  (로그인 했을때만 호출)
+     */
+    @PutMapping
+    public boolean updateUserKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdUpdateDto kwdUpdateDto){
+        log.info("[Starting request] PUT /keyword");
+
+        updateKwdList(headers, kwdUpdateDto.getSubscKwdList(), UserKwdType.s);
+        updateKwdList(headers, kwdUpdateDto.getBanKwdList(), UserKwdType.b);
+
+        log.info("[Finished request] PUT /keyword");
+        return true;
+    }
+
+    /**
      * 구독 키워드 수정
      *  [로그인 o] 인자로 받은 키워드 리스트로 해당 사용자의 구독 키워드 변경
      *  (로그인 했을때만 호출)
@@ -135,7 +152,7 @@ public class KwdApi {
     public boolean updateSubscKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/subscribe");
 
-        updateKwdList(headers, kwdListDto, UserKwdType.s);
+        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.s);
 
         log.info("[Finished request] PUT /keyword/subscribe");
         return true;
@@ -150,7 +167,7 @@ public class KwdApi {
     public boolean updateBanKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/ban");
 
-        updateKwdList(headers, kwdListDto, UserKwdType.b);
+        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.b);
 
         log.info("[Finished request] PUT /keyword/ban");
         return true;
@@ -184,7 +201,7 @@ public class KwdApi {
      * 사용자 키워드 수정
      *  UserKwdType에 따라 구독 또는 금지 키워드 변경
      */
-    private void updateKwdList(HttpHeaders headers, KwdListDto kwdListDto, UserKwdType type) {
+    private void updateKwdList(HttpHeaders headers, List<KwdDto> kwdListDto, UserKwdType type) {
         //사용자 정보 불러오기
         Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
@@ -195,7 +212,7 @@ public class KwdApi {
         }
 
         User user = optionalUser.get();
-        List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
+        List<Long> kwdIds = kwdListDto.stream().map(KwdDto::getKwdId).toList();
         //받아온 키워드 리스트로 업데이트
         userKwdService.updateUserKwdList(user,kwdIds,type);
     }
