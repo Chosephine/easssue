@@ -50,7 +50,7 @@ public class KwdApi {
         }
 
         User user = optionalUser.get();
-        List<UserKwd> subscKwdList = userKwdService.getSubscKwdList(user);
+        List<UserKwd> subscKwdList = userKwdService.getUserKwdList(user,UserKwdType.s);
         log.info("userId: {}, subscKwdList size: {}",user.getId(),subscKwdList.size());
 
         //로그인 했는데 없으면 랜덤으로 하나
@@ -80,7 +80,7 @@ public class KwdApi {
         }
 
         User user = optionalUser.get();
-        List<UserKwd> banKwdList = userKwdService.getBanKwdList(user);
+        List<UserKwd> banKwdList = userKwdService.getUserKwdList(user,UserKwdType.b);
         log.info("userId: {}, banKwdList size: {}",user.getId(),banKwdList.size());
 
         log.info("[Finished request] GET /keyword/ban");
@@ -108,11 +108,13 @@ public class KwdApi {
 
         User user = optionalUser.get();
         //해당 사용자의 추천 키워드 리스트
-        List<Kwd> recKwdList = new ArrayList<>(recKwdService.getRecKwdList(user).stream().map(RecKwd::getKwd).toList());
+        List<Kwd> recKwdList = new ArrayList<>(recKwdService
+                .getRecKwdList(user).stream().map(RecKwd::getKwd).toList());
         log.info("userId: {}, recKwdList size: {}",user.getId(),recKwdList.size());
 
         //해당 사용자의 금지 키워드 리스트
-        List<Kwd> banKwdList = new ArrayList<>(userKwdService.getBanKwdList(user).stream().map(UserKwd::getKwd).toList());
+        List<Kwd> banKwdList = new ArrayList<>(userKwdService
+                .getUserKwdList(user,UserKwdType.b).stream().map(UserKwd::getKwd).toList());
         //추천 키워드에서 금지 키워드 제거
         boolean isRemoved = recKwdList.removeAll(banKwdList);
         if(isRemoved){
@@ -195,6 +197,6 @@ public class KwdApi {
         User user = optionalUser.get();
         List<Long> kwdIds = kwdListDto.getKwdList().stream().map(KwdDto::getKwdId).toList();
         //받아온 키워드 리스트로 업데이트
-        userKwdService.updateKwdList(user,kwdIds,type);
+        userKwdService.updateUserKwdList(user,kwdIds,type);
     }
 }
