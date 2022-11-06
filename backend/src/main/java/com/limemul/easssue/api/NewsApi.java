@@ -2,10 +2,7 @@ package com.limemul.easssue.api;
 
 import com.limemul.easssue.api.dto.news.KwdArticleDto;
 import com.limemul.easssue.api.dto.news.ArticleListDto;
-import com.limemul.easssue.entity.ArticleLog;
-import com.limemul.easssue.entity.Kwd;
-import com.limemul.easssue.entity.User;
-import com.limemul.easssue.entity.UserKwd;
+import com.limemul.easssue.entity.*;
 import com.limemul.easssue.jwt.JwtProvider;
 import com.limemul.easssue.repo.KwdRepo;
 import com.limemul.easssue.service.ArticleLogService;
@@ -73,8 +70,8 @@ public class NewsApi {
         if (user.isPresent()){
             log.info("user id is {}", user.get().getId());
 
-            List<UserKwd> userKwdList = userKwdService.getSubscKwdList(user.get());
-            Boolean flag = false;
+            List<UserKwd> userKwdList = userKwdService.getUserKwdList(user.get(), UserKwdType.s);
+            boolean flag = false;
             for( UserKwd userKwd : userKwdList) {
                 if (targetKwd.get().equals(userKwd.getKwd())) {
                     flag = true;
@@ -139,12 +136,5 @@ public class NewsApi {
 
         log.info("[Finished request] POST /news/log/{}",articleId);
         return true;
-    }
-
-    /**
-     * 테스트용 사용자
-     */
-    private User getUser(Long userId) {
-        return userService.getUserByEmail("user"+userId+"@xx.xx");
     }
 }
