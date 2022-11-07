@@ -45,7 +45,7 @@ def url_to_summary(url):
     def get_nouns(sentences):
         nouns = []
         for sentence in sentences:
-            if sentence is not '':
+            if sentence != '':
                 nouns.append(' '.join([noun for noun in twitter.nouns(str(sentence))
                                     if noun not in stop_words and len(noun) > 1]))
         return nouns
@@ -158,8 +158,8 @@ def url_to_summary(url):
 
 def main(argv):
     # url = input('url : ')
-    if not os.path.exists('wordcloud'):
-        os.mkdir('wordcloud')
+    if not os.path.exists('src/main/resources/popup/wordcloud'):
+        os.mkdir('src/main/resources/popup/wordcloud')
     key_sent, filename = url_to_summary(argv[1])
     print(key_sent)
     print(filename)

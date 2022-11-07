@@ -123,6 +123,7 @@ public class PopupApi {
 
             if(exitVal!=0){
                 log.info("exit value is not 0. exitVal: {}",exitVal);
+                return new PopupResDto();
             }
             return new PopupResDto(cloud.toString(),summary.toString());
         } catch (IOException | InterruptedException e) {
