@@ -44,9 +44,9 @@ public class UserService {
     public String getEmail(UserInfoDto userInfoDto){
         String email= userInfoDto.getEmail();
 
-        if(!userInfoDto.isVerifiedEmail()){
-            log.info("{} is not verified email.",email);
-        }
+//        if(!userInfoDto.isVerifiedEmail()){
+//            log.info("{} is not verified email.",email);
+//        }
 
         Optional<User> optionalUser = userRepo.findByEmail(email);
         if(optionalUser.isEmpty()){

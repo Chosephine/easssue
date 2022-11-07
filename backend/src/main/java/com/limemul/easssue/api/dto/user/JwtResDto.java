@@ -12,4 +12,5 @@ public class JwtResDto {
 
     private String accessToken;
     private String refreshToken;
+
 }

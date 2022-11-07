@@ -10,6 +10,9 @@ application-oauth.yml
 JwtProperties.java
 !**/src/resources/popup/wordcloud/
 
+### Jasypt ###
+application-JASYPT.properties
+
 ### STS ###
 .apt_generated
 .classpath

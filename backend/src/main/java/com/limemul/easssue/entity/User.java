@@ -21,30 +21,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String oauthId;
-
     private String email;
 
-    private String picture;
+    private String pwd;
 
     private String wordCloudImg;
 
-    public User(String oauthId, String email, String picture) {
-        this.oauthId = oauthId;
+    public User(String email, String pwd) {
         this.email = email;
-        this.picture = picture;
+        this.pwd = pwd;
     }
 
     public static User from(UserInfoDto userInfoDto){
-        String oauthId= userInfoDto.getId();
         String email= userInfoDto.getEmail();
-        String picture= userInfoDto.getPicture();
+        String password= userInfoDto.getPwd();
 
-        return new User(oauthId,email,picture);
+        return new User(email, password);
     }
 
     public String getWordCloudImg() {
-        //todo 나중에 "emtpy"로 보내서 프론트에서 처리할수도
+        //todo 나중에 "empty"로 보내서 프론트에서 처리할수도
         //사용자의 워드 클라우드 없으면 기본 이미지
         return Objects.requireNonNullElse(wordCloudImg, "https://k7d102.p.ssafy.io/resource/default_cloud_img.png");
     }
