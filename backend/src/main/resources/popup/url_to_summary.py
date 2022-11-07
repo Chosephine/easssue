@@ -82,7 +82,7 @@ def url_to_summary(url):
     # wc = WordCloud(background_color='white', font_path='font/NanumBarunGothic.ttf', colormap='Blues')
     wc.generate_from_frequencies(top_news_nouns)
     ## 파일로 저장
-    now = datetime.datetime.now()
+    now = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S:%f')
     wc.to_file(f'src/main/resources/popup/wordcloud/{now}.png')
     ## show
     # figure = plt.figure(figsize=(10, 10))

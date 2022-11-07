@@ -104,7 +104,6 @@ public class PopupApi {
         builder.redirectErrorStream(true);
         try {
             long start = System.currentTimeMillis();
-            log.info("start: {}",start/1000);
 
             Process process = builder.start();
             int exitVal = process.waitFor();
@@ -115,10 +114,10 @@ public class PopupApi {
             String line;
             int idx=0;
             while ((line=br.readLine())!=null){
-                log.info(">>> {}: {} [{}]",++idx,line,(System.currentTimeMillis()-start)/1000);
+                log.info(">>> {}: {} [{}ms]",++idx,line,(System.currentTimeMillis()-start));
                 result.add(line);
             }
-            log.info("br.readLine() duration: {}",(System.currentTimeMillis()-start)/1000);
+            log.info("br.readLine() duration: {}",(System.currentTimeMillis()-start));
 
             int size = result.size();
             cloud.append(result.get(size -1)).append(".png");
@@ -130,8 +129,64 @@ public class PopupApi {
                 log.info("exit value is not 0. exitVal: {}",exitVal);
                 return new PopupResDto();
             }
+            log.info("[Finished request] GET /popup/v2");
             return new PopupResDto(cloud.toString(),summary.toString());
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/v3")
+    public PopupResDto getPopupInfoV3(@RequestBody PopupReqDto popupReqDto){
+        log.info("[Starting request] GET /popup/v3");
+
+        String url = popupReqDto.getUrl();
+        log.info("Requested url is [{}]",url);
+
+        Path path= Paths.get("");
+        log.info("Current work space: {}", path.toAbsolutePath());
+
+        StringBuilder cloud=new StringBuilder("https://k7d102.p.ssafy.io/resource/popup/wordcloud/");
+        StringBuilder summary= new StringBuilder();
+        List<String> result=new ArrayList<>();
+
+        List<String> command = new ArrayList<>();
+        command.add("python3");
+        command.add("src/main/resources/popup/url_to_summary.py");
+        command.add(url);
+
+        ProcessBuilder builder=new ProcessBuilder(command);
+        builder.redirectErrorStream(true);
+        try {
+            long start = System.currentTimeMillis();
+
+            Process process = builder.start();
+            int exitVal = process.exitValue();
+
+            BufferedReader br=new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
+
+            String line;
+            int idx=0;
+            while ((line=br.readLine())!=null){
+                log.info(">>> {}: {} [{}ms]",++idx,line,(System.currentTimeMillis()-start));
+                result.add(line);
+            }
+            log.info("br.readLine() duration: {}",(System.currentTimeMillis()-start));
+
+            int size = result.size();
+            cloud.append(result.get(size -1)).append(".png");
+            for(int i = size-4;i<size-1;i++){
+                summary.append(result.get(i)).append("\n");
+            }
+
+            if(exitVal!=0){
+                log.info("exit value is not 0. exitVal: {}",exitVal);
+                return new PopupResDto();
+            }
+            log.info("[Finished request] GET /popup/v3");
+            return new PopupResDto(cloud.toString(),summary.toString());
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
