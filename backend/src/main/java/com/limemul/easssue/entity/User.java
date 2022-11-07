@@ -44,4 +44,6 @@ public class User {
         //사용자의 워드 클라우드 없으면 기본 이미지
         return Objects.requireNonNullElse(wordCloudImg, "https://k7d102.p.ssafy.io/resource/default_cloud_img.png");
     }
+
+
 }

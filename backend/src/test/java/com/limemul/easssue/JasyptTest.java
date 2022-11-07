@@ -34,8 +34,8 @@ public class JasyptTest {
 
     @Test
     public void verifyPasswordOneWayEncryption() {
-        JasyptEncrypt jasyptEncrypt = new JasyptEncrypt("1234");
-        BasicPasswordEncryptor basicEncrypt = new BasicPasswordEncryptor();
+        JasyptEncrypt jasyptEncrypt = new JasyptEncrypt("1234"); // 비번
+        BasicPasswordEncryptor basicEncrypt = new BasicPasswordEncryptor(); // 암호화
 //        String encryptPwd = basicEncrypt.encryptPassword(jasyptEncrypt.password);
         String encryptPwd = basicEncrypt.encryptPassword("1234");
         boolean checkPwd = basicEncrypt.checkPassword(jasyptEncrypt.password, encryptPwd);

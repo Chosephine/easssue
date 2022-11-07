@@ -6,6 +6,7 @@ import com.limemul.easssue.jwt.JwtProvider;
 import com.limemul.easssue.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,5 +56,44 @@ public class UserService {
             log.info("userId: {} (email: {}) signed up.",user.getId(),email);
         }
         return email;
+    }
+
+    /**
+     * 회원가입
+     * 비밀번호는 암호화해서 db 저장
+     */
+    @Transactional
+    public User signUp(UserInfoDto userInfoDto) {
+        BasicPasswordEncryptor basicEncryptor = new BasicPasswordEncryptor();
+        String encryptPwd = basicEncryptor.encryptPassword(userInfoDto.getPwd());
+        User user = new User(userInfoDto.getEmail(), encryptPwd);
+        return userRepo.save(user);
+    }
+
+    /**
+     * 로그인 정보 확인
+     * 잘못된 email일 때 오류 반환,
+     * 잘못된 pwd일 때 오류 반환
+     * */
+    public boolean checkUser(UserInfoDto userInfoDto) {
+        User user = getUserByEmail(userInfoDto.getEmail());
+        if (user.equals(null)){
+            throw new IllegalArgumentException("존재하지 않는 유저입니다.");
+        }
+
+        BasicPasswordEncryptor basicEncryptor = new BasicPasswordEncryptor();
+        boolean checkPwd = basicEncryptor.checkPassword(userInfoDto.getPwd(), user.getPwd());
+        if (!checkPwd){
+            throw new IllegalArgumentException("패스워드가 틀렸습니다.");
+        }
+        return true;
+
+    }
+
+    /**
+     * 이메일 중복 체크
+     */
+    public User emailCheck(String email) {
+        return userRepo.findByEmail(email).orElse(null);
     }
 }
