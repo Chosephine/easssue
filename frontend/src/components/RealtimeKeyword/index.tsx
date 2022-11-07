@@ -1,13 +1,30 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { trendAPI } from "@/modules/api";
+import { RootState } from "@/modules/store";
 
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
   const [trend, setTrend] = useState('');
+  const trendState : boolean = useSelector((state : RootState)=>{
+    return state.persistedReducer.settingsReducer.trendState;
+  })
+  useEffect(()=>{
+    if (trendState){
+      const getTrends = async () => {
+        const trendRes = await trendAPI();
+        setTrend(()=> trendRes)
+        //test 해볼것
+        console.log(trend);
+      }
+      getTrends();
+    }
+  },[])
+
   const settings = {
 
     dots: false,
