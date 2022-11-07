@@ -2,11 +2,14 @@ package com.limemul.easssue.api.dto.news;
 
 import com.limemul.easssue.entity.Article;
 import com.limemul.easssue.entity.ArticleKwd;
+import com.limemul.easssue.entity.Kwd;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 public class ArticleDto {
@@ -32,11 +35,8 @@ public class ArticleDto {
         pubDate = article.getPubDate();
         summary = article.getSummary();
         img = article.getImg();
-        keywords = new ArrayList<>();
-        List<ArticleKwd> articleKwds = article.getArticleKwds();
-        for (ArticleKwd articleKwd : articleKwds) {
-            keywords.add(articleKwd.getKwd().getName());
-        }
+        keywords = article.getArticleKwds().stream().sorted((o1, o2) -> o2.getCount() - o1.getCount())
+                .limit(3).map(ArticleKwd::getKwd).map(Kwd::getName).toList();
     }
 
 }
