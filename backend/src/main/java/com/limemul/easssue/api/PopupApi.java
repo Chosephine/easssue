@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,18 +91,21 @@ public class PopupApi {
         Path path= Paths.get("");
         log.info("Current work space: {}", path.toAbsolutePath());
 
-        StringBuilder cloud=new StringBuilder("./src/main/resources/popup/wordcloud/");
+        StringBuilder cloud=new StringBuilder("https://k7d102.p.ssafy.io/resource/popup/wordcloud/");
         StringBuilder summary= new StringBuilder();
         List<String> result=new ArrayList<>();
 
         List<String> command = new ArrayList<>();
         command.add("python3");
-        command.add("./src/main/resources/popup/url_to_summary.py");
+        command.add("src/main/resources/popup/url_to_summary.py");
         command.add(url);
 
         ProcessBuilder builder=new ProcessBuilder(command);
         builder.redirectErrorStream(true);
         try {
+            long start = System.currentTimeMillis();
+            log.info("start: {}",start/1000);
+
             Process process = builder.start();
             int exitVal = process.waitFor();
 
@@ -111,9 +115,10 @@ public class PopupApi {
             String line;
             int idx=0;
             while ((line=br.readLine())!=null){
-                log.info(">>> {}: {}",++idx,line);
+                log.info(">>> {}: {} [{}]",++idx,line,(System.currentTimeMillis()-start)/1000);
                 result.add(line);
             }
+            log.info("br.readLine() duration: {}",(System.currentTimeMillis()-start)/1000);
 
             int size = result.size();
             cloud.append(result.get(size -1)).append(".png");
