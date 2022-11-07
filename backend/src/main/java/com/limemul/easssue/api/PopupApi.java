@@ -92,6 +92,7 @@ public class PopupApi {
 
         StringBuilder cloud=new StringBuilder("./src/main/resources/popup/wordcloud/");
         StringBuilder summary= new StringBuilder();
+        List<String> result=new ArrayList<>();
 
         List<String> command = new ArrayList<>();
         command.add("python3");
@@ -108,15 +109,16 @@ public class PopupApi {
 
             //todo 이걸 이렇게 하드코딩하는게 맞나...
             String line;
-            for(int i=1;i<=3;i++){
-                if((line= br.readLine())!=null) {
-                    summary.append(line);
-                    log.info("summary {} >>> {}", i, line);
-                }
+            int idx=0;
+            while ((line=br.readLine())!=null){
+                log.info(">>> {}: {}",++idx,line);
+                result.add(line);
             }
-            if((line=br.readLine())!=null) {
-                cloud.append(line).append(".png");
-                log.info("cloud >>> {}", line);
+
+            int size = result.size();
+            cloud.append(result.get(size -1)).append(".png");
+            for(int i = size-4;i<size-1;i++){
+                summary.append(result.get(i)).append("\n");
             }
 
             if(exitVal!=0){

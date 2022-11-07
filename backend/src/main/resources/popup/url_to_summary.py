@@ -78,12 +78,12 @@ def url_to_summary(url):
     cmap = LinearSegmentedColormap.from_list("mycmap", color)
 
     ### 워드 클라우드 제작
-    wc = WordCloud(background_color='white', font_path='./src/main/resources/popup/SB 어그로 B.ttf', color_func=color_func)
-    # wc = WordCloud(background_color='white', font_path='./font/NanumBarunGothic.ttf', colormap='Blues')
+    wc = WordCloud(background_color='white', font_path='src/main/resources/popup/SB 어그로 B.ttf', color_func=color_func)
+    # wc = WordCloud(background_color='white', font_path='font/NanumBarunGothic.ttf', colormap='Blues')
     wc.generate_from_frequencies(top_news_nouns)
     ## 파일로 저장
     now = datetime.datetime.now()
-    wc.to_file(f'./src/main/resources/popup/wordcloud/{now}.png')
+    wc.to_file(f'src/main/resources/popup/wordcloud/{now}.png')
     ## show
     # figure = plt.figure(figsize=(10, 10))
     # ax = figure.add_subplot(1, 1, 1)
