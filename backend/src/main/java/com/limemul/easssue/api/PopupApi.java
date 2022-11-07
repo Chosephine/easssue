@@ -81,7 +81,7 @@ public class PopupApi {
     }
 
     @GetMapping("/v2")
-    public void getPopupInfoV2(@RequestBody PopupReqDto popupReqDto){
+    public PopupResDto getPopupInfoV2(@RequestBody PopupReqDto popupReqDto){
         log.info("[Starting request] GET /popup/v2");
 
         String url = popupReqDto.getUrl();
@@ -103,19 +103,26 @@ public class PopupApi {
         try {
             Process process = builder.start();
             int exitVal = process.waitFor();
-            log.info("exitVal: {}",exitVal);
 
             BufferedReader br=new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
 
+            //todo 이걸 이렇게 하드코딩하는게 맞나...
             String line;
-            while ((line=br.readLine())!=null){
-                System.out.println(">>> "+line);
-                log.info(">>> {}",line);
+            for(int i=1;i<=3;i++){
+                if((line= br.readLine())!=null) {
+                    summary.append(line);
+                    log.info("summary {} >>> {}", i, line);
+                }
+            }
+            if((line=br.readLine())!=null) {
+                cloud.append(line).append(".png");
+                log.info("cloud >>> {}", line);
             }
 
             if(exitVal!=0){
-                System.out.println("비정상종료");
+                log.info("exit value is not 0. exitVal: {}",exitVal);
             }
+            return new PopupResDto(cloud.toString(),summary.toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

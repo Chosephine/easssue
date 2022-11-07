@@ -1,5 +1,5 @@
 ### import
-import sys
+import sys, os
 import numpy as np
 import pandas as pd
 import json
@@ -158,6 +158,8 @@ def url_to_summary(url):
 
 def main(argv):
     # url = input('url : ')
+    if not os.path.exists('wordcloud'):
+        os.mkdir('wordcloud')
     key_sent, filename = url_to_summary(argv[1])
     print(key_sent)
     print(filename)
