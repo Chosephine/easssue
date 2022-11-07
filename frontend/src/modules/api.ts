@@ -141,7 +141,8 @@ export const searchKeyword = async (value: string) => {
         'Content-type': 'application/json'
       }
     });
-    console.log(data);
+    console.log("kwdList : ",data.kwdList);
+    return data.kwdList;
   } catch (error) {
     console.error('search keywords error : ', error);
   }
