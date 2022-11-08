@@ -134,6 +134,7 @@ def url_to_summary(url):
     def summarize(sent_num):
         summary = []
         index=sorted_sent_rank_idx[:sent_num]
+        index.sort()
         # print(index)
         for idx in index:
             summary.append(description[idx])
