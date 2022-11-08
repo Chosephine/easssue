@@ -37,4 +37,8 @@ public class Article {
 
     @OneToMany(mappedBy = "article")
     private final List<ArticleKwd> articleKwds = new ArrayList<>();
+
+    public void updateHit() {
+        this.hit++;
+    }
 }

@@ -1,16 +1,10 @@
 ### import
-import sys
+import sys, os
 import numpy as np
-import pandas as pd
-import json
 import datetime
 
-from konlpy import jvm
-from konlpy.tag import Kkma
-from konlpy.tag import Okt
+from konlpy.tag import Mecab
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.preprocessing import normalize
 
 from newspaper import Article
 import kss
@@ -18,8 +12,6 @@ import re
 
 from wordcloud import WordCloud
 from collections import Counter
-import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy.linalg import solve
 
 ### 불용어
@@ -41,12 +33,12 @@ def url_to_summary(url):
 
     ### 문장 명사화
     ## 불용어 제외, 길이 1인 단어 제외
-    twitter = Okt()
+    mecab = Mecab()
     def get_nouns(sentences):
         nouns = []
         for sentence in sentences:
-            if sentence is not '':
-                nouns.append(' '.join([noun for noun in twitter.nouns(str(sentence))
+            if sentence != '':
+                nouns.append(' '.join([noun for noun in mecab.nouns(str(sentence))
                                     if noun not in stop_words and len(noun) > 1]))
         return nouns
 
@@ -72,18 +64,14 @@ def url_to_summary(url):
     ### 워드 클라우드 색상 지정
     def color_func(word, font_size, position,orientation,random_state=None, **kwargs):
         return("hsl({:d},{:d}%, {:d}%)".format(np.random.randint(180,220),np.random.randint(70,90),np.random.randint(50,70)))
-    
-    color = ['#79DAE8', '#0AA1DD', '#2155CD']
-    from matplotlib.colors import LinearSegmentedColormap
-    cmap = LinearSegmentedColormap.from_list("mycmap", color)
 
     ### 워드 클라우드 제작
-    wc = WordCloud(background_color='white', font_path='./src/main/resources/popup/SB 어그로 B.ttf', color_func=color_func)
-    # wc = WordCloud(background_color='white', font_path='./font/NanumBarunGothic.ttf', colormap='Blues')
+    wc = WordCloud(background_color='white', font_path='src/main/resources/SB 어그로 B.ttf', color_func=color_func)
+    # wc = WordCloud(background_color='white', font_path='font/NanumBarunGothic.ttf', colormap='Blues')
     wc.generate_from_frequencies(top_news_nouns)
     ## 파일로 저장
-    now = datetime.datetime.now()
-    wc.to_file(f'./src/main/resources/popup/wordcloud/{now}.png')
+    now = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S:%f')
+    wc.to_file(f'src/main/resources/img/popup/{now}.png')
     ## show
     # figure = plt.figure(figsize=(10, 10))
     # ax = figure.add_subplot(1, 1, 1)
@@ -146,6 +134,7 @@ def url_to_summary(url):
     def summarize(sent_num):
         summary = []
         index=sorted_sent_rank_idx[:sent_num]
+        index.sort()
         # print(index)
         for idx in index:
             summary.append(description[idx])
@@ -158,11 +147,12 @@ def url_to_summary(url):
 
 def main(argv):
     # url = input('url : ')
+    if not os.path.exists('src/main/resources/img/popup'):
+        os.mkdir('src/main/resources/img/popup')
     key_sent, filename = url_to_summary(argv[1])
     print(key_sent)
     print(filename)
     return key_sent, filename
 
 if __name__ == "__main__":
-    jvm.init_jvm()
     main(sys.argv)

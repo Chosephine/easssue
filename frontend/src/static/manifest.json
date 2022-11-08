@@ -21,7 +21,7 @@
     "newtab": "newTab.html"
   },
 
-  "permissions": ["identity","storage", "bookmarks", "history", "tabs", "identity.email"],
+  "permissions": ["storage", "bookmarks", "unlimitedStorage", "webRequest", "*://*.google.com/"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
