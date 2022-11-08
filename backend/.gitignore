@@ -11,6 +11,9 @@ JwtProperties.java
 secrets.json
 !**/src/resources/img
 
+### Jasypt ###
+application-JASYPT.properties
+
 ### STS ###
 .apt_generated
 .classpath

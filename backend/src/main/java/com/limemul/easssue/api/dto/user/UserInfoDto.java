@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserInfoDto {
 
-    private String id;
     private String email;
-    private boolean verifiedEmail;
-    private String picture;
+    private String pwd;
+
 }

@@ -2,12 +2,10 @@ package com.limemul.easssue.entity;
 
 import com.limemul.easssue.api.dto.user.UserInfoDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @Entity
@@ -21,26 +19,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String oauthId;
-
     private String email;
 
-    private String picture;
+    private String pwd;
 
     private String wordCloudImg;
 
-    public User(String oauthId, String email, String picture) {
-        this.oauthId = oauthId;
+    private User(String email, String pwd) {
         this.email = email;
-        this.picture = picture;
+        this.pwd = pwd;
     }
 
-    public static User from(UserInfoDto userInfoDto){
-        String oauthId= userInfoDto.getId();
-        String email= userInfoDto.getEmail();
-        String picture= userInfoDto.getPicture();
-
-        return new User(oauthId,email,picture);
+    public static User of(String email, String pwd){
+        return new User(email, pwd);
     }
 
     public void setWordCloudImg(String wordCloudImg) {

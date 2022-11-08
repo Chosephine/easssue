@@ -40,6 +40,13 @@ dependencies {
 	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
+	// jasypt
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+	// bouncycastle
+	implementation 'org.bouncycastle:bcprov-jdk15to18:1.72'
+
+
 	// apache commons: execute python file on java
 	implementation 'org.apache.commons:commons-exec:1.3'
 
