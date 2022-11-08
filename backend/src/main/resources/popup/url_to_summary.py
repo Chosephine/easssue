@@ -71,7 +71,7 @@ def url_to_summary(url):
     wc.generate_from_frequencies(top_news_nouns)
     ## 파일로 저장
     now = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S:%f')
-    wc.to_file(f'src/main/resources/popup/wordcloud/{now}.png')
+    wc.to_file(f'src/main/resources/img/{now}.png')
     ## show
     # figure = plt.figure(figsize=(10, 10))
     # ax = figure.add_subplot(1, 1, 1)
@@ -146,8 +146,8 @@ def url_to_summary(url):
 
 def main(argv):
     # url = input('url : ')
-    if not os.path.exists('src/main/resources/popup/wordcloud'):
-        os.mkdir('src/main/resources/popup/wordcloud')
+    if not os.path.exists('src/main/resources/img'):
+        os.mkdir('src/main/resources/img')
     key_sent, filename = url_to_summary(argv[1])
     print(key_sent)
     print(filename)
