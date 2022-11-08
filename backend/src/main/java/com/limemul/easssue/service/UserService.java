@@ -22,6 +22,14 @@ public class UserService {
     private final UserRepo userRepo;
 
     /**
+     * 이메일로 사용자 조회
+     *  access token에서 email 꺼내서 조회
+     */
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+    }
+
+    /**
      * 회원가입
      * 비밀번호는 암호화해서 db 저장
      */
