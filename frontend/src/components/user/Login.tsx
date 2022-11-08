@@ -8,8 +8,11 @@ export interface LoginReq {
   email :string,
   pwd : string
 }
+interface loginState {
+  stateChange : Function;
+}
 
-const LogIn: FC = () => {
+const LogIn: FC<loginState> = ({stateChange}) => {
   const [landingImg, setLandingImg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +39,7 @@ const LogIn: FC = () => {
             <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
               <div>
                 <img
-                  src="https://j7d108.p.ssafy.io/resource/logo.png"
+                  src="biglogo.png"
                   alt=""
                   className="h-14 w-14"
                 />
@@ -86,9 +89,9 @@ const LogIn: FC = () => {
               </form>
               <div className="pt-4 text-center font-light text-gray-500 dark:text-gray-400">
                 아직 회원이 아니신가요?{' '}
-                <a href="/SignUp" className="font-medium text-blue-500">
+                <span onClick={()=>{stateChange()}} className="hover:pointer font-medium text-blue-500">
                   회원가입하기
-                </a>
+                </span>
               </div>
             </div>
           </div>

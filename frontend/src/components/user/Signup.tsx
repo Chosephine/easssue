@@ -1,10 +1,15 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import { signUp, checkDuplicateEmail } from '@/modules/api';
+import { signUpAndSetToken } from '@/modules/auth';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/modules/store';
 
+interface SignUpProps {
+  stateChange: Function;
+}
 
-interface SignUpProps { }
-
-const SignUp: FunctionComponent<SignUpProps> = () => {
+const SignUp: FunctionComponent<SignUpProps> = ({ stateChange }) => {
+  const dispatch = useDispatch<AppDispatch>(); 
   const [email, setEmail] = useState<string>('');
   const [pwd, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -24,7 +29,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   const [isPasswordBlur, setIsPasswordBlur] = useState<boolean>(true);
   const [isPasswordConfirmBlur, setIsPasswordConfirmBlur] =
     useState<boolean>(true);
-  
 
   const onChangeEmail = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +48,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
         setEmailMessage('이메일 중복 확인이 필요해요!');
       }
     },
-    [],
+    []
   );
 
   // 비밀번호
@@ -57,7 +61,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
 
       if (!passwordRegex.test(passwordCurrent)) {
         setPasswordMessage(
-          '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!',
+          '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!'
         );
         setIsPassword(false);
       } else {
@@ -65,7 +69,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
         setIsPassword(true);
       }
     },
-    [],
+    []
   );
 
   // 비밀번호 확인
@@ -82,16 +86,12 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
         setIsPasswordConfirm(false);
       }
     },
-    [pwd],
+    [pwd]
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isSignUp = signUp(email, pwd).then(data => {
-      if (data) {
-        console.log(data);
-      }
-    });
+    dispatch(signUpAndSetToken({email,pwd,}))
   };
 
   const checkEmail = async (currentEmail: string) => {
@@ -108,127 +108,155 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   };
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
-      <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
-        <div className="w-full rounded bg-white px-6 py-8 text-black ">
-          <div className='pb-6'><img src="https://j7d108.p.ssafy.io/resource/logo.png" alt="" className='w-14 h-14' /></div>
-          <h1 className="mb-4 text-xl leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-            회원가입
-          </h1>
-          <input
-            id="Email"
-            onChange={onChangeEmail}
-            type="text"
-            className={`my-2 block w-full rounded border p-3  ${isEmailBlur
-                ? 'border-stone-200'
-                : `${isEmail ? 'border-green-600' : 'border-red-500'}`
-              }`}
-            name="email"
-            placeholder="이메일"
-            onBlur={() => {
-              setIsEmailBlur(false);
-            }}
-            required
-          />
-          <div className="flex justify-between">
-            {email.length > 0 && (
-              <span
-                className={`text-[0.7rem] ${isEmail && !emailDuplicate && emailCheckState
-                    ? 'text-blue-400'
-                    : 'text-gray-500'
-                  }`}
-              >
-                {emailMessage}{' '}
-              </span>
-            )}
-            {isEmail && emailDuplicate ? (
-              <span
-                onClick={() => {
-                  checkEmail(email);
-                }}
-                className="text-[0.7rem] text-blue-600"
-              >
-                이메일 중복 확인하기
-              </span>
-            ) : (
-              ''
-            )}
+    <section className="flex min-h-[80vh] flex-col dark:bg-gray-900">
+      <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2 md:h-screen lg:py-0">
+        <div className="w-full rounded-lg bg-white dark:border dark:border-gray-700 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
+          <div className="space-y-4 p-6 md:space-y-6">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
+              <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
+                <div className="w-full rounded bg-white text-black ">
+                  <div className="pb-6">
+                    <img src="biglogo.png" alt="" className="w-14 h-14" />
+                  </div>
+                  <h1 className="mb-4 text-xl leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+                    회원가입
+                  </h1>
+                  <input
+                    id="Email"
+                    onChange={onChangeEmail}
+                    type="text"
+                    className={`my-2 block w-full rounded border p-3  ${
+                      isEmailBlur
+                        ? 'border-stone-200'
+                        : `${isEmail ? 'border-green-600' : 'border-red-500'}`
+                    }`}
+                    name="email"
+                    placeholder="이메일"
+                    onBlur={() => {
+                      setIsEmailBlur(false);
+                    }}
+                    required
+                  />
+                  <div className="flex justify-between">
+                    {email.length > 0 && (
+                      <span
+                        className={`text-[0.7rem] ${
+                          isEmail && !emailDuplicate && emailCheckState
+                            ? 'text-blue-400'
+                            : 'text-gray-500'
+                        }`}
+                      >
+                        {emailMessage}{' '}
+                      </span>
+                    )}
+                    {isEmail && emailDuplicate ? (
+                      <span
+                        onClick={() => {
+                          checkEmail(email);
+                        }}
+                        className="text-[0.7rem] text-blue-600"
+                      >
+                        이메일 중복 확인하기
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+
+                  <input
+                    id="Password1"
+                    onChange={onChangePassword}
+                    type="password"
+                    className={`my-2 block w-full rounded border p-3  ${
+                      isPasswordBlur
+                        ? 'border-stone-200'
+                        : `${
+                            isPassword ? 'border-green-600' : 'border-red-500'
+                          }`
+                    }`}
+                    name="pwd"
+                    placeholder="비밀번호"
+                    required
+                  />
+                  {pwd.length > 0 && (
+                    <span
+                      className={`text-[0.7rem] ${
+                        isPassword ? 'text-blue-400' : 'text-gray-500'
+                      }`}
+                    >
+                      {passwordMessage}
+                    </span>
+                  )}
+                  <input
+                    id="Password2"
+                    onChange={onChangePasswordConfirm}
+                    type="password"
+                    className={`my-2 block w-full rounded border p-3  ${
+                      isPasswordConfirmBlur
+                        ? 'border-stone-200'
+                        : `${
+                            isPasswordConfirm
+                              ? 'border-green-600'
+                              : 'border-red-500'
+                          }`
+                    }`}
+                    name="confirm_password"
+                    placeholder="비밀번호 확인"
+                    required
+                  />
+                  {passwordConfirm.length > 0 && (
+                    <span
+                      className={`text-[0.7rem] ${
+                        isPasswordConfirm ? 'text-blue-400' : 'text-gray-500'
+                      }`}
+                    >
+                      {passwordConfirmMessage}
+                    </span>
+                  )}
+
+                  {/* input box end */}
+                  <button
+                    type="submit"
+                    className={`my-1 w-full rounded-lg ${
+                      !(
+                        isEmail &&
+                        isPassword &&
+                        isPasswordConfirm &&
+                        emailCheckState
+                      )
+                        ? 'bg-gray-400'
+                        : 'bg-blue-500'
+                    } py-2.5 text-center text-white focus:outline-none`}
+                    disabled={
+                      !(
+                        isEmail &&
+                        isPassword &&
+                        isPasswordConfirm &&
+                        emailCheckState
+                      )
+                    }
+                  >
+                    회원가입하기
+                  </button>
+                </div>
+
+                <div className="pt-4 mt-6 text-stone-600">
+                  이미 회원이신가요?_?
+                  <span
+                    onClick={() => {
+                      stateChange();
+                    }}
+                    className="text-blue-500 hover:pointer"
+                  >
+                    로그인하기
+                  </span>
+                </div>
+              </div>
+            </form>
           </div>
-
-          <input
-            id="Password1"
-            onChange={onChangePassword}
-            type="password"
-            className={`my-2 block w-full rounded border p-3  ${isPasswordBlur
-                ? 'border-stone-200'
-                : `${isPassword ? 'border-green-600' : 'border-red-500'}`
-              }`}
-            name="pwd"
-            placeholder="비밀번호"
-            required
-          />
-          {pwd.length > 0 && (
-            <span
-              className={`text-[0.7rem] ${isPassword ? 'text-blue-400' : 'text-gray-500'
-                }`}
-            >
-              {passwordMessage}
-            </span>
-          )}
-          <input
-            id="Password2"
-            onChange={onChangePasswordConfirm}
-            type="password"
-            className={`my-2 block w-full rounded border p-3  ${isPasswordConfirmBlur
-                ? 'border-stone-200'
-                : `${isPasswordConfirm ? 'border-green-600' : 'border-red-500'}`
-              }`}
-            name="confirm_password"
-            placeholder="비밀번호 확인"
-            required
-          />
-          {passwordConfirm.length > 0 && (
-            <span
-              className={`text-[0.7rem] ${isPasswordConfirm ? 'text-blue-400' : 'text-gray-500'
-                }`}
-            >
-              {passwordConfirmMessage}
-            </span>
-          )}
-          
-          {/* input box end */}
-          <button
-            type="submit"
-            className={`my-1 w-full rounded-lg ${!(
-                isEmail &&
-                isPassword &&
-                isPasswordConfirm &&
-                emailCheckState
-              )
-                ? 'bg-gray-400'
-                : 'bg-blue-500'
-              } py-2.5 text-center text-white focus:outline-none`}
-            disabled={
-              !(
-                isEmail &&
-                isPassword &&
-                isPasswordConfirm &&
-                emailCheckState
-              )
-            }
-          >
-            회원가입하기
-          </button>
-        </div>
-
-        <div className="mb-6 text-stone-600">
-          이미 회원이신가요?_?
-          <a className="text-blue-500" href="../login/">
-            로그인하기
-          </a>
         </div>
       </div>
-    </form>
+    </section>
   );
 };
 

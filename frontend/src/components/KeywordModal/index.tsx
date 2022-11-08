@@ -18,7 +18,7 @@ export const KeywordModal: React.FC<KeywordModalProps> = ({ setKeywordModalOpen 
             </button>
           </div>
         <KeywordIndex />
-        <KeywordModalSaveBtn />
+        <KeywordModalSaveBtn setKeywordModalOpen={setKeywordModalOpen}/>
         </div>
       </div>
     </>

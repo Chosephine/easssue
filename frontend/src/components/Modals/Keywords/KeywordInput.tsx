@@ -33,11 +33,11 @@ const KeyInput: FC = () => {
   );
 
   const dispatch = useDispatch();
-  const addKeywordButton = () => {
+  const addKeywordButton = (kwdId: number , kwdName : string) => {
     dispatch(
       addKeyword({
-        kwdId: 123,
-        kwdName: 'string',
+        kwdId,
+        kwdName,
       })
     );
   };
@@ -53,7 +53,7 @@ const KeyInput: FC = () => {
         />
         <ul className="h-[65%] overflow-auto">
         {searchResult && searchResult.map(searchResultItem =>{
-          return <li>{searchResultItem.kwdName}<button onClick={addKeywordButton}> addKeywordButton </button></li>
+          return <li>{searchResultItem.kwdName}<button onClick={()=>addKeywordButton(searchResultItem.kwdId, searchResultItem.kwdName)}> 키워드 추가하기 </button></li>
         })}
         </ul>
       </div>
