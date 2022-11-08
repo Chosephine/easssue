@@ -4,6 +4,7 @@ import com.limemul.easssue.api.dto.dash.DashResDto;
 import com.limemul.easssue.api.dto.dash.GraphValueDto;
 import com.limemul.easssue.api.dto.dash.GrassValueDto;
 import com.limemul.easssue.api.dto.dash.NewsListDto;
+import com.limemul.easssue.api.dto.popup.PopupResDto;
 import com.limemul.easssue.entity.ArticleLog;
 import com.limemul.easssue.entity.Category;
 import com.limemul.easssue.entity.User;
@@ -16,10 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @RestController
 @RequestMapping("/dash")
@@ -30,6 +37,10 @@ public class DashApi {
     private final UserService userService;
     private final ArticleLogService articleLogService;
     private final CategoryService categoryService;
+
+    private final static String programPath = "src/main/resources/dashboard_wordcloud.py";
+    private final static String imgPath = "https://k7d102.p.ssafy.io/resource/dash/";
+    private final static String imgFormat = ".png";
 
     /**
      * 대시보드 방사형 그래프, 워드 클라우드, 캘린더 히트맵 & 오늘 읽은 기사 리스트 조회
@@ -56,6 +67,48 @@ public class DashApi {
 
         //워드 클라우드
         String cloud=user.getWordCloudImg();
+        //todo 함수로 빼기
+        if(cloud==null){
+            StringBuilder img=new StringBuilder(imgPath);
+            List<String> result=new ArrayList<>();
+
+            List<String> command = new ArrayList<>();
+            command.add("python3");
+            command.add(programPath);
+            command.add(user.getId().toString());
+
+            ProcessBuilder builder=new ProcessBuilder(command);
+            builder.redirectErrorStream(true);
+            try {
+                long start = System.currentTimeMillis();
+
+                Process process = builder.start();
+                int exitVal = process.waitFor();
+
+                BufferedReader br=new BufferedReader(new InputStreamReader(process.getInputStream(), UTF_8));
+
+                String line;
+                int idx=0;
+                while ((line=br.readLine())!=null){
+                    log.info(">>> {}: {} [{}ms]",++idx,line,(System.currentTimeMillis()-start));
+                    result.add(line);
+                }
+                log.info("dashboard wordcloud exec time: {}ms",(System.currentTimeMillis()-start));
+
+                img.append(result.get(0)).append(imgFormat);
+
+                if(exitVal!=0){
+                    log.info("exit value is not 0. exitVal: {}",exitVal);
+                    cloud="https://k7d102.p.ssafy.io/resource/default_dash_img.gif";
+                }else{
+                    cloud=img.toString();
+                    user.setWordCloudImg(cloud);
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
 
         //캘린더 히트맵
         List<GrassValueDto> calendarHeatMapInfo = articleLogService.getCalendarHeatMapInfo(user);
