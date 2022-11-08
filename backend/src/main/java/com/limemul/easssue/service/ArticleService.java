@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -93,5 +94,17 @@ public class ArticleService {
 
     }
 
+    /**
+     * 기사 조회수 올리기
+     */
+    @Transactional
+    public void updateHit(Long articleId) {
+        Optional<Article> optionalArticle = articleRepo.findById(articleId);
+        if(optionalArticle.isEmpty()){
+            throw new IllegalArgumentException("존재하지 않는 기사입니다.");
+        }
 
+        Article article = optionalArticle.get();
+        article.updateHit();
+    }
 }
