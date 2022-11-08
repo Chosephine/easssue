@@ -42,9 +42,11 @@ public class UserApi {
 
             log.info("user {} is logged in", email);
             log.info("[Finished request] POST /user/login");
-            return new JwtResDto(accessToken,refreshToken);
+            return new JwtResDto(true, accessToken,refreshToken);
         } else {
-            throw new IllegalArgumentException("회원 정보를 확인해주세요");
+            log.info("login is failed");
+            log.info("[Finished request] POST /user/login");
+            return new JwtResDto(false, "","");
         }
 
     }

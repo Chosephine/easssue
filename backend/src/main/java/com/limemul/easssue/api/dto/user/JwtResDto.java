@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JwtResDto {
 
+    private boolean status;
     private String accessToken;
     private String refreshToken;
 

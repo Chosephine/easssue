@@ -25,16 +25,13 @@ public class User {
 
     private String wordCloudImg;
 
-    public User(String email, String pwd) {
+    private User(String email, String pwd) {
         this.email = email;
         this.pwd = pwd;
     }
 
-    public static User from(UserInfoDto userInfoDto){
-        String email= userInfoDto.getEmail();
-        String password= userInfoDto.getPwd();
-
-        return new User(email, password);
+    public static User of(String email, String pwd){
+        return new User(email, pwd);
     }
 
     public String getWordCloudImg() {
