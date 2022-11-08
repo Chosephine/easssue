@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { createRoot } from 'react-dom/client'
 import './popup.css'
 import '@root/index.css'
+import { PopupIndex } from '@/components/Popup'
 
 import { login } from '@/modules/api';
 
@@ -15,18 +16,7 @@ const App: React.FC<{}> = () => {
   },[])
 
   return (
-    <div>
-      <h1 className="text-sm font-bold underline">
-      Hello world!
-    </h1>
-    <button onClick={async()=>{
-      const data = await login();
-      console.log("pop" + data);
-      
-    }}>
-      구글 로그인 버튼
-    </button>
-    </div>
+    <PopupIndex />
   )
 }
 

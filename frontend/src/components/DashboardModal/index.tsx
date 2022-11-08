@@ -1,24 +1,43 @@
-import React from "react";
-import { DashboardModalProps } from "./types";
-import { DashIndex } from "@/components/Modals/DashBoard"
+import React, { useState } from 'react';
+import { DashboardModalProps } from './types';
+import { DashIndex } from '@/components/Modals/DashBoard';
+import SingUpComponent from '@/components/user/Signup';
+import LoginComponent from '@/components/user/Login';
 
 export const DashboardModal: React.FC<DashboardModalProps> = ({
-  setDashboardModalOpen, isLogin
+  setDashboardModalOpen,
+  isLogin,
 }) => {
+  const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const onCloseClick = () => {
-    setDashboardModalOpen(false)
+    setDashboardModalOpen(false);
+  };
+  function loginToSignUp() {
+    setIsSignUp(() => !isSignUp);
+  }
+
+  function signUpToLogin() {
+    setIsSignUp(() => !isSignUp);
   }
   return (
     <>
       <div className="absolute top-0 left-0 w-screen h-screen bg-black/75">
         <div className="p-2 z-50 h-[80%] w-[70%] absolute top-[15%] left-[15%] bg-white rounded-lg">
-        <div className="text-xl">
-              대시보드
+          <div className="text-xl">
+            대시보드
             <button className="absolute right-2" onClick={onCloseClick}>
               X
             </button>
           </div>
-          <DashIndex></DashIndex>
+          {isLogin ? (
+            <DashIndex/>
+          ) : (
+            isSignUp ? (
+              <SingUpComponent stateChange={signUpToLogin} />
+            ) : (
+              <LoginComponent stateChange={loginToSignUp} />
+            )
+          )}
         </div>
       </div>
     </>

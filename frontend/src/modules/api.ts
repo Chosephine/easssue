@@ -5,23 +5,22 @@ export const BASE_URL = 'https://k7d102.p.ssafy.io/api';
 
 //!user
 /**
- * * getAccessToken
- * @params None
+ * * login
+ * @param {string} email
+ * @param {string} pwd
  * @method POST
  * @url /user/login
  */
 
-export const login = async () => {
-  const token = chrome.identity.getAuthToken(
-    { interactive: true },
-    async function (googleToken) {
+export const login = async (email : string, pwd : string) => {
       try {
-        console.log('Token :', googleToken);
+        console.log('email, pwd :', email, pwd);
         const { data } = await axios({
           url: BASE_URL + '/user/login',
           method: 'POST',
           data: {
-            googleToken: googleToken,
+            email,
+            pwd,
           },
         });
         console.log(data);
@@ -29,9 +28,56 @@ export const login = async () => {
       } catch (error) {
         console.error('loginError : ', error);
       }
-    }
-  );
 };
+
+/**
+ * * signup with email, password
+ * @param {string} email - user email
+ * @param {string} pwd - password
+ * @method POST
+ * @url /user/signup
+ */
+
+export const signUp = async (email : string, pwd :string)=>{
+  try {
+    const { data } = await axios({
+      url : BASE_URL + '/user/signup',
+      method : 'POST',
+      data : {
+        email,
+        pwd,
+      }
+    })
+    if(data){
+      console.log("signup successful,", data);
+      return login(email, pwd)
+    }
+  } catch (error) {
+    console.error("signup failed : ", error)
+  }
+}
+
+/**
+ * * email duplication check at signup
+ * @param {string} email
+ * @method GET
+ * @url /user/check/{email}
+ */
+
+export const checkDuplicateEmail =async (email: string) =>{
+  try {
+    const {data} = await axios({
+      url : BASE_URL + `/user/check/${email}`,
+      method : 'GET'
+    })
+    console.log(data);
+    return data
+  } catch (error) {
+    
+  }
+}
+
+
 
 //!keyword
 /**
@@ -73,7 +119,7 @@ export const getRecommendKeywords = async () => {
 
 /**
  * * add and edit subscribed keyword
- * @params keywordLists { kwdId : number,kwdName : string}[]
+ * @param { kwdId: number,kwdName : string} keywordLists
  * @method PUT
  * @url /keyword/subscribe
  */
@@ -97,7 +143,8 @@ export const putSubscribeKeywords = async (
 
 /**
  * * modify ban keyword
- * @params KeywordList
+ * @type {{kwdId: number; kwdName: string ;}[]}
+ * @param {list} keywordLists
  * @method PUT
  * @url /keyword/ban
  */
@@ -120,7 +167,7 @@ export const putBanKeywords = async (
 
 /**
  * * search keywords list infos
- * @params search input "value"
+ * @param {string} value
  * @method GET
  * @url /keyword/search/{value}
  */
@@ -141,7 +188,8 @@ export const searchKeyword = async (value: string) => {
         'Content-type': 'application/json'
       }
     });
-    console.log(data);
+    console.log("kwdList : ",data.kwdList);
+    return data.kwdList;
   } catch (error) {
     console.error('search keywords error : ', error);
   }
@@ -150,7 +198,7 @@ export const searchKeyword = async (value: string) => {
 //!news
 /**
  * * get main news
- * @params page number
+ * @param {number} pageNumber
  * @method GET
  * @url /news/popular/{pageNumber}
  */
@@ -169,7 +217,8 @@ export const getNews = async (pageNumber: number) => {
 
 /**
  * * get news by keyword
- * @params KeywordNumber, PagerNumber
+ * @param {number} keywordNumber - keyword number
+ * @param {number} pageNumber - page number
  * @method GET
  * @url /news/subscribe/{keywordNumber}/page/{pageNumber}
  */
@@ -232,7 +281,7 @@ export const getDashBoardInfo = async () => {
 
 /**
  * * GET newsHistory
- * @params date(YYYY-MM-DD)
+ * @param {date} fullDate - YYYY-MM-DD
  * @method GET
  * @url /dash/news/{date}
  */
@@ -251,11 +300,37 @@ export const getNewsHistory = async (fullDate : string)=>{
   }
 }
 
+//! popup
+
+/**
+ * * get word cloud img and 3line summery at current page
+ * @param newsUrl : string
+ * @method POST
+ * @url /popup
+ */
+
+export const popupApi = async (newsUrl : string) =>{
+  try {
+    const {data} = await axios({
+      url : BASE_URL + `/popup`,
+      method : 'POST',
+      data : {
+        url : newsUrl
+      }
+    })
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("popup data api err : ", error)
+  }
+}
+
+
 //! API
 
 /**
  * * GET nateTrend
- * @params none
+ * @param none
  * @method GET
  * @url /dash/news/{date}
  */

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { KeywordResponse } from "./types";
 import { trendAPI } from "@/modules/api";
+import { RootState } from "@/modules/store";
 
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
