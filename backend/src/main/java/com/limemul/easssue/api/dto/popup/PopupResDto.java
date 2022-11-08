@@ -12,7 +12,7 @@ import java.util.List;
 public class PopupResDto {
 
     private boolean error=true;
-    private String cloud="";
+    private String cloud="https://k7d102.p.ssafy.io/resource/default_popup_img.png";
     private List<String> summary=new ArrayList<>();
 
     public PopupResDto(String cloud, List<String> summary) {

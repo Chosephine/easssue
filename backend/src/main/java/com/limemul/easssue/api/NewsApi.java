@@ -114,8 +114,8 @@ public class NewsApi {
 
     /**
      * 기사 로그 남기기
-     *  [로그인 o] 해당 사용자가 언제 무슨 카테고리의 무슨 기사 읽었는지 로그 남기기
-     *  (로그인 했을때만 호출)
+     *  [로그인 o] 해당 사용자가 언제 무슨 카테고리의 무슨 기사 읽었는지 로그 남기고, 조회수 올리기
+     *  [로그인 x] 조회수만 올리기
      */
     @PostMapping("/log/{articleId}")
     public boolean logReadArticle(@RequestHeader HttpHeaders headers,@PathVariable Long articleId){
@@ -123,6 +123,9 @@ public class NewsApi {
 
         //사용자 정보 불러오기
         Optional<User> optionalUser = JwtProvider.getUserFromJwt(userService, headers);
+
+        //조회수 올리기
+        articleService.updateHit(articleId);
 
         //로그인 안하면 아무 작업 안함
         if(optionalUser.isEmpty()){

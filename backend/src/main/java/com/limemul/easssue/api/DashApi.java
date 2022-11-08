@@ -99,7 +99,7 @@ public class DashApi {
 
                 if(exitVal!=0){
                     log.info("exit value is not 0. exitVal: {}",exitVal);
-                    cloud="";
+                    cloud="https://k7d102.p.ssafy.io/resource/default_dash_img.gif";
                 }else{
                     cloud=img.toString();
                     user.setWordCloudImg(cloud);

@@ -71,14 +71,16 @@ public class PopupApi {
             }
             log.info("url to summary exec time: {}ms",(System.currentTimeMillis()-start));
 
-            cloud.append(result.get(3)).append(imgFormat);
-            summary=result.subList(0,3);
-
             if(exitVal!=0){
                 log.info("exit value is not 0. exitVal: {}",exitVal);
                 log.info("[Finished request] GET /popup");
                 return new PopupResDto();
             }
+
+            int size = result.size();
+            cloud.append(result.get(size-1)).append(imgFormat);
+            summary=result.subList(0,size-1);
+
             log.info("[Finished request] GET /popup");
             return new PopupResDto(cloud.toString(),summary);
         } catch (IOException | InterruptedException e) {
