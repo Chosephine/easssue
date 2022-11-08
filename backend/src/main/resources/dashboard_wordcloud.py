@@ -12,8 +12,10 @@ def color_func(word, font_size, position,orientation,random_state=None, **kwargs
     return("hsl({:d},{:d}%, {:d}%)".format(np.random.randint(180,220),np.random.randint(70,90),np.random.randint(50,70)))
 
 def get_user_word(user_id, cursor):
-    today = datetime.date.today()
+    today = datetime.datetime.now() + datetime.timedelta(hours=9)
     week_ago = today - datetime.timedelta(days=7)
+    today = today.date().strftime('%Y-%m-%d')
+    week_ago = week_ago.date().strftime('%Y-%m-%d')
 
     query = f"""
     select k.kwd_name, ak.kwd_count
