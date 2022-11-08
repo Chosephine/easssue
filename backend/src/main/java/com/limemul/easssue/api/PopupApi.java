@@ -4,7 +4,7 @@ import com.limemul.easssue.api.dto.popup.PopupReqDto;
 import com.limemul.easssue.api.dto.popup.PopupResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.charset.StandardCharsets.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @RestController
 @RequestMapping("/popup")
@@ -26,11 +25,16 @@ import static java.nio.charset.StandardCharsets.*;
 @Slf4j
 public class PopupApi {
 
-    private final static String programPath = "src/main/resources/popup/url_to_summary.py";
+    private final static String programPath = "src/main/resources/url_to_summary.py";
     private final static String imgPath = "https://k7d102.p.ssafy.io/resource/popup/";
     private final static String imgFormat = ".png";
 
-    @GetMapping
+    /**
+     * 확장 프로그램 팝업창 워드 클라우드, 세줄 요약 조회
+     *  (로그인 여부 관계 없이 호출 가능)
+     */
+    //todo 함수로 빼기
+    @PostMapping
     public PopupResDto getPopupInfo(@RequestBody PopupReqDto popupReqDto){
         log.info("[Starting request] GET /popup");
 
@@ -59,7 +63,6 @@ public class PopupApi {
 
             BufferedReader br=new BufferedReader(new InputStreamReader(process.getInputStream(), UTF_8));
 
-            //todo 이걸 이렇게 하드코딩하는게 맞나...
             String line;
             int idx=0;
             while ((line=br.readLine())!=null){
@@ -68,9 +71,8 @@ public class PopupApi {
             }
             log.info("url to summary exec time: {}ms",(System.currentTimeMillis()-start));
 
-            int size = result.size();
-            cloud.append(result.get(size -1)).append(imgFormat);
-            summary=result.subList(size-4,size-1);
+            cloud.append(result.get(3)).append(imgFormat);
+            summary=result.subList(0,3);
 
             if(exitVal!=0){
                 log.info("exit value is not 0. exitVal: {}",exitVal);
