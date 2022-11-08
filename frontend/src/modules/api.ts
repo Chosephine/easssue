@@ -271,6 +271,8 @@ export const trendAPI = async () => {
       // responseEncodig: 'utf8'
     });
     console.log(data.data);
+    return data;
+    
   } catch (error) {
     console.error('nate trend api error: ' + error);
   }

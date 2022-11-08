@@ -50,7 +50,6 @@ const App: React.FC<{}> = () => {
     if(accessToken !== ''){
       axios.defaults.headers.common['Authorization'] = `${accessToken}`;
     }
-    getNews(0);
     trendAPI();
     // 키워드 어디서부터 내려줄지? 
     getRecommendKeywords()
@@ -65,7 +64,7 @@ const App: React.FC<{}> = () => {
   const fetchUrl = () => {
     chrome.storage.local.get(['bgimg'], (result) => {
       setImgUrl(result.bgimg);
-      // console.log(result.bgimg)
+      console.log(result.bgimg)
     });
   };
   return (
@@ -122,7 +121,7 @@ const App: React.FC<{}> = () => {
       {keywordModalOpen && (
         <KeywordModal setKeywordModalOpen={setKeywordModalOpen}></KeywordModal>
       )}
-      <button onClick={async()=>{
+      {/* <button onClick={async()=>{
         try {
           await newsLogApi(1)
         } catch (error) {
@@ -130,7 +129,7 @@ const App: React.FC<{}> = () => {
         }
       }}>
         뉴스로그 증가
-              </button>
+              </button> */}
     </>
   );
 };
