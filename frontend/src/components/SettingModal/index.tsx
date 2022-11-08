@@ -7,6 +7,7 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
     setSettingModalOpen(false)
   }
   const onSaveClick = () => {
+    console.log(bgimg)
     chrome.storage.local.set({'bgimg': bgimg}, ()=> {
     } )
     setSettingModalOpen(false)

@@ -1,5 +1,7 @@
 import React from "react";
 import { KeywordModalProps } from "./types";
+import { KeywordIndex } from "../Modals/Keywords/KeywordComponent";
+import { KeywordModalSaveBtn } from "./SaveBtn";
 
 export const KeywordModal: React.FC<KeywordModalProps> = ({ setKeywordModalOpen }) => {
   const onCloseClick = () => {
@@ -15,6 +17,8 @@ export const KeywordModal: React.FC<KeywordModalProps> = ({ setKeywordModalOpen 
               X
             </button>
           </div>
+        <KeywordIndex />
+        <KeywordModalSaveBtn />
         </div>
       </div>
     </>

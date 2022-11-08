@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { KeywordResponse } from "./types";
+import { trendAPI } from "@/modules/api";
 
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
+  const [trend, setTrend] = useState<KeywordResponse>({});
   const settings = {
     dots: false,
     infinite: true,
@@ -15,27 +18,44 @@ export const RealtimeKeyword = () => {
     autoplay: true,
     speed: 1500,
     autoplaySpeed: 4000,
-  }
-  const words = ["1위", "2위", "3위", "4위", "5위", "6위", "7위", "8위", "9위", "10위"]
+  };
+
+  useEffect(() => {
+    trendAPI().then((data) => {
+      setTrend(data.data);
+    });
+  }, []);
 
   return (
-      <div className="p-2 bg-black/50 rounded-xl w-1/2 m-8" onMouseOver={() => setIsHovering(1)} onMouseOut={() => setIsHovering(0)} >
+    <div
+      className="p-2 bg-black/50 rounded-xl m-8"
+      onMouseOver={() => setIsHovering(1)}
+      onMouseOut={() => setIsHovering(0)}
+    >
       {!isHovering ? (
-        <Slider {...settings} >
-          {words.map((item, index) => {
-            return <div key={index}>
-              <div className="text-lg text-white">{item}</div>
-            </div>
+        <Slider {...settings}>
+          {Object.values(trend).map((value, index) => {
+            return (
+              <div key={index}>
+                <div className="text-lg text-white">
+                  {index + 1} {value.keyword_name}
+                </div>
+              </div>
+            );
           })}
         </Slider>
-        ) : (
-          words.map((item, index) => {
-            return <div key={index}>
-              <div className="text-lg text-white">{item}</div>
+      ) : (
+        Object.values(trend).map((value, index) => {
+          return (
+            <div key={index}>
+              
+                <div className="text-lg text-white">
+                  {index + 1} <a href={`https://www.google.com/search?q=${value.keyword_name}`}> {value.keyword_name} </a>
+                </div>
             </div>
-        }))
-      }
-          
-      </div>
-  )
-}
+          );
+        })
+      )}
+    </div>
+  );
+};

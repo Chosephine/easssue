@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import { RadarController } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-
+import type { GraphDataType } from './types';
 
 ChartJS.register(
   RadialLinearScale,
@@ -21,17 +21,15 @@ ChartJS.register(
   Legend
 );
 
-interface RadarChartProps {
-  
-}
- 
-export const RadarChart: FC<RadarChartProps> = () => {
-  const data = {
-    labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6'],
+
+export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
+  console.log(labels, data);
+  const dataset = {
+    labels,
     datasets: [
       {
         label: '# of Votes',
-        data: [2, 9, 3, 5, 2, 3],
+        data,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -39,6 +37,6 @@ export const RadarChart: FC<RadarChartProps> = () => {
     ],
   };
   return <>
-    <Radar data={data} style={{height : '200px'}}/>
+    <Radar data={dataset} style={{height : '200px'}}/>
   </>;
 }
