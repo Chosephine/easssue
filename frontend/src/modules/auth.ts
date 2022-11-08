@@ -1,45 +1,30 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
 import { login, BASE_URL } from './api';
 import axios from 'axios';
-type backToken = {
+import { LoginReq } from '@/components/user/Login';
+type loginResponse = {
+  status : boolean,
   accessToken : string,
   refreshToken : string
 }
 interface Initial {
-  token: backToken;
+  token: loginResponse;
   isLogin: boolean;
 }
 
 const initialState : Initial = {
   token: {
+    status : false,
     accessToken : '',
     refreshToken : ''
   },
   isLogin: false,
 };
 
-export const loginAuthToken = createAsyncThunk('login', async () => {
-  return new Promise<backToken>(function(resolve, reject) {
-    chrome.identity.getAuthToken(
-      { interactive: true }
-      ,async (googleToken) => {
-        try {
-          console.log('Token :', googleToken);
-          const { data } = await axios({
-            url: BASE_URL + '/user/login',
-            method: 'POST',
-            data: {
-              googleToken: googleToken,
-            },
-          });
-          console.log(data);
-          resolve(data)
-        } catch (error) {
-          console.error('loginError : ', error);
-        }
-      }
-    );
-});
+export const loginAndSetToken = createAsyncThunk<loginResponse,LoginReq>('login', async (loginReq) => {
+  const { email , pwd } = loginReq;
+  const data = await login(email, pwd);
+  return data;
 });
 
 export const authSlice = createSlice({
@@ -47,9 +32,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(loginAuthToken.fulfilled, (state, action) => {
+    builder.addCase(loginAndSetToken.fulfilled, (state, action) => {
       state.token = action.payload;
-      state.isLogin = true;
+      state.isLogin = action.payload.status;
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${action.payload.accessToken}`;
