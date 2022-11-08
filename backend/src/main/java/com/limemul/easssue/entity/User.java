@@ -2,12 +2,10 @@ package com.limemul.easssue.entity;
 
 import com.limemul.easssue.api.dto.user.UserInfoDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @Entity

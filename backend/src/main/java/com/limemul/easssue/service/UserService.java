@@ -77,10 +77,6 @@ public class UserService {
      * */
     public boolean checkUser(UserInfoDto userInfoDto) {
         User user = getUserByEmail(userInfoDto.getEmail());
-        if (user.equals(null)){
-            throw new IllegalArgumentException("존재하지 않는 유저입니다.");
-        }
-
         BasicPasswordEncryptor basicEncryptor = new BasicPasswordEncryptor();
         boolean checkPwd = basicEncryptor.checkPassword(userInfoDto.getPwd(), user.getPwd());
         if (!checkPwd){
