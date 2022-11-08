@@ -16,7 +16,7 @@ import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GrassDto {
 
-    /** 이번 달 첫 날 */
+    /** 저번 달 마지막 날 */
     private String startDate;
     /** 이번 달 마지막 날 */
     private String endDate;
@@ -25,7 +25,7 @@ public class GrassDto {
 
     public GrassDto(List<GrassValueDto> heatMapInfo) {
         LocalDate now = LocalDate.now();
-        this.startDate=now.with(firstDayOfMonth()).toString();
+        this.startDate=now.minusMonths(1).with(lastDayOfMonth()).toString();
         this.endDate=now.with(lastDayOfMonth()).toString();
         if(heatMapInfo.size()>0){
             this.values=heatMapInfo;
