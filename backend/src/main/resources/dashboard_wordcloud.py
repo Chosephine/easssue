@@ -38,7 +38,7 @@ def main(argv):
 
     # --------------------------
     base_dir=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    secret_file=os.path.join(base_dir,'secrets.json')
+    secret_file=os.path.join(base_dir,'resources/secrets.json')
 
     with open(secret_file) as f:
         secrets=json.loads(f.read())
