@@ -31,7 +31,7 @@ export const keywordSlice = createSlice({
         (keyword) => keyword.kwdId === action.payload.kwdId
       );
       if (!isDuplicate) {
-        state.subScribeKwdList.unshift(action.payload);
+        state.subScribeKwdList.push(action.payload);
       }
     },
     removeKeyword: (state, action) => {

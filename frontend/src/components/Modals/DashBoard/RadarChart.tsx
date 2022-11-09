@@ -18,7 +18,6 @@ ChartJS.register(
   LineElement,
   Filler,
   Tooltip,
-  Legend
 );
 
 

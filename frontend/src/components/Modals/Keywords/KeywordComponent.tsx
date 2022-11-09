@@ -6,7 +6,7 @@ import { putSubscribeKeywords } from '@/modules/api';
 export const KeywordIndex:FC = () =>{
   return (
     <>
-      <div className="flex p-3 border-2 border-black bg-white h-[70%] overflow-auto">
+      <div className="flex p-3  bg-white h-[75%] overflow-auto">
         <Input/>
         <UserKeyword />
       </div>

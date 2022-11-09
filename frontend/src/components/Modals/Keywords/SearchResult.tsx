@@ -4,7 +4,7 @@ interface SearchResultItemProps {
 }
  
 export const SearchResultItem: FC<SearchResultItemProps> = () => {
-  return <li>
+  return <li className='flex'>
     
   </li>;
 }

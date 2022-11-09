@@ -5,7 +5,7 @@ import { RootState } from '@modules/store'
 import { KeywordModalProps } from './types'
 
 
-export const KeywordModalSaveBtn : FC<KeywordModalProps> = ({setKeywordModalOpen}) => {
+export const KeywordModalSaveBtn : FC<KeywordModalProps> = ({setKeywordModalOpen , isLogin}) => {
   const {subScribeKwdList, banKwdList} = useSelector((state : RootState)=> {return{
     subScribeKwdList : state.persistedReducer.keyWordReducer.subScribeKwdList,
     banKwdList : state.persistedReducer.keyWordReducer.banKwdList
@@ -17,6 +17,6 @@ export const KeywordModalSaveBtn : FC<KeywordModalProps> = ({setKeywordModalOpen
     console.log(subScribeKwdList);
   }
   return <>
-    <button className="absolute right-4 bottom-4"onClick={saveHandler}>저장하고 나가기</button>
+    <button className="absolute p-4 bg-blue-500 right-4 bottom-4"onClick={saveHandler}>저장하고 나가기</button>
   </>;
 }

@@ -21,7 +21,7 @@
     "newtab": "newTab.html"
   },
 
-  "permissions": ["storage", "bookmarks", "unlimitedStorage", "webRequest", "*://*.google.com/"],
+  "permissions": ["storage", "bookmarks", "unlimitedStorage", "webRequest", "*:/\/*.google.com/", "tabs"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
