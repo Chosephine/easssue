@@ -232,7 +232,8 @@ export const getKeyWordNews = async (
       url: BASE_URL + `/news/subscribe/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
-    console.log(data);
+    console.log("getKewNews Data : ",data);
+    return data;
   } catch (error) {
     console.error('keyword news error: ' + error);
   }
