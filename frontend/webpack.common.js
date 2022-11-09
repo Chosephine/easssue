@@ -69,7 +69,7 @@ function getHtmlPlugins(chunks) {
   return chunks.map(
     (chunk) =>
       new HtmlPlugin({
-        title: 'extension-test',
+        title: '새 탭',
         filename: `${chunk}.html`,
         chunks: [chunk],
       })
