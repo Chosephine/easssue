@@ -23,6 +23,7 @@ export const PopupIndex: FC<PopupIndexProps> = () => {
 
     const getUrl = async()=> {
       const url = (await getCurrentTab()).url
+      console.log(url)
       if (typeof url === 'string'){
         const data : PopupData = await popupApi(url);
         if (!data.error){

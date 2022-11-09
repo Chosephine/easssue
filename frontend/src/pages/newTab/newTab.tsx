@@ -74,7 +74,7 @@ const App: React.FC<{}> = () => {
         style={{
           width: '100vw',
           height: '100vh',
-          backgroundImage: 'url(' + imgUrl + ')' || '',
+          backgroundImage: 'url(' + imgUrl + ')' || 'url(default-background.png)',
         }}
       >
         <div className="h-8 p-2">
@@ -84,7 +84,7 @@ const App: React.FC<{}> = () => {
             setKeywordModalOpen={setKeywordModalOpen}
           />
         </div>
-        <div className="flex flex-row h-full">
+        <div className="flex flex-row justify-center h-full">
           <div className="w-1/4"></div>
           <div className="w-1/2">
             <Scrollbars
