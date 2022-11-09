@@ -6,6 +6,6 @@ export const KeywordButton: React.FC<KeywordButtonProps> = ({ content, setSubSel
     setKeywordTitle((subSelect === index)? "인기 & 추천" : content)
   }
   return (
-    <button className="w-full rounded-full text-white text-md p-2 text-center" style={{backgroundColor: (subSelect === index)? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)", color: (subSelect === index)? "rgb(0, 0 ,0)" : "rgb(255, 255, 255)"}}onClick={onButtonClick}>{content}</button>
+    <button className="w-full rounded-full text-white text-lg p-1 text-center" style={{backgroundColor: (subSelect === index)? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)", color: (subSelect === index)? "rgb(0, 0 ,0)" : "rgb(255, 255, 255)"}}onClick={onButtonClick}>{content}</button>
   )
 }
