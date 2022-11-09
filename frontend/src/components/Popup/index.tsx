@@ -42,10 +42,14 @@ export const PopupIndex: FC<PopupIndexProps> = () => {
       <img className='w-10 h-10 ml-[33px]' src="biglogo.png" alt="" />
       <h1 className='m-5 text-xl font-bold'>easssue 있슈</h1>
       </div>
+      <div className='w-[100%] flex items-center'>
+      <img className='w-3 h-3 ml-[33px]' src="smalllogo.png" alt="" />
+      <h2 className='my-5 ml-3 text-lg font-bold'>키워드 클라우드</h2>
+      </div>
       <PopupWordCloud imgUrl={cloudImg}/>
       <div className='w-[100%] flex items-center'>
-      <img className='w-10 h-10 ml-[33px]' src="smalllogo.png" alt="" />
-      <h2 className='m-5 text-lg font-bold'>3줄 요약</h2>
+      <img className='w-3 h-3 ml-[33px]' src="smalllogo.png" alt="" />
+      <h2 className='my-5 ml-3 text-lg font-bold'>3줄 요약</h2>
       </div>
       <PopupSummery summary={summary}/>
     </div>
