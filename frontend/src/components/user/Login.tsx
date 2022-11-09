@@ -13,7 +13,6 @@ interface loginState {
 }
 
 const LogIn: FC<loginState> = ({stateChange}) => {
-  const [landingImg, setLandingImg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,18 +21,15 @@ const LogIn: FC<loginState> = ({stateChange}) => {
       email: logInFormData.get('email') as string,
       pwd: logInFormData.get('password') as string,
     };
-    const logInRes: { accessToken: string; refreshToken: string } | string =
-      await dispatch(loginAndSetToken(logInform)).unwrap();
+    const logInRes = await dispatch(loginAndSetToken(logInform)).unwrap()
 
-    if (typeof logInRes !== typeof 'string') {
-      // dispatch(login());
-    } else {
+    if (!logInRes.status) {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
     }
   };
   return (
     <>
-      <section className="flex min-h-[80vh] flex-col dark:bg-gray-900">
+      <section className="flex  flex-col dark:bg-gray-900">
         <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2 md:h-screen lg:py-0">
           <div className="w-full rounded-lg bg-white dark:border dark:border-gray-700 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
             <div className="space-y-4 p-6 sm:p-8 md:space-y-6">

@@ -119,7 +119,7 @@ const App: React.FC<{}> = () => {
         ></DashboardModal>
       )}
       {keywordModalOpen && (
-        <KeywordModal setKeywordModalOpen={setKeywordModalOpen}></KeywordModal>
+        <KeywordModal setKeywordModalOpen={setKeywordModalOpen} isLogin={isLogin}></KeywordModal>
       )}
       {/* <button onClick={async()=>{
         try {

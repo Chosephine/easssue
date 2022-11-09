@@ -7,7 +7,7 @@ interface PopupSummaryProps {
 export const PopupSummery: FC<PopupSummaryProps> = ({ summary }) => {
   
   return <>
-    <div className='h-[218px] w-[426px] border-2 border-black overflow-auto'>
+    <div className='h-[218px] w-[426px] border-2 border-gray-400 overflow-auto'>
       { summary && summary.map((item, index)=>{
         return <p key={index}>{`${index+1}. ${item}`}</p>
       })}
