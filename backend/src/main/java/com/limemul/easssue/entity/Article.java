@@ -35,6 +35,10 @@ public class Article {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_kwd_id")
+    private Kwd fromKwd;
+
     @OneToMany(mappedBy = "article")
     private final List<ArticleKwd> articleKwds = new ArrayList<>();
 

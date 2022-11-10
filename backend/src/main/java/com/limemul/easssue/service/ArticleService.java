@@ -68,7 +68,7 @@ public class ArticleService {
 //        LocalDateTime now = LocalDateTime.now();
         Pageable pageable = PageRequest.of(page, articlesSize);
 
-        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByArticleDesc(kwd, pageable);
+        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByCountDescArticleDesc(kwd, pageable);
         List<Article> kwdArticleList=new ArrayList<>();
         for (ArticleKwd articleKwd : articleKwdList) {
             kwdArticleList.add(articleKwd.getArticle());
@@ -83,7 +83,7 @@ public class ArticleService {
         // 기사 리스트
         Pageable pageable = PageRequest.of(page, articlesSize);
 
-        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByArticleDesc(kwd, pageable);
+        Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByCountDescArticleDesc(kwd, pageable);
         List<Article> kwdArticleList=new ArrayList<>();
         for (ArticleKwd articleKwd : articleKwdList) {
             kwdArticleList.add(articleKwd.getArticle());
