@@ -56,6 +56,32 @@ public class NewsApi {
     }
 
     /**
+     * 인기 기사 v2
+     *  오늘의 인기 기사 리스트 조회
+     *  [로그인 o] 금지 키워드 들어있는 기사 제외한 인기 기사 반환
+     *  [로그인 x] v1 (GET /news/popular/page/{page}) 과 동일
+     */
+    @GetMapping("/popular/v2/page/{page}")
+    public ArticleListDto popularNewsV2(@RequestHeader HttpHeaders headers,@PathVariable int page){
+        log.info("[Starting request] GET /news/popular/v2/page/{}", page);
+
+        //사용자 정보 불러오기
+        Optional<User> optionalUser = JwtProvider.getUserFromJwt(userService, headers);
+
+        //로그인 안하면 오늘의 인기 기사 리스트 반환
+        if(optionalUser.isEmpty()){
+            log.info("User not signed in");
+            log.info("[Finished request] GET /news/popular/v2/page/{}",page);
+            return articleService.getPopularArticle(page);
+        }
+
+        //로그인 했으면 금지 키워드 들어있는 기사 제외하고 반환
+
+
+        log.info("[Finished request] GET /news/popular/v2/page/{}", page);
+    }
+
+    /**
      * 구독 키워드 기사 리스트 반환 api
      */
     @GetMapping("/subscribe/{kwdId}/page/{page}")

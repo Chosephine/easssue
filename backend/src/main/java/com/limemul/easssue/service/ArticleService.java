@@ -40,32 +40,24 @@ public class ArticleService {
         log.info("current datetime is {}", now);
         Pageable pageable= PageRequest.of(page, articlesSize);
         Slice<Article> articles = articleRepo.findByPubDateAfterOrderByHitDesc(now.minusDays(1),pageable);
-//        List<Long> banKwdList = new ArrayList<>();
 
-//        List<Long> banKwdList = new ArrayList<>();
-//        banKwdList.add(Long.valueOf(1));
-//        banKwdList.add(Long.valueOf(2));
-//        banKwdList.add(Long.valueOf(3));
-//        banKwdList.add(Long.valueOf(17191));
-//        banKwdList.add(Long.valueOf(6561));
-
-//        Slice<Article> articles = articleRepo.findByArticleAndKwdOrderByHit(banKwdList, pageable);
         List<ArticleDto> articleDtoList = articles.stream().map(ArticleDto::new).collect(Collectors.toList());
         return new ArticleListDto(articleDtoList, page, articles.isLast());
+    }
 
-
+    /**
+     *
+     */
+    public List<Article> getPopularArticleExcludeBanKwd(User user,int page){
+        
     }
 
     public KwdArticleDto getSubsArticle(Kwd kwd, Integer page){
-
-
         // 연관키워드 리스트
         List<RelKwd> relKwds = relKwdRepo.findAllByFromKwd(kwd);
         List<KwdDto> relKwdDtoList = relKwds.stream().map(KwdDto::new).collect(Collectors.toList());
 
-
         // 기사 리스트
-//        LocalDateTime now = LocalDateTime.now();
         Pageable pageable = PageRequest.of(page, articlesSize);
 
         Slice<ArticleKwd> articleKwdList = articleKwdRepo.findAllByKwdOrderByCountDescArticleDesc(kwd, pageable);
@@ -79,7 +71,6 @@ public class ArticleService {
     }
 
     public ArticleListDto getRecommendedArticle(Kwd kwd, Integer page){
-
         // 기사 리스트
         Pageable pageable = PageRequest.of(page, articlesSize);
 
@@ -91,7 +82,6 @@ public class ArticleService {
         List<ArticleDto> articleDtoList = kwdArticleList.stream().map(ArticleDto::new).collect(Collectors.toList());
 
         return new ArticleListDto(articleDtoList, page, articleKwdList.isLast());
-
     }
 
     /**

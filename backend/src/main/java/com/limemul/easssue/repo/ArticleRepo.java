@@ -2,6 +2,7 @@ package com.limemul.easssue.repo;
 
 import com.limemul.easssue.entity.Article;
 import com.limemul.easssue.entity.ArticleKwd;
+import com.limemul.easssue.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -24,5 +25,6 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
 //            " order by a.hit desc", nativeQuery = true)
 //    Slice<Article> findByArticleAndKwdOrderByHit(@Param("kwdIds") List<Long> kwdIds, Pageable pageable);
 
-
+    @Query("select a from Article a where a not in (select a2 from Article a2 join ArticleKwd ak on a2=ak.article where ak.kwd in (select kwd from UserKwd where type='b' and user=:user)) and a.pubDate>=:pubDate order by a.hit desc limit")
+    List<Article> findByPubDateAfterNotInBanKwdOrderByHitDesc(@Param("user") User user,@Param("pubDate") LocalDateTime pubDate,@Param("page") int page);
 }

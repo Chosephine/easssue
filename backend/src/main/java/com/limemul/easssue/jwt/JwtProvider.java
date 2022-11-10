@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.limemul.easssue.jwt.JwtProperties.*;
+
 public class JwtProvider {
 
     /**
@@ -25,12 +27,12 @@ public class JwtProvider {
                 .setSubject(email)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenInvalidTime))
-                .signWith(SignatureAlgorithm.HS256, JwtProperties.SECRET)
+                .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
     }
 
     public static String getEmail(String token) {
-        return Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
     }
 
     /**
@@ -38,11 +40,11 @@ public class JwtProvider {
      *  토큰 없으면 Optional.empty() 반환
      */
     public static Optional<User> getUserFromJwt(UserService userService, HttpHeaders headers){
-        List<String> auth = headers.get(JwtProperties.HEADER_STRING);
+        List<String> auth = headers.get(HEADER_STRING);
         if(auth==null){
             return Optional.empty();
         }
-        String token = auth.get(0).replace(JwtProperties.TOKEN_PREFIX, "");
+        String token = auth.get(0).replace(TOKEN_PREFIX, "");
         String email = JwtProvider.getEmail(token);
         return Optional.of(userService.getUserByEmail(email));
     }
