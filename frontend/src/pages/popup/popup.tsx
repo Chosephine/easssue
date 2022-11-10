@@ -4,7 +4,6 @@ import './popup.css'
 import '@root/index.css'
 import { PopupIndex } from '@/components/Popup'
 
-import { login } from '@/modules/api';
 
 
 
