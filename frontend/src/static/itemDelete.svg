@@ -1,0 +1,16 @@
+<svg id="arrow_copy" data-name="arrow copy" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #606060;
+        stroke: #606060;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Line_2" data-name="Line 2" class="cls-1" d="M12.5,11.5l234,234Z"/>
+  <path id="Line_2_copy" data-name="Line 2 copy" class="cls-1" d="M246.5,11.5l-234,234Z"/>
+</svg>

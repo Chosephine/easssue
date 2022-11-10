@@ -6,7 +6,7 @@ interface PopupWordCloudProps {
  
 export const PopupWordCloud: FC<PopupWordCloudProps> = ({imgUrl}) => {
   return <>
-    <img className='h-[218px] w-[426px] border-2 border-gray-300' src={imgUrl} alt="" />
+    <img className='ml-3 h-[160px] w-[370px]' src={imgUrl} alt="keyword cloud" />
   </>;
 }
  
