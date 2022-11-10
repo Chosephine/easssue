@@ -32,7 +32,7 @@ public class ArticleDto {
         newsId = article.getId();
         title = article.getTitle();
         link = article.getLink();
-        pubDate = article.getPubDate();
+        pubDate = article.getPubDate().plusHours(9L);
         summary = article.getSummary();
         img = article.getImg();
         keywords = article.getArticleKwds().stream().sorted((o1, o2) -> o2.getCount() - o1.getCount())
