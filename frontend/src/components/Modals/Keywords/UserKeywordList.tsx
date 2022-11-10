@@ -57,7 +57,11 @@ const UserKeyword: FC = () => {
                           <div className="flex flex-col gap-4 lg:p-0 p-2  rounde-lg m-2">
                             <div className="flex items-center justify-between w-full p-2 lg:rounded-full md:rounded-full hover:bg-gray-100 cursor-pointer border-2 rounded-lg">
                               <div className="lg:flex md:flex items-center">
-                                <img className="w-4 h-4" src="draggable_1.svg" alt="" />
+                                <img
+                                  className="w-4 h-4"
+                                  src="draggable_1.svg"
+                                  alt=""
+                                />
                                 <div className="flex flex-col">
                                   <div className="text-sm pl-2 leading-3 text-gray-700 font-bold w-full">
                                     {keyword.kwdName}
@@ -66,7 +70,12 @@ const UserKeyword: FC = () => {
                               </div>
 
                               <div className="flex items-center mr-2">
-                                <span onClick={() => removeKeywordButton(keyword.kwdId)} className="h-[100%]" > {"키워드 삭제"}</span>
+                                <span
+                                  onClick={() =>
+                                    removeKeywordButton(keyword.kwdId)
+                                  }
+                                  className="h-[100%]"
+                                ><img className='w-4 h-4' src="itemDelete.svg" alt="" /></span>
                               </div>
                             </div>
                           </div>
