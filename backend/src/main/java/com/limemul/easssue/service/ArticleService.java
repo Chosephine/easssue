@@ -29,27 +29,36 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ArticleService {
 
-//    private final UserService userService;
     private final ArticleRepo articleRepo;
     private final RelKwdRepo relKwdRepo;
     private final ArticleKwdRepo articleKwdRepo;
-    private static final Integer articlesSize = 6;
+
+    private static final int articlesSize = 6;
 
     public ArticleListDto getPopularArticle(Integer page){
-        LocalDateTime now = LocalDateTime.now();
-        log.info("current datetime is {}", now);
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1L);
+        log.info("yesterday: {}", yesterday);
         Pageable pageable= PageRequest.of(page, articlesSize);
-        Slice<Article> articles = articleRepo.findByPubDateAfterOrderByHitDesc(now.minusDays(1),pageable);
+        Slice<Article> articles = articleRepo.findByPubDateAfterOrderByHitDesc(yesterday,pageable);
 
         List<ArticleDto> articleDtoList = articles.stream().map(ArticleDto::new).collect(Collectors.toList());
         return new ArticleListDto(articleDtoList, page, articles.isLast());
     }
 
     /**
-     *
+     * 금지 키워드 제외한 인기 기사 리스트 조회
+     *  최근 하루동안 올라온 기사
+     *  조회수 내림차순 정렬
+     *  해당 사용자의 금지 키워드 포함하는 기사 제외한 기사 리스트 반환
      */
-    public List<Article> getPopularArticleExcludeBanKwd(User user,int page){
-        
+    public ArticleListDto getPopularArticleExcludeBanKwd(User user,int page) {
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1L);
+        log.info("yesterday: {}", yesterday);
+        Pageable pageable = PageRequest.of(page, articlesSize);
+        Slice<Article> articles = articleRepo.findByPubDateAfterNotInBanKwdOrderByHitDesc(user, yesterday, pageable);
+
+        List<ArticleDto> articleDtoList = articles.stream().map(ArticleDto::new).collect(Collectors.toList());
+        return new ArticleListDto(articleDtoList, page, articles.isLast());
     }
 
     public KwdArticleDto getSubsArticle(Kwd kwd, Integer page){

@@ -76,9 +76,10 @@ public class NewsApi {
         }
 
         //로그인 했으면 금지 키워드 들어있는 기사 제외하고 반환
-
-
+        User user = optionalUser.get();
+        log.info("userId: {}",user.getId());
         log.info("[Finished request] GET /news/popular/v2/page/{}", page);
+        return articleService.getPopularArticleExcludeBanKwd(user,page);
     }
 
     /**
