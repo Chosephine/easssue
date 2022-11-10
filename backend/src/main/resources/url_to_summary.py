@@ -66,7 +66,7 @@ def url_to_summary(url):
         return("hsl({:d},{:d}%, {:d}%)".format(np.random.randint(180,220),np.random.randint(70,90),np.random.randint(50,70)))
 
     ### 워드 클라우드 제작
-    wc = WordCloud(background_color='white', font_path='src/main/resources/SB 어그로 B.ttf', color_func=color_func)
+    wc = WordCloud(background_color='white', font_path='src/main/resources/SB 어그로 B.ttf', color_func=color_func,width=370, height=160)
     # wc = WordCloud(background_color='white', font_path='font/NanumBarunGothic.ttf', colormap='Blues')
     wc.generate_from_frequencies(top_news_nouns)
     ## 파일로 저장
