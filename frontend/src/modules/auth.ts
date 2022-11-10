@@ -1,5 +1,5 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
-import { login,  signUp } from './api';
+import { login,  signUp, jwtCheck } from './api';
 import axios from 'axios';
 import { LoginReq } from '@/components/user/Login';
 type loginResponse = {
@@ -32,6 +32,12 @@ export const signUpAndSetToken = createAsyncThunk<loginResponse,LoginReq>('signu
   return data;
 });
 
+export const userStateCheck = createAsyncThunk('jwtCheck', async ()=>{
+  const data = await jwtCheck();
+  console.log("redux jwt",data);
+  return data;
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -50,6 +56,23 @@ export const authSlice = createSlice({
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${action.payload.accessToken}`;
+    })
+    .addCase(userStateCheck.fulfilled, (state,action)=>{
+      console.log(current(state));
+      
+      if (!action.payload) {
+        state.isLogin = false;
+        state.token = {
+          status : false,
+          accessToken : '',
+          refreshToken : ''
+        }
+      }else{
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${state.token.accessToken}`;
+      }
+      // return action.payload;
     })
   },
 });

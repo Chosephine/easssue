@@ -19,6 +19,7 @@ import { KeywordModal } from "@/components/KeywordModal";
 //api
 import axios from 'axios'
 import { getNews,trendAPI,getRecommendKeywords,newsLogApi  } from '@modules/api'
+import { userStateCheck } from '@/modules/auth';
 import { getSubscribeKeywordsRedux } from '@/modules/keyWordReducer';
 
 
@@ -50,10 +51,18 @@ const App: React.FC<{}> = () => {
     if(accessToken !== ''){
       axios.defaults.headers.common['Authorization'] = `${accessToken}`;
     }
-    trendAPI();
-    // 키워드 어디서부터 내려줄지? 
-    getRecommendKeywords()
-    dispatch(getSubscribeKeywordsRedux());
+    const getInitialData = async ()=>{
+      const jwtStatus = await dispatch(userStateCheck()).unwrap();
+      console.log("jwtStatus", jwtStatus);
+      if(accessToken !== ''){
+      axios.defaults.headers.common['Authorization'] = `${accessToken}`;
+    }
+    await trendAPI();
+    await getRecommendKeywords()
+    await dispatch(getSubscribeKeywordsRedux());
+      // return jwtStatus.data;
+    }
+    getInitialData();
   }, []);
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
@@ -64,7 +73,7 @@ const App: React.FC<{}> = () => {
   const fetchUrl = () => {
     chrome.storage.local.get(['bgimg'], (result) => {
       setImgUrl(result.bgimg);
-      console.log(result.bgimg)
+      // console.log(result.bgimg)
     });
   };
   return (
