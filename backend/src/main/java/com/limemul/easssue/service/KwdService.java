@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,9 +23,10 @@ public class KwdService {
 
     /**
      * 랜덤 키워드 하나 조회
+     *  최근 일주일 기사에 있는 키워드 중에서
      */
     public List<Kwd> getRandomKwd(){
-        return kwdRepo.findByRandom();
+        return kwdRepo.findByRandom(LocalDate.now().minusWeeks(1L));
     }
 
     /**

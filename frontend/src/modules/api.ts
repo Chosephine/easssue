@@ -12,22 +12,22 @@ export const BASE_URL = 'https://k7d102.p.ssafy.io/api';
  * @url /user/login
  */
 
-export const login = async (email : string, pwd : string) => {
-      try {
-        console.log('email, pwd :', email, pwd);
-        const { data } = await axios({
-          url: BASE_URL + '/user/login',
-          method: 'POST',
-          data: {
-            email,
-            pwd,
-          },
-        });
-        console.log(data);
-        return data;
-      } catch (error) {
-        console.error('loginError : ', error);
-      }
+export const login = async (email: string, pwd: string) => {
+  try {
+    console.log('email, pwd :', email, pwd);
+    const { data } = await axios({
+      url: BASE_URL + '/user/login',
+      method: 'POST',
+      data: {
+        email,
+        pwd,
+      },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('loginError : ', error);
+  }
 };
 
 /**
@@ -38,24 +38,24 @@ export const login = async (email : string, pwd : string) => {
  * @url /user/signup
  */
 
-export const signUp = async (email : string, pwd :string)=>{
+export const signUp = async (email: string, pwd: string) => {
   try {
     const { data } = await axios({
-      url : BASE_URL + '/user/signup',
-      method : 'POST',
-      data : {
+      url: BASE_URL + '/user/signup',
+      method: 'POST',
+      data: {
         email,
         pwd,
-      }
-    })
-    if(data){
-      console.log("signup successful,", data);
-      return login(email, pwd)
+      },
+    });
+    if (data) {
+      console.log('signup successful,', data);
+      return login(email, pwd);
     }
   } catch (error) {
-    console.error("signup failed : ", error)
+    console.error('signup failed : ', error);
   }
-}
+};
 
 /**
  * * email duplication check at signup
@@ -64,12 +64,12 @@ export const signUp = async (email : string, pwd :string)=>{
  * @url /user/check/{email}
  */
 
-export const checkDuplicateEmail =async (email: string) =>{
+export const checkDuplicateEmail = async (email: string) => {
   try {
-    const {data} = await axios({
-      url : BASE_URL + `/user/check/${email}`,
-      method : 'GET'
-    })
+    const { data } = await axios({
+      url: BASE_URL + `/user/check/${email}`,
+      method: 'GET',
+    });
     console.log(data);
     return data
   } catch (error) {
@@ -118,7 +118,24 @@ export const getSubscribeKeywords = async () => {
     console.error('subscribe keywords error : ', error);
   }
 };
+/**
+ * * get ban keywords list
+ * @method GET
+ * @url /keyword/ban
+ */
 
+export const getBanKeywords = async () => {
+  try {
+    const { data } = await axios({
+      url: BASE_URL + '/keyword/ban',
+      method: 'GET',
+    });
+    console.log('get ban keywords:', data);
+    return data;
+  } catch (error) {
+    console.error('get ban keywords error : ', error);
+  }
+};
 /**
  * * get recommend keywords
  * @method GET
@@ -131,9 +148,36 @@ export const getRecommendKeywords = async () => {
       url: BASE_URL + '/keyword/recommend',
       method: 'GET',
     });
-    console.log("recommend", data);
+    console.log('recommend', data);
   } catch (error) {
     console.error('recommend keywords error : ', error);
+  }
+};
+
+/**
+ * * modify sub, ban keywords onetime
+ * @param subScribeKwdList
+ * @param banKeywordList
+ * @method PUT
+ * @url /keyword
+ */
+
+export const putAllKeywordList = async (
+  subScribeKwdList: { kwdId: number; kwdName: string }[],
+  banKeywordList: { kwdId: number; kwdName: string }[]
+) => {
+  try {
+    const { data } = await axios({
+      url: BASE_URL + '/keyword',
+      method: 'PUT',
+      data : {
+        subscKwdList : subScribeKwdList,
+        banKwdList : banKeywordList
+      }
+    });
+    console.log(data);
+  } catch (error) {
+    console.error('put all keyword list error:', error);
   }
 };
 
@@ -172,14 +216,17 @@ export const putSubscribeKeywords = async (
 export const putBanKeywords = async (
   keywordLists: { kwdId: number; kwdName: string }[]
 ) => {
+  console.log('put ban data:', keywordLists);
+
   try {
     const { data } = await axios({
       url: BASE_URL + '/keyword/ban',
       method: 'PUT',
       data: {
-        KwdList: keywordLists,
+        kwdList: keywordLists,
       },
     });
+    console.log('ban keyword', data);
   } catch (error) {
     console.error('ban keywords put error : ', error);
   }
@@ -194,21 +241,21 @@ export const putBanKeywords = async (
 
 export const searchKeyword = async (value: string) => {
   console.log(value);
-  
+
   // const keyDecode = encodeURI(value);
-  const deUrl = encodeURI(BASE_URL + `/keyword/search/${value}`)
+  const deUrl = encodeURI(BASE_URL + `/keyword/search/${value}`);
   console.log(deUrl);
-  
+
   try {
     const { data } = await axios({
       url: deUrl,
       method: 'GET',
       headers: {
-        'charset' : 'utf-8',
-        'Content-type': 'application/json'
-      }
+        charset: 'utf-8',
+        'Content-type': 'application/json',
+      },
     });
-    console.log("kwdList : ",data.kwdList);
+    console.log('kwdList : ', data.kwdList);
     return data.kwdList;
   } catch (error) {
     console.error('search keywords error : ', error);
@@ -226,10 +273,10 @@ export const searchKeyword = async (value: string) => {
 export const getNews = async (pageNumber: number) => {
   try {
     const { data }= await axios({
-      url: BASE_URL + `/news/popular/page/${pageNumber}`,
+      url: BASE_URL + `/news/popular/v2/page/${pageNumber}`,
     });
-    // console.log(data);
-    return data
+    console.log(data);
+    return data;
   } catch (error) {
     console.error('get news error: ' + error);
   }
@@ -252,7 +299,7 @@ export const getKeyWordNews = async (
       url: BASE_URL + `/news/subscribe/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
-    // console.log("getKewNews Data : ",data);
+    console.log('getKewNews Data : ', data);
     return data;
   } catch (error) {
     console.error('keyword news error: ' + error);
@@ -261,23 +308,20 @@ export const getKeyWordNews = async (
 
 /**
  * * news log api
- * @param newsId 
+ * @param newsId
  * @method POST
  * @url /news/log/{newsId}
  * TODO : login required
  */
-export const newsLogApi = async (newsId : number) =>{
+export const newsLogApi = async (newsId: number) => {
   try {
     const { data } = await axios({
       url: BASE_URL + `/news/log/${newsId}`,
-      method : 'POST'
+      method: 'POST',
     });
     console.log(data);
-    
-  } catch (error) {
-    
-  }
-}
+  } catch (error) {}
+};
 
 //!dash
 // TODO : login required
@@ -307,19 +351,18 @@ export const getDashBoardInfo = async () => {
  * @url /dash/news/{date}
  */
 
-export const getNewsHistory = async (fullDate : string)=>{
+export const getNewsHistory = async (fullDate: string) => {
   try {
-    const {data} = await axios({
-      url : BASE_URL + `/dash/news/${fullDate}`,
-      method : 'GET'
-    })
+    const { data } = await axios({
+      url: BASE_URL + `/dash/news/${fullDate}`,
+      method: 'GET',
+    });
     console.log(data);
     return data;
-    
   } catch (error) {
-    console.error("get News history failed : ", error);
+    console.error('get News history failed : ', error);
   }
-}
+};
 
 //!popup
 
@@ -330,22 +373,21 @@ export const getNewsHistory = async (fullDate : string)=>{
  * @url /popup
  */
 
-export const popupApi = async (newsUrl : string) =>{
+export const popupApi = async (newsUrl: string) => {
   try {
-    const {data} = await axios({
-      url : BASE_URL + `/popup`,
-      method : 'POST',
-      data : {
-        url : newsUrl
-      }
-    })
+    const { data } = await axios({
+      url: BASE_URL + `/popup`,
+      method: 'POST',
+      data: {
+        url: newsUrl,
+      },
+    });
     console.log(data);
     return data;
   } catch (error) {
-    console.error("popup data api err : ", error)
+    console.error('popup data api err : ', error);
   }
-}
-
+};
 
 //!API
 
@@ -368,7 +410,6 @@ export const trendAPI = async () => {
     });
     // console.log(data.data);
     return data;
-    
   } catch (error) {
     console.error('nate trend api error: ' + error);
   }

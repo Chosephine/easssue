@@ -5,6 +5,6 @@ export const RelatedKeywordButton: React.FC<RelatedKeywordButtonProps> = ({ cont
     setRelSelect((relSelect === index)? 0 : index)
   }
   return (
-    <button className="w-full rounded-full text-white text-md p-2 text-center" style={{backgroundColor: (relSelect === index)? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)", color: (relSelect === index)? "rgb(0, 0 ,0)" : "rgb(255, 255, 255)"}}onClick={onButtonClick}>{content}</button>
+    <button className="w-full rounded-full text-white text-base p-1 text-center" style={{backgroundColor: (relSelect === index)? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)", color: (relSelect === index)? "rgb(0, 0 ,0)" : "rgb(255, 255, 255)"}}onClick={onButtonClick}>{content}</button>
   )
 }

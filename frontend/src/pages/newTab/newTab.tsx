@@ -83,7 +83,7 @@ const App: React.FC<{}> = () => {
         style={{
           width: '100vw',
           height: '100vh',
-          backgroundImage: 'url(' + imgUrl + ')' || 'url(default-background.png)',
+          backgroundImage: !(imgUrl === '') ? 'url(' + imgUrl + ')' : 'url(default-background.png)',
         }}
       >
         <div className="h-8 p-2">

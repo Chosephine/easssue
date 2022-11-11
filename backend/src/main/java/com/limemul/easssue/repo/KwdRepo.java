@@ -5,15 +5,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface KwdRepo extends JpaRepository<Kwd,Long> {
 
     /**
      * 랜덤 키워드 하나 반환
+     *  해당 날짜 이후 기사에 포함된 키워드 중에서
      */
-    @Query(value = "select * from kwd order by rand() limit 1",nativeQuery = true)
-    List<Kwd> findByRandom();
+    @Query(value = "select k.* from article_kwd ak " +
+            "join article a on ak.article_id=a.article_id " +
+            "join kwd k on ak.kwd_id=k.kwd_id " +
+            "where a.pub_date>=:pubDate order by rand() limit 1",nativeQuery = true)
+    List<Kwd> findByRandom(@Param("pubDate") LocalDate pubDate);
 
     /**
      * 검색한 단어 포함하는 키워드 리스트 반환

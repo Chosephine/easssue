@@ -41,7 +41,7 @@ export const Bookmark:React.FC<BookmarkProps> = ({setBookmarkModalOpen, bookmark
     <DragDropContext onDragEnd={(result) => {}}>
       <Droppable droppableId="bookmark-list">
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} className="bg-black/50 p-4 rounded-lg mx-2">
+          <div {...provided.droppableProps} ref={provided.innerRef} className="bg-black/50 p-4 rounded-lg m-2 mb-8">
           <div className="grid grid-cols-10 gap-4">
             {renderBookmarks(bookmarkTree)}
             <button onClick={onCreateClick}>

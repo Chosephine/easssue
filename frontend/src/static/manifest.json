@@ -1,7 +1,7 @@
 {
-  "name": "easssue",
-  "description": "issue tracking extension",
-  "version": "1.0.0",
+  "name": "있슈 easssue",
+  "description": "실시간 이슈 확인 확장 프로그램",
+  "version": "1.1.0",
   "manifest_version": 3,
   "oauth2": {
     "client_id": "900377591657-g44asicjjvhlbibbhfuhjenosejli4ba.apps.googleusercontent.com",
@@ -22,7 +22,7 @@
   },
 
 
-  "permissions": ["storage", "bookmarks", "unlimitedStorage", "webRequest","tabs"],
+  "permissions": ["storage", "bookmarks", "unlimitedStorage", "tabs"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
