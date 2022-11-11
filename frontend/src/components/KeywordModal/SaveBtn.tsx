@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { putSubscribeKeywords } from '@/modules/api';
+import { putBanKeywords, putSubscribeKeywords,putAllKeywordList } from '@/modules/api';
 import { RootState } from '@modules/store';
 import { KeywordModalProps } from './types';
 
@@ -16,9 +16,11 @@ export const KeywordModalSaveBtn: FC<KeywordModalProps> = ({
   });
   const saveHandler = async () => {
     //*  벤리스트와 구독 키워드 한번에 보낼 것
-    await putSubscribeKeywords(subScribeKwdList);
+    // putBanKeywords(banKwdList);
+    // putSubscribeKeywords(subScribeKwdList);
+    putAllKeywordList(subScribeKwdList,banKwdList);
     setKeywordModalOpen(false);
-    console.log(subScribeKwdList);
+    console.log(subScribeKwdList, banKwdList);
   };
   return (
     <>

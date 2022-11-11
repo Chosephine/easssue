@@ -1,7 +1,7 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState, AppDispatch } from './store';
-import { getSubscribeKeywords } from './api';
+import { getSubscribeKeywords, getBanKeywords } from './api';
 
 export type keyword = { kwdId: number; kwdName: string };
 interface Initial {
@@ -17,7 +17,15 @@ export const getSubscribeKeywordsRedux = createAsyncThunk(
   'getSubscribeKeywords',
   async () => {
     const data = await getSubscribeKeywords();
-    // console.log(data);
+    console.log('sub list : ',data);
+    return data;
+  }
+);
+export const getBanKeywordsRedux = createAsyncThunk(
+  'getBanKeywords',
+  async () => {
+    const data = await getBanKeywords();
+    console.log(data);
     return data;
   }
 );
@@ -34,13 +42,27 @@ export const keywordSlice = createSlice({
         state.subScribeKwdList.push(action.payload);
       }
     },
+    addBanKeyword: (state, action) => {
+      const isDuplicate = state.banKwdList.find(
+        (keyword) => keyword.kwdId === action.payload.kwdId
+      );
+      if (!isDuplicate) {
+        state.banKwdList.push(action.payload);
+      }
+    },
     removeKeyword: (state, action) => {
-      const data = state.subScribeKwdList.filter((keywords) => {
-        console.log(keywords, action.payload.kwdId);
+      const data = state.subScribeKwdList.filter((keyword) => {
+        console.log(keyword, action.payload.kwdId);
 
-        return keywords.kwdId != action.payload;
+        return keyword.kwdId != action.payload;
       });
       state.subScribeKwdList = data;
+    },
+    removeBanKeyword: (state, action) => {
+      const data = state.banKwdList.filter((keyword) => {
+        return keyword.kwdId != action.payload;
+      });
+      state.banKwdList = data;
     },
     endDropChangeList: (state, action) => {
       if (!action.payload.destination) return;
@@ -49,6 +71,14 @@ export const keywordSlice = createSlice({
       const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
       keywords.splice(action.payload.destination.index, 0, reorderedItem);
       state.subScribeKwdList = keywords;
+    },
+    endDropChangeBanList: (state, action) => {
+      if (!action.payload.destination) return;
+      const keywords = [...state.banKwdList];
+      console.log(keywords.map((a) => current(a)));
+      const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
+      keywords.splice(action.payload.destination.index, 0, reorderedItem);
+      state.banKwdList = keywords;
     },
   },
   extraReducers: (builder) => {
@@ -59,7 +89,12 @@ export const keywordSlice = createSlice({
   },
 });
 
-export const { addKeyword, removeKeyword, endDropChangeList } =
-  keywordSlice.actions;
+export const {
+  addKeyword,
+  addBanKeyword,
+  removeKeyword,
+  removeBanKeyword,
+  endDropChangeList,
+} = keywordSlice.actions;
 
 export default keywordSlice.reducer;
