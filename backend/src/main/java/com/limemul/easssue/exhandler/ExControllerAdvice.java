@@ -86,7 +86,7 @@ public class ExControllerAdvice {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
                 .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
-                .message("JWT 토근이 만료되었습니다.")
+                .message("JWT 토큰이 만료되었습니다.")
                 .build();
     }
 
