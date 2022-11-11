@@ -9,6 +9,10 @@ import { trendAPI } from "@/modules/api";
 export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) => {
   const [isHovering, setIsHovering] = useState(0);
   const [isGoogle, setIsGoogle] = useState(false);
+  const fr = new DocumentFragment
+  const header = document.querySelector('#header') || document.querySelector('body')!
+  const naverBg = window.getComputedStyle(header).backgroundColor
+  const bg = window.getComputedStyle(document.body).backgroundColor
   useEffect(() => {
     setIsGoogle(host==="www.google.com")
   })
@@ -22,35 +26,34 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
     autoplay: true,
     speed: 1500,
     autoplaySpeed: 4000,
+    pauseOnHover: false
   }
 
   return (
-    <div style={{height: "100%", minWidth: 270, maxWidth: 270, display: "block", alignItems: "center" }} onMouseOver={() => setIsHovering(1)}>
-      {!isHovering ? ("") : (
-          <div className="keyword-box"  onMouseOut={() => setIsHovering(0)} >
-            {Object.values(trend).map((value, index) => {
-            return (
-              <div key={index}>
-              
-                <div className="text-lg text-white">
-                  {index + 1} <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}>{value.keyword_name}</a>
-                </div>
-            </div>
-            );
-          })}
-          </div>
-        )}
+    <div style={{height: "100%", minWidth: 270, maxWidth: 270, display: "block", alignItems: "center", backgroundColor: (isGoogle)? bg : naverBg}} onMouseOver={() => setIsHovering(1)} onMouseOut={() => setIsHovering(0)} >
         <Slider {...settings} className="keyword">
         {Object.values(trend).map((value, index) => {
             return (
               <div key={index}>
-                <div className="text-lg text-white">
-                {index + 1} <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}>{value.keyword_name}</a>
+                <div className="keyword-text">
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}>{value.keyword_name}</a>
                 </div>
               </div>
             );
           })}
         </Slider>
+        <div className="keyword-box"  style={{display: !isHovering? "none" : "block"}} onMouseOut={() => setIsHovering(0)} >
+            <div className="keyword-title">실시간 키워드</div>
+            {Object.values(trend).map((value, index) => {
+            return (
+              <div key={index}>
+                <div className="box-text">
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}> &nbsp; {value.keyword_name}</a>
+                </div>
+            </div>
+            );
+          })}
+          </div>
     </div>
   ) 
 }
