@@ -199,7 +199,7 @@ export const putBanKeywords = async (
       url: BASE_URL + '/keyword/ban',
       method: 'PUT',
       data: {
-        KwdList: keywordLists,
+        kwdList: keywordLists,
       },
     });
     console.log('ban keyword', data);

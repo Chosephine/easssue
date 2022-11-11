@@ -16,9 +16,9 @@ export const KeywordModalSaveBtn: FC<KeywordModalProps> = ({
   });
   const saveHandler = async () => {
     //*  벤리스트와 구독 키워드 한번에 보낼 것
-    // putBanKeywords(banKwdList);
-    // putSubscribeKeywords(subScribeKwdList);
-    putAllKeywordList(subScribeKwdList,banKwdList);
+    await putBanKeywords(banKwdList);
+    await putSubscribeKeywords(subScribeKwdList);
+    // putAllKey  wordList(subScribeKwdList,banKwdList);
     setKeywordModalOpen(false);
     console.log(subScribeKwdList, banKwdList);
   };
