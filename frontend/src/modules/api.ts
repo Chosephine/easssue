@@ -71,9 +71,33 @@ export const checkDuplicateEmail = async (email: string) => {
       method: 'GET',
     });
     console.log(data);
+    return data
+  } catch (error) {
+    
+  }
+}
+
+/**
+ * * jwt token and user login status check when create new tab
+ * @param none
+ * @method GET
+ * @url /user/jwt
+ */
+export const jwtCheck = async ()=>{
+  try {
+    const { data } = await axios({
+      url : BASE_URL + '/user/jwt',
+      method : 'GET'
+    });
+    console.log("jwt check:", data);
+    
     return data;
-  } catch (error) {}
-};
+  } catch (error) {
+    console.error("jwt check error :", error);
+  }
+}
+
+
 
 //!keyword
 /**
@@ -88,7 +112,7 @@ export const getSubscribeKeywords = async () => {
       url: BASE_URL + '/keyword/subscribe',
       method: 'GET',
     });
-    // console.log(data);
+    console.log(data);
     return data;
   } catch (error) {
     console.error('subscribe keywords error : ', error);
@@ -299,7 +323,7 @@ export const newsLogApi = async (newsId: number) => {
   } catch (error) {}
 };
 
-//! dash
+//!dash
 // TODO : login required
 /**
  * * GET dash board information
@@ -340,7 +364,7 @@ export const getNewsHistory = async (fullDate: string) => {
   }
 };
 
-//! popup
+//!popup
 
 /**
  * * get word cloud img and 3line summery at current page
@@ -365,7 +389,7 @@ export const popupApi = async (newsUrl: string) => {
   }
 };
 
-//! API
+//!API
 
 /**
  * * GET nateTrend
@@ -384,7 +408,7 @@ export const trendAPI = async () => {
       // charset: 'utf-8',
       // responseEncodig: 'utf8'
     });
-    console.log(data.data);
+    // console.log(data.data);
     return data;
   } catch (error) {
     console.error('nate trend api error: ' + error);
