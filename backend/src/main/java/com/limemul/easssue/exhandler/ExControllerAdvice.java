@@ -1,6 +1,7 @@
 package com.limemul.easssue.exhandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
@@ -74,6 +75,18 @@ public class ExControllerAdvice {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .message("지원하지 않는 Method입니다.")
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler
+    public ErrorResult wrongMethodExHandler(ExpiredJwtException e){
+        log.error("[Exception Handler] ex",e);
+        return ErrorResult.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .message("JWT 토근이 만료되었습니다.")
                 .build();
     }
 
