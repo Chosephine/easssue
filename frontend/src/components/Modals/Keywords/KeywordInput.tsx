@@ -1,10 +1,11 @@
 import React, { FC, useMemo, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
-import { removeKeyword, addKeyword, keyword } from '@modules/keyWordReducer';
+import { addKeyword, addBanKeyword, keyword } from '@modules/keyWordReducer';
 import { searchKeyword } from '@/modules/api';
 import Scrollbars from 'react-custom-scrollbars-2';
-const KeyInput: FC = () => {
+import { ModeProps } from '@/components/KeywordModal/types';
+const KeyInput: FC<ModeProps> = ({mode}) => {
   const [inputKeyword, setInputKeyword] = useState<string>('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     debounceSearch(e.target.value);
@@ -35,12 +36,21 @@ const KeyInput: FC = () => {
 
   const dispatch = useDispatch();
   const addKeywordButton = (kwdId: number, kwdName: string) => {
-    dispatch(
-      addKeyword({
-        kwdId,
-        kwdName,
-      })
-    );
+    if(mode){
+      dispatch(
+        addBanKeyword({
+          kwdId,
+          kwdName,
+        })
+      );
+    }else{
+      dispatch(
+        addKeyword({
+          kwdId,
+          kwdName,
+        })
+      );
+    }
   };
 
   return (
