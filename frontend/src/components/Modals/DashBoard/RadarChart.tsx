@@ -34,7 +34,7 @@ export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
   const options = {
     elements: {
       point: {
-        radius: 2, // 점 크기
+        radius: 3, // 점 크기
       },
     },
     scales: {

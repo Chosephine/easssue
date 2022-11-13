@@ -22,9 +22,11 @@ export const DashboardModal: React.FC<DashboardModalProps> = ({
   return (
     <>
       <div className="absolute top-0 left-0 w-screen h-screen bg-black/75">
-        <div className="p-2 z-50 h-[80%] w-[70%] absolute top-[10%] left-[15%] bg-white rounded-lg">
-          <div className="text-xl">
-            대시보드
+        <div className="p-2 z-50 h-[80%] w-[70%] absolute top-[10%] left-[15%] bg-gray-200 rounded-lg">
+          <div className="text-xl font-bold mt-2 border-b-2 border-black mr-6">
+
+
+          대시보드
             <button className="absolute right-3" onClick={onCloseClick}>
               <img className='h-5 w-5' src="itemDelete.svg" alt="" />
             </button>
