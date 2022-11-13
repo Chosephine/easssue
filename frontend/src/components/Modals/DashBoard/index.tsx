@@ -8,16 +8,20 @@ interface DashIndexProps {}
 
 export const DashIndex: FC<DashIndexProps> = () => {
   const [dashBoardInfo, setDashBoardInfo] = useState<DashInfo>();
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const getDashInfo = async () => {
       const data = await getDashBoardInfo();
+      setLoading(()=>false)
       setDashBoardInfo(() => data);
     };
     getDashInfo();
   }, []);
   return (
     <>
-      {dashBoardInfo && (
+      {loading ?  <div className='h-[100%] flex justify-center flex-col items-center'>
+      <img className='ml-3 h-[50%] w-[30%]' src="spinner.gif" alt="" /> 
+      </div>  : dashBoardInfo && (
         <section className="flex-row w-[100%] h-[95%]  border-2 bg-gray-200">
           <div className="grid grid-cols-12 h-[50%]">
             <div className="col-span-3 h-[75%] m-6 bg-white shadow-lg">
