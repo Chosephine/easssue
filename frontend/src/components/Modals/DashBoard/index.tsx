@@ -18,13 +18,14 @@ export const DashIndex: FC<DashIndexProps> = () => {
   },[])
   return (
     <>
-      {dashBoardInfo && <section className="flex-row w-[100%] h-[95%] border-blue-100 border-2 bg-blue-200">
+      {dashBoardInfo && <section className="flex-row w-[100%] h-[95%]  border-2 bg-gray-200">
         <div className="grid grid-cols-12 h-[50%]">
-          <div className='col-span-3 h-[90%] m-6 bg-white  shadow-md'>
+          <div className='col-span-3 h-[75%] m-6 bg-white  shadow-lg'>
             <h1 className="mt-3 border-b-2 border-gray-400 ml-3 mb-0 mr-1 font-bold text-lg">읽은 뉴스</h1>
           <RadarChart labels={dashBoardInfo.graph.labels} data={dashBoardInfo.graph.data}/>
           </div>
-          <div className='col-span-9 h-[98%]'>
+          <div className='col-span-9 h-[75%] m-6 bg-white  shadow-lg'>
+          <h1 className="mt-3 border-b-2 border-gray-400 ml-3 mb-2 mr-1 font-bold text-lg">워드 클라우드</h1>
           <DashBoardWordCloudImg cloud={dashBoardInfo.cloud}/>
           </div>
         </div>
