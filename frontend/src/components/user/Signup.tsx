@@ -246,7 +246,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ stateChange }) => {
                     onClick={() => {
                       stateChange();
                     }}
-                    className="text-blue-500 hover:pointer"
+                    className="text-blue-500 hover:cursor-pointer"
                   >
                     로그인하기
                   </span>
