@@ -12,14 +12,7 @@ import { RadarController } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import type { GraphDataType } from './types';
 
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-);
-
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
   console.log(labels, data);
@@ -27,27 +20,71 @@ export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
     labels,
     datasets: [
       {
-        label: '관심있는 주제',
+        label: '읽은 기사의 수',
         data,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0)',
+        borderColor: 'navy',
         borderWidth: 1,
-        min : 0
+        pointBackgroundColor:'bg-blue-200',
+        lineTension:0.2,
+        min: 0,
       },
     ],
   };
   const options = {
+    elements: {
+      point: {
+        radius: 2, // 점 크기
+      },
+    },
     scales: {
-        r: {
-            angleLines: {
-                display: false
-            },
-            Min: 0,
-            suggestedMax: 10
+
+      r: {
+        angleLines: {
+          display: false,
+          // color:'white'
+        },
+        Min: 0,
+        pointLabels: {
+          // color: 'white', // 라벨의 글씨 색상
+          font: {
+            family: 'Pretendard-Regular',
+            size : 13
+          },
+        },
+        grid: {
+          // color: 'black', // 거미줄 중간 중간 선 색상
+          // color:'rgba(0,0,0,0)'
+          // borderDash : [15, 30],
+          circular : true
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize:40,
+          color: 'white',
+          showLabelBackdrop: false, // hide square behind text // 이부분이 숫자 label의 배경 부분.
+          font: {
+            family: 'Pretendard-Regular',
+          },
+
+          display: false
+        },
+      },
+      
+    },
+    plugins : {
+      legend :{
+        labels :{
+          font:{
+            size: 100
+          }
         }
+      }
     }
-  }
-  return <>
-    <Radar data={dataset} style={{height : '200px'}} options={options}/>
-  </>;
-}
+  };
+  return (
+    <>
+      <Radar data={dataset} style={{ height: '' }} options={options} />
+    </>
+  );
+};
