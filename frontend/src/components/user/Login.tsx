@@ -85,7 +85,7 @@ const LogIn: FC<loginState> = ({stateChange}) => {
               </form>
               <div className="pt-4 text-center font-light text-gray-500 dark:text-gray-400">
                 아직 회원이 아니신가요?{' '}
-                <span onClick={()=>{stateChange()}} className="hover:pointer font-medium text-blue-500">
+                <span onClick={()=>{stateChange()}} className="hover:cursor-pointer font-medium text-blue-500">
                   회원가입하기
                 </span>
               </div>
