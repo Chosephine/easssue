@@ -25,7 +25,7 @@ public interface KwdRepo extends JpaRepository<Kwd,Long> {
      * 랜덤 키워드 하나 반환
      *  최근 10개 기사 키워드 중 하나 반환
      */
-    @Query(value = "(select * from kwd k " +
+    @Query(value = "(select k.* from kwd k " +
             "join article_kwd ak on ak.kwd_id=k.kwd_id " +
             "order by ak.article_kwd_id desc limit 10) " +
             "order by rand() limit 1",nativeQuery = true)
