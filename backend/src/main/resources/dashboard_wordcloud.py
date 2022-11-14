@@ -65,7 +65,7 @@ def main(argv):
     user_vocab_lst = dict(user_vocab_lst[:25])
 
     ### 워드 클라우드 제작
-    wc = WordCloud(background_color='white', font_path='src/main/resources/SB 어그로 B.ttf', color_func=color_func, width=1000, height=350)
+    wc = WordCloud(background_color='white', font_path='src/main/resources/SB 어그로 B.ttf', color_func=color_func, width=945, height=241)
     wc.generate_from_frequencies(user_vocab_lst)
     
     ## 파일로 저장
