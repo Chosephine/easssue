@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { method } from 'lodash';
 
-export const BASE_URL = 'https://k7d102.p.ssafy.io/api';
+export const BASE_URL = 'https://www.easssue.com/api';
 
 //!user
 /**
