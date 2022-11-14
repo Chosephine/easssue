@@ -10,7 +10,7 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
   const [isHovering, setIsHovering] = useState(0);
   const [isGoogle, setIsGoogle] = useState(false);
   const fr = new DocumentFragment
-  const header = document.querySelector('#header') || document.querySelector('body')!
+  const header = document.querySelector('#header') || document.querySelector('#lnb') || document.querySelector('body')!
   const naverBg = window.getComputedStyle(header).backgroundColor
   const bg = window.getComputedStyle(document.body).backgroundColor
   useEffect(() => {
@@ -36,7 +36,7 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
             return (
               <div key={index}>
                 <div className="keyword-text">
-                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}>{value.keyword_name}</a>
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`} style={{textDecoration: "none"}}>{value.keyword_name}</a>
                 </div>
               </div>
             );
@@ -48,7 +48,7 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
             return (
               <div key={index}>
                 <div className="box-text">
-                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`}> &nbsp; {value.keyword_name}</a>
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`} style={{textDecoration: "none"}}> &nbsp; {value.keyword_name}</a>
                 </div>
             </div>
             );
