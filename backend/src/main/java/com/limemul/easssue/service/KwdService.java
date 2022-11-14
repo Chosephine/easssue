@@ -1,12 +1,7 @@
 package com.limemul.easssue.service;
 
 import com.limemul.easssue.entity.Kwd;
-import com.limemul.easssue.entity.RelKwd;
-import com.limemul.easssue.entity.User;
-import com.limemul.easssue.entity.UserKwd;
 import com.limemul.easssue.repo.KwdRepo;
-import com.limemul.easssue.repo.RecKwdRepo;
-import com.limemul.easssue.repo.UserKwdRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +21,7 @@ public class KwdService {
      *  최근 일주일 기사에 있는 키워드 중에서
      */
     public List<Kwd> getRandomKwd(){
-        return kwdRepo.findByRandom(LocalDate.now().minusWeeks(1L));
+        return kwdRepo.findRandomOrderByArticleKwd();
     }
 
     /**
