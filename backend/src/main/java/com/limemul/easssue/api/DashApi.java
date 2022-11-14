@@ -38,9 +38,9 @@ public class DashApi {
     private final CategoryService categoryService;
 
     private final static String programPath = "src/main/resources/dashboard_wordcloud.py";
-    private final static String imgPath = "https://k7d102.p.ssafy.io/resource/dash/";
+    private final static String imgPath = "https://www.easssue.com/resource/dash/";
     private final static String imgFormat = ".png";
-    private final static String defaultDashImg = "https://k7d102.p.ssafy.io/resource/default_dash_img.gif";
+    private final static String defaultDashImg = "https://www.easssue.com/resource/default_dash_img.gif";
 
 
     /**
