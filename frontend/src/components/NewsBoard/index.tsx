@@ -56,6 +56,7 @@ export const NewsBoard: FC = () => {
         if (data.newsList.length === 0) {
           setPageNum(0)
         }
+        console.log(data)
         setNewsObject(data);
       });
     }

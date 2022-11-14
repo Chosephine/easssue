@@ -28,22 +28,30 @@ const App: React.FC<{}> = () => {
 const fr = new DocumentFragment
 const container = document.querySelector(".gb_Ld") || fr
 const container2 = document.querySelector("#NM_WEATHER") || fr
+const container3 = document.querySelector(".lnb_group") || fr
 const child = document.createElement("div")
-const bg = window.getComputedStyle(document.body).backgroundColor
-console.log(bg)
+const child2 = document.createElement("div")
 child.style.height = "100%"
-child.style.backgroundColor = bg
+child2.style.position = "absolute"
+child2.style.left = "800px"
+child2.style.height = "100%"
 container.prepend(child)
+container3.prepend(child2)
 if (container === fr) {
   const root = createRoot(container2)
   root.render( 
     <App/>)
+  const root2 = createRoot(child2)
+  root2.render(
+    <App/>
+  )
 }
-else{
+else {
   const root = createRoot(child)
   root.render(
     <App/>)
 }
+
 
 
 
