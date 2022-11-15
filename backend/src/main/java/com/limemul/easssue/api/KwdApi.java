@@ -208,7 +208,6 @@ public class KwdApi {
         Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
         //로그인 안하면 예외 발생
-        //todo 예외 던질지 false 반환할지 프론트와 이야기
         if(optionalUser.isEmpty()){
             throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
         }
