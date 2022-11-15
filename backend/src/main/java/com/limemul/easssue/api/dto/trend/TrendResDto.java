@@ -15,6 +15,10 @@ public class TrendResDto {
     List<String> trend;
 
     public TrendResDto(List<Trend> trendList) {
-        this.trend=trendList.stream().map(Trend::getTitle).toList();
+        List<String> strings = trendList.stream().map(Trend::getTitle).toList();
+        for (String string : strings) {
+            String[] split = string.trim().split("\\s*;\\s*");
+            trend.add(split[1]);
+        }
     }
 }
