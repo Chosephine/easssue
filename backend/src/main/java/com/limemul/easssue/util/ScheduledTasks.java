@@ -49,7 +49,7 @@ public class ScheduledTasks {
      * 네이트 트렌드 크롤링한 결과 반환
      * todo 함수로 빼기
      */
-    private List<String> getTrendList() {
+    public static List<String> getTrendList() {
         List<String> result=new ArrayList<>();
 
         List<String> command = new ArrayList<>();
