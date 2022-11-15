@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,10 +42,7 @@ public class TrendApi {
     @GetMapping
     public TrendResDto getTrend(){
         log.info("[Starting request] GET /trend");
-        List<String> trendList = ScheduledTasks.getTrendList();
-        TrendResDto trendResDto=new TrendResDto();
-        trendResDto.setTrend(trendList);
         log.info("[Finished request] GET /trend");
-        return trendResDto;
+        return new TrendResDto(ScheduledTasks.getTrendList());
     }
 }

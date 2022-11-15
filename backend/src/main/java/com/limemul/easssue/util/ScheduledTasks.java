@@ -33,13 +33,8 @@ public class ScheduledTasks {
     @Transactional
     public void getNateTrends(){
         log.info("[Starting request] Scheduled - getNateTrends");
-        List<String> trendList = getTrendList();
-        List<Trend> result=new ArrayList<>();
-        for (String trend : trendList) {
-            String[] split = trend.trim().split("\\s*;\\s*");
-            result.add(Trend.of(Integer.parseInt(split[0]),split[1]));
-        }
-        trendRepo.saveAll(result);
+        List<Trend> trendList = getTrendList();
+        trendRepo.saveAll(trendList);
         log.info("[Finished request] Scheduled - getNateTrends");
     }
 
@@ -49,8 +44,8 @@ public class ScheduledTasks {
      * 네이트 트렌드 크롤링한 결과 반환
      * todo 함수로 빼기
      */
-    public static List<String> getTrendList() {
-        List<String> result=new ArrayList<>();
+    public static List<Trend> getTrendList() {
+        List<Trend> result=new ArrayList<>();
 
         List<String> command = new ArrayList<>();
         command.add("python3");
@@ -67,7 +62,8 @@ public class ScheduledTasks {
             String line;
             while ((line=br.readLine())!=null){
                 log.info(">>> {}",line);
-                result.add(line);
+                String[] split = line.trim().split("\\s*;\\s*");
+                result.add(Trend.of(Integer.parseInt(split[0]),split[1]));
             }
 
             //비정상 종료 시, 빈 리스트 반환
