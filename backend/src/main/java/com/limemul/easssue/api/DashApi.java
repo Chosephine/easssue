@@ -109,6 +109,7 @@ public class DashApi {
 
     /**
      * 해당 사용자의 최근 일주일 동안 읽은 기사 키워드 바탕 워드 클라우드 작성
+     * todo 함수로 빼기
      */
     private String getCloud(User user) {
         StringBuilder img=new StringBuilder(imgPath);
