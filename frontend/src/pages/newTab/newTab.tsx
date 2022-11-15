@@ -86,7 +86,7 @@ const App: React.FC<{}> = () => {
           backgroundImage: !!imgUrl ? 'url(' + imgUrl + ')' : 'url(default-background.png)',
         }}
       >
-        <div className="h-8 p-2">
+        <div className="h-[4rem] p-2">
           <Settingbar
             setSettingModalOpen={setSettingModalOpen}
             setDashboardModalOpen={setDashboardModalOpen}

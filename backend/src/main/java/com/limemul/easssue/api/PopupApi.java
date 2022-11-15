@@ -26,7 +26,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class PopupApi {
 
     private final static String programPath = "src/main/resources/url_to_summary.py";
-    private final static String imgPath = "https://k7d102.p.ssafy.io/resource/popup/";
+    private final static String imgPath = "https://www.easssue.com/resource/popup/";
     private final static String imgFormat = ".png";
 
     /**

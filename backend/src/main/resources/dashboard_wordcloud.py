@@ -55,7 +55,7 @@ def main(argv):
         host="k7d102.p.ssafy.io",
         user="ssafy",
         password=mysql_pwd,
-        database="easssue_test"
+        database="easssue_data"
     )
 
     mycursor = mydb.cursor()

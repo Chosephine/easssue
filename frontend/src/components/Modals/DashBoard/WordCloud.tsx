@@ -10,7 +10,7 @@ export const DashBoardWordCloudImg: FC<DashBoardWordCloudImgProps> = ({
   const img = cloud;
   return (
     <>
-      <img src={img} alt="word cloud" className="h-[75%] w-full" />
+      <img src={img} alt="word cloud" className="h-[80%] mr-1 w-full" />
     </>
   );
 };

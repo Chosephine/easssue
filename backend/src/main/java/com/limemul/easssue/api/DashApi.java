@@ -38,9 +38,9 @@ public class DashApi {
     private final CategoryService categoryService;
 
     private final static String programPath = "src/main/resources/dashboard_wordcloud.py";
-    private final static String imgPath = "https://k7d102.p.ssafy.io/resource/dash/";
+    private final static String imgPath = "https://www.easssue.com/resource/dash/";
     private final static String imgFormat = ".png";
-    private final static String defaultDashImg = "https://k7d102.p.ssafy.io/resource/default_dash_img.gif";
+    private final static String defaultDashImg = "https://www.easssue.com/resource/default_dash_img.gif";
 
 
     /**
@@ -109,6 +109,7 @@ public class DashApi {
 
     /**
      * 해당 사용자의 최근 일주일 동안 읽은 기사 키워드 바탕 워드 클라우드 작성
+     * todo 함수로 빼기
      */
     private String getCloud(User user) {
         StringBuilder img=new StringBuilder(imgPath);
