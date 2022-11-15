@@ -30,7 +30,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 0/1 * * * *")
 //    @Scheduled(cron = "0 0/10 * * * *")
-//    @Transactional
+    @Transactional
     public void getNateTrends(){
         log.info("[Starting request] Scheduled - getNateTrends");
         List<String> trendList = getTrendList();
