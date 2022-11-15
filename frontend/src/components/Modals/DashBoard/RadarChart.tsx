@@ -22,7 +22,7 @@ export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
       {
         label: '읽은 기사의 수',
         data,
-        backgroundColor: 'rgba(255, 99, 132, 0)',
+        backgroundColor: 'rgba(72,122,182, 0.5)',
         borderColor: 'navy',
         borderWidth: 1,
         pointBackgroundColor:'bg-blue-200',

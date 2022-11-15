@@ -27,8 +27,8 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
         <button className="mx-2" onClick={onDashboardClick}>
           <img src="hexagonal_32.png" alt="" />
         </button>
-        <button className="mx-2" onClick={onKeywordClick}>
-          <img src="plus_32.png" alt="" />
+        <button className="p-1 mx-2 hover:cursor-pointer" onClick={onKeywordClick}>
+          <img onClick={onKeywordClick} src="plus_32.png" alt="" />
         </button>
       </div>
     </>

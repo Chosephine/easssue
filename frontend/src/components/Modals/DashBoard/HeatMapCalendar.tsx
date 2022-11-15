@@ -23,9 +23,13 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
       const getToday = `${now.getFullYear()}-${now.getMonth() + 1}-${
         now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
       }`;
+      const korDate =
+        `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${
+          now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
+        }` + '일';
       const data = await getNewsHistory(getToday);
-      console.log(data, getToday);
-      setClickedDate(()=>getToday  + '(오늘)')
+      console.log(data, korDate);
+      setClickedDate(() => korDate);
       setNewsList(() => data.newsList);
     };
     getNewsHistoryApi();
@@ -35,18 +39,21 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
   }, [newsList]);
   const getNewsHistoryFromDate = async (fullDate: string) => {
     const now = new Date();
-      const getToday = `${now.getFullYear()}-${now.getMonth() + 1}-${
-        now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
-      }`;
+    const getToday = `${now.getFullYear()}-${now.getMonth() + 1}-${
+      now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
+    }`;
     let isToday = false;
-    if(getToday === fullDate){
+    if (getToday === fullDate) {
       isToday = true;
     }
     const data = await getNewsHistory(fullDate);
     console.log('getNewsHistoryFromDate:', data);
     if (data !== null) {
+      const splitDate = fullDate.split('-');
+      const korDate = `${splitDate[0]}년 ${splitDate[1]}월 ${splitDate[2]}일`
       setNewsList(() => data.newsList);
-      setClickedDate(()=>`${isToday ? fullDate + '(오늘)' : fullDate}`);
+      console.log('korDate:', korDate);
+      setClickedDate(() =>korDate);
     }
   };
   return (
@@ -98,31 +105,29 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
         />
       </div>
       <div className="h-[75%] w-[100%]">
-
-      <span className="border-b-2 border-gray-400 ml-3 mb-5 mr-1 text-lg">
-        {clickedDate}
-      </span>
-      <ul className="border-l-2 mt-1 ml-5 h-[100%] w-[100%] overflow-auto">
-        <Scrollbars
-          autoHideTimeout={1000}
-          autoHideDuration={200}
-          autoHide={true}
-        >
-          
-          {newsList.map((news: News, idx) => {
-            return (
-              <li key={idx}>
-                <CalendarHistory
-                  category={news.category}
-                  newsTitle={news.newsTitle}
-                  newsLink={news.newsLink}
+        <span className=" ml-[4rem] mb-5 mr-1 text-lg">
+          {clickedDate}
+        </span>
+        <ul className="border-l-2 mt-1 ml-5 h-[100%] w-[100%] overflow-auto">
+          <Scrollbars
+            autoHideTimeout={1000}
+            autoHideDuration={200}
+            autoHide={true}
+          >
+            {newsList.map((news: News, idx) => {
+              return (
+                <li key={idx}>
+                  <CalendarHistory
+                    category={news.category}
+                    newsTitle={news.newsTitle}
+                    newsLink={news.newsLink}
                   />
-              </li>
-            );
-          })}
-        </Scrollbars>
-      </ul>
-          </div>
+                </li>
+              );
+            })}
+          </Scrollbars>
+        </ul>
+      </div>
     </>
   );
 };
