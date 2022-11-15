@@ -9,4 +9,4 @@ soup = BeautifulSoup(response.text,"lxml")
 k = soup.p.string
 x = json.loads(k)
 for i in range(10):
-    print(x[i][0],x[i][1])
+    print(x[i][0],";",x[i][1])
