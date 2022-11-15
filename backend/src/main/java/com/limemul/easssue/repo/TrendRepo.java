@@ -10,5 +10,5 @@ public interface TrendRepo extends JpaRepository<Trend,Long> {
     /**
      * 최근 등록한 실시간 검색어 10개 반환
      */
-    List<Trend> findTop10ByIdOrderByIdDesc();
+    List<Trend> findTop10ByOrderByIdDesc();
 }
