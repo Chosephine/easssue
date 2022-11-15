@@ -33,7 +33,7 @@ export const DashIndex: FC<DashIndexProps> = () => {
                 data={dashBoardInfo.graph.data}
               />
             </div>
-            <div className="col-span-9 h-[75%] m-6 bg-white  shadow-lg">
+            <div className="col-span-9 h-[85%] m-6 bg-white  shadow-lg">
               <h1 className="mt-3 border-b-2 border-gray-400 ml-3 mb-2 mr-1 font-bold text-lg">
                 워드 클라우드
               </h1>
