@@ -70,7 +70,7 @@ export const NewsBoard: FC = () => {
         setKeywordTitle={setKeywordTitle}
         setKeywordId={setKeywordId}
       />
-      <div className="bg-black/50 rounded-lg my-4 mx-2 p-4">
+      <div className="bg-black/50 rounded-lg my-4 mx-2 p-4 relative">
         <div className="text-white text-xl">{keywordTitle}</div>
         <div>
           <RelatedKeywordBar
@@ -78,7 +78,7 @@ export const NewsBoard: FC = () => {
             relSelect={relSelect}
             setRelSelect={setRelSelect}
           />
-          <button className="mx-2" onClick={onPageClick}>
+          <button className="mx-2 absolute top-4 right-2" onClick={onPageClick}>
           <img className="m-auto" src="refresh_32.png" />
         </button>
         </div>

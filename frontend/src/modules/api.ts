@@ -401,8 +401,7 @@ export const popupApi = async (newsUrl: string) => {
 export const trendAPI = async () => {
   try {
     const { data } = await axios({
-      // url: 'https://www.nate.com/js/data/jsonLiveKeywordDataV1.js?v=202104300440',
-      url: 'https://www.nate.com/main/srv/news/data/keywordList.today.json?v=202104300430',
+      url: BASE_URL + `/trend`,
       // responseType: 'json',
       method: 'GET',
       // charset: 'utf-8',

@@ -12,6 +12,9 @@ module.exports = {
 
     },
   },
+  variants: {
+    lineClamp: ['responsive', 'hover']
+  },
   plugins: [
     require('@tailwindcss/line-clamp'),
     require('flowbite/plugin')

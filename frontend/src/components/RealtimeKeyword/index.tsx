@@ -9,7 +9,7 @@ import { RootState } from "@/modules/store";
 
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
-  const [trend, setTrend] = useState<KeywordResponse>({});
+  const [trend, setTrend] = useState<string[]>([]);
   const settings = {
     dots: false,
     infinite: true,
@@ -24,7 +24,9 @@ export const RealtimeKeyword = () => {
 
   useEffect(() => {
     trendAPI().then((data) => {
-      setTrend(data.data);
+      console.log(7)
+      console.log(data)
+      setTrend(data.trend)
     });
   }, []);
 
@@ -36,23 +38,23 @@ export const RealtimeKeyword = () => {
     >
       {!isHovering ? (
         <Slider {...settings}>
-          {Object.values(trend).map((value, index) => {
+          {trend.map((value, index) => {
             return (
               <div key={index}>
                 <div className="text-lg text-white">
-                  {index + 1} {value.keyword_name}
+                  {index + 1} {value}
                 </div>
               </div>
             );
           })}
         </Slider>
       ) : (
-        Object.values(trend).map((value, index) => {
+        trend.map((value, index) => {
           return (
             <div key={index}>
               
                 <div className="text-lg text-white">
-                  {index + 1} <a href={`https://www.google.com/search?q=${value.keyword_name}`}> {value.keyword_name} </a>
+                  {index + 1} <a href={`https://www.google.com/search?q=${value}`}> {value} </a>
                 </div>
             </div>
           );

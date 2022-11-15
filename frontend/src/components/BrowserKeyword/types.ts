@@ -9,11 +9,13 @@ type keyword = {
   count: number;
   score: number;
 }
+
+
 export interface KeywordResponse {
   [k : number]: keyword;
 }
 
 export interface BrowserKeywordProp {
-  trend: KeywordResponse;
+  trend: string[];
   host: string;
 }

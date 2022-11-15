@@ -18,17 +18,17 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
   return (
     <>
       <div className="flex justify-end">
-        <button className="mx-2" onClick={onHistoryClick}>
-          <img className="m-auto" src="history_32.png" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onHistoryClick}>
+          <img className="m-auto" src="history.svg" />
         </button>
-        <button className="mx-2" onClick={onSettingClick}>
-          <img src="setting_32.png" alt="" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onSettingClick}>
+          <img src="settings.svg" alt="" />
         </button>
-        <button className="mx-2" onClick={onDashboardClick}>
-          <img src="hexagonal_32.png" alt="" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onDashboardClick}>
+          <img src="dashboards_v1.svg" alt="" />
         </button>
-        <button className="mx-2" onClick={onKeywordClick}>
-          <img src="plus_32.png" alt="" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onKeywordClick}>
+          <img src="kwd_add.svg" alt="" />
         </button>
       </div>
     </>
