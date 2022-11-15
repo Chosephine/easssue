@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,8 +28,11 @@ public class ScheduledTasks {
      * 네이트 트렌드 불러와서 DB에 저장
      *  10분 마다 갱신
      */
-    @Scheduled(cron = "0 0/10 * * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
+//    @Scheduled(cron = "0 0/10 * * * *")
+//    @Transactional
     public void getNateTrends(){
+        log.info("[Starting request] Scheduled - getNateTrends");
         List<String> trendList = getTrendList();
         List<Trend> result=new ArrayList<>();
         for (String trend : trendList) {
@@ -36,6 +40,7 @@ public class ScheduledTasks {
             result.add(Trend.of(Integer.getInteger(split[0]),split[1]));
         }
         trendRepo.saveAll(result);
+        log.info("[Finished request] Scheduled - getNateTrends");
     }
 
     //======================================================================
