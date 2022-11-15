@@ -22,14 +22,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class ScheduledTasks {
 
     private final TrendRepo trendRepo;
+
     private final static String programPath = "src/main/resources/trend_crawling.py";
 
     /**
      * 네이트 트렌드 불러와서 DB에 저장
      *  10분 마다 갱신
      */
-    @Scheduled(cron = "0 0/1 * * * *")
-//    @Scheduled(cron = "0 0/10 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     @Transactional
     public void getNateTrends(){
         log.info("[Starting request] Scheduled - getNateTrends");

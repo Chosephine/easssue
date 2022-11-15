@@ -17,19 +17,19 @@ public class Trend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int rank;
+    private int ranking;
 
     private String title;
 
     private LocalDateTime regDate;
 
-    private Trend(int rank, String title) {
-        this.rank = rank;
+    private Trend(int ranking, String title) {
+        this.ranking = ranking;
         this.title = title;
         this.regDate=LocalDateTime.now();
     }
 
-    public static Trend of(int rank,String title){
-        return new Trend(rank,title);
+    public static Trend of(int ranking,String title){
+        return new Trend(ranking,title);
     }
 }

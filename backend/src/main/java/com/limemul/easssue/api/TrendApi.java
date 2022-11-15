@@ -29,7 +29,7 @@ public class TrendApi {
         log.info("[Starting request] GET /trend/v2");
 
         List<Trend> trendList = trendRepo.findTop10ByOrderByIdDesc()
-                .stream().sorted(Comparator.comparingInt(Trend::getRank)).toList();
+                .stream().sorted(Comparator.comparingInt(Trend::getRanking)).toList();
 
         log.info("[Finished request] GET /trend/v2");
         return new TrendResDto(trendList);
