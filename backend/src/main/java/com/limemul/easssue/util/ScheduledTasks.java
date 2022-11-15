@@ -36,8 +36,8 @@ public class ScheduledTasks {
         List<String> trendList = getTrendList();
         List<Trend> result=new ArrayList<>();
         for (String trend : trendList) {
-            String[] split = trend.split(";");
-            result.add(Trend.of(Integer.getInteger(split[0]),split[1]));
+            String[] split = trend.trim().split("\\s*;\\s*");
+            result.add(Trend.of(Integer.parseInt(split[0]),split[1]));
         }
         trendRepo.saveAll(result);
         log.info("[Finished request] Scheduled - getNateTrends");
