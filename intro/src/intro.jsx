@@ -1,59 +1,68 @@
 import React, { useRef, useEffect } from 'react';
-import { gsap,Back } from 'gsap';
-import { ScrollTrigger } from "gsap/ScrollTrigger"; //https://www.youtube.com/watch?v=_-_JCocqNbw
-
+import { gsap, Back } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
+import styled from 'styled-components';
+import Main from './pages/Main';
 gsap.registerPlugin(ScrollTrigger);
 export default function App() {
-  const app = useRef();
-  const Box = ({ children, className }) => {
-    return <div className={'box ' + className}>{children}</div>;
-  };
-  function Container({ children }) {
-    return (
-      <div className="">
-        <Box>Don't Animate Me</Box>
-      </div>
-    );
-  }
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Target the two specific elements we have asigned the animate class
-      gsap.to('.animate',{
-        x: 1000,
-        duration: 1,
-        ease: "power3.in", //https://greensock.com/docs/v3/Eases
-        delay: 0.1,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: '.animate',
-          markers: true,
-          scrub:1,
-          pin:true,
-          start: 'top center',
-          end: "bottom top"
-        },
-      });
-      ScrollTrigger.create({ trigger: '.app' });
-    }, app); // <- Scope!
+    gsap.registerPlugin(ScrollTrigger);
 
-    return () => ctx.revert();
+    ScrollTrigger.defaults({
+      toggleActions: 'restart pause resume pause',
+      scroller: '.container',
+    });
+
+    gsap.to('.orange p', {
+      scrollTrigger: '.orange',
+      duration: 0.2,
+      delay: 2,
+      rotation: 360,
+    });
+
+    gsap.to('.red', {
+      scrollTrigger: {
+        trigger: '.red p',
+        markers: true,
+        scrub: true,
+        // toggleActions: 'restart pause reverse pause',
+      },
+      duration: 3,
+      backgroundColor: '#FFA',
+      ease: 'power3',
+    });
+
+    gsap.to('.yoyo p', {
+      scrollTrigger: '.yoyo',
+      scale: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2',
+    });
   }, []);
   return (
     <>
-    <section style={{width:"100%", height:"100vh"}}>
+      <div className="container">
+        <section className="panel">
+          <h1>Pair with CSS Scroll Snapping</h1>
+        </section>
 
-    </section>
-    <div className="app" ref={app}>
-      <Box className="animate" style={{opacity:0}}>Box</Box>
-      <Container></Container>
-      <Box className="animate">Box</Box>
-      <div>
-        <Box className="animate">Box</Box>
+        <section className="panel orange">
+          <p>This element will spin.</p>
+        </section>
+
+        <section className="panel red">
+          <p>This background color will change</p>
+        </section>
+
+        <section className="panel blue yoyo">
+          <p>Yoyo Text!</p>
+        </section>
+
+        <section className="panel">
+          <h1>Pair with CSS Scroll Snapping</h1>
+        </section>
       </div>
-    </div>
-    <section style={{width:"100%", height:"100vh"}}>
-
-    </section>
     </>
   );
 }
