@@ -7,11 +7,13 @@ export type keyword = { kwdId: number; kwdName: string };
 interface Initial {
   subScribeKwdList: keyword[];
   banKwdList: keyword[];
+  subKeyLength : number;
 }
 
 const initialState: Initial = {
   subScribeKwdList: [],
   banKwdList: [],
+  subKeyLength : 0
 };
 export const getSubscribeKeywordsRedux = createAsyncThunk(
   'getSubscribeKeywords',
@@ -38,8 +40,13 @@ export const keywordSlice = createSlice({
       const isDuplicate = state.subScribeKwdList.find(
         (keyword) => keyword.kwdId === action.payload.kwdId
       );
-      if (!isDuplicate) {
+      const isFull = state.subKeyLength === 15 ? true : false;
+      if (!isDuplicate && !isFull) {
         state.subScribeKwdList.push(action.payload);
+        state.subKeyLength = state.subKeyLength + 1;
+      }
+      if(isFull){
+        alert('키워드는 15개 까지 등록 가능해요 !!')
       }
     },
     addBanKeyword: (state, action) => {
@@ -47,7 +54,7 @@ export const keywordSlice = createSlice({
         (keyword) => keyword.kwdId === action.payload.kwdId
       );
       if (!isDuplicate) {
-        state.banKwdList.push(action.payload);
+          state.banKwdList.push(action.payload);
       }
     },
     removeKeyword: (state, action) => {
@@ -57,6 +64,7 @@ export const keywordSlice = createSlice({
         return keyword.kwdId != action.payload;
       });
       state.subScribeKwdList = data;
+      state.subKeyLength = state.subKeyLength - 1;
     },
     removeBanKeyword: (state, action) => {
       const data = state.banKwdList.filter((keyword) => {
@@ -85,6 +93,8 @@ export const keywordSlice = createSlice({
     builder.addCase(getSubscribeKeywordsRedux.fulfilled, (state, action) => {
       console.log(action.payload.kwdList);
       state.subScribeKwdList = action.payload.kwdList;
+      const keyLength = action.payload.kwdList.length;
+      state.subKeyLength = keyLength;
     });
   },
 });

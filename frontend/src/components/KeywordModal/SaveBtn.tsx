@@ -8,16 +8,17 @@ export const KeywordModalSaveBtn: FC<KeywordModalProps> = ({
   setKeywordModalOpen,
   isLogin,
 }) => {
-  const { subScribeKwdList, banKwdList } = useSelector((state: RootState) => {
+  const { subScribeKwdList, banKwdList, subKeyLength } = useSelector((state: RootState) => {
     return {
       subScribeKwdList: state.persistedReducer.keyWordReducer.subScribeKwdList,
       banKwdList: state.persistedReducer.keyWordReducer.banKwdList,
+      subKeyLength: state.persistedReducer.keyWordReducer.subKeyLength,
     };
   });
   const saveHandler = async () => {
     //*  벤리스트와 구독 키워드 한번에 보낼 것
     await putBanKeywords(banKwdList);
-    await putSubscribeKeywords(subScribeKwdList);
+    await putSubscribeKeywords(subScribeKwdList, subKeyLength);
     // putAllKey  wordList(subScribeKwdList,banKwdList);
     setKeywordModalOpen(false);
     console.log(subScribeKwdList, banKwdList);

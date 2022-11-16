@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from '@/modules/store';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
@@ -13,9 +13,11 @@ const UserKeyword: FC = () => {
   useEffect(() => {
     dispatch(getSubscribeKeywordsRedux());
   }, []);
-  const subScribeKwdList = useSelector((state: RootState) => {
+  const {subScribeKwdList, subKeyLength} = useSelector((state: RootState) => {
     // console.log(state);
-    return state.persistedReducer.keyWordReducer.subScribeKwdList;
+    return {subScribeKwdList : state.persistedReducer.keyWordReducer.subScribeKwdList,
+      subKeyLength : state.persistedReducer.keyWordReducer.subKeyLength
+    }
   });
   console.log('kwdList:', subScribeKwdList);
   const removeKeywordButton = (keywordId: number) => {
@@ -23,7 +25,7 @@ const UserKeyword: FC = () => {
   };
   return (
     <div className="w-[60%]">
-      <div className="text-xl font-bold"> {'구독중인 키워드'}</div>
+      <div className="text-xl font-bold"> {'구독중인 키워드'}<span className={`${subKeyLength === 15 ? 'text-red-500' : ''}`}>{` (${subKeyLength}/15)`}</span></div>
       <DragDropContext
         onDragEnd={(dndResult) => dispatch(endDropChangeList(dndResult))}
       >

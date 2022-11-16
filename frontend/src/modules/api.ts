@@ -189,19 +189,23 @@ export const putAllKeywordList = async (
  */
 
 export const putSubscribeKeywords = async (
-  keywordLists: { kwdId: number; kwdName: string }[]
+  keywordLists: { kwdId: number; kwdName: string }[], subKeyLength :number
 ) => {
-  try {
-    const { data } = await axios({
-      url: BASE_URL + '/keyword/subscribe',
-      method: 'PUT',
-      data: {
-        kwdList: keywordLists,
-      },
-    });
-    console.log(data);
-  } catch (error) {
-    console.error('subscribe keywords put error : ', error);
+  if(subKeyLength <= 15) {
+    try {
+      const { data } = await axios({
+        url: BASE_URL + '/keyword/subscribe',
+        method: 'PUT',
+        data: {
+          kwdList: keywordLists,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.error('subscribe keywords put error : ', error);
+    }
+  }else{
+    alert('key length error!');
   }
 };
 
