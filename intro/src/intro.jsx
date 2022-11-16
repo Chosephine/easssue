@@ -3,7 +3,6 @@ import { gsap, Back } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
 import styled from 'styled-components';
 import Main from './pages/Main';
-gsap.registerPlugin(ScrollTrigger);
 export default function App() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -12,11 +11,28 @@ export default function App() {
       toggleActions: 'restart pause resume pause',
       scroller: '.container',
     });
-
+    gsap.fromTo(
+      '.main',
+      {
+        opacity: 0,
+        x: '-50vw',
+      },
+      {
+        scrollTrigger: '.section02',
+        trigger: '.main img',
+        marker: true,
+        duration: 1,
+        delay: 1,
+        opacity: 1,
+        x: '0',
+        ease: 'power3',
+      }
+    );
     gsap.to('.orange p', {
       scrollTrigger: '.orange',
       duration: 0.2,
       delay: 2,
+      makers: true,
       rotation: 360,
     });
 
@@ -25,7 +41,6 @@ export default function App() {
         trigger: '.red p',
         markers: true,
         scrub: true,
-        // toggleActions: 'restart pause reverse pause',
       },
       duration: 3,
       backgroundColor: '#FFA',
@@ -43,10 +58,7 @@ export default function App() {
   return (
     <>
       <div className="container">
-        <section className="panel">
-          <h1>Pair with CSS Scroll Snapping</h1>
-        </section>
-
+        <Main />
         <section className="panel orange">
           <p>This element will spin.</p>
         </section>
@@ -62,6 +74,7 @@ export default function App() {
         <section className="panel">
           <h1>Pair with CSS Scroll Snapping</h1>
         </section>
+        <Main />
       </div>
     </>
   );
