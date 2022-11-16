@@ -17,7 +17,10 @@ export const Bookmark:React.FC<BookmarkProps> = ({setBookmarkModalOpen, bookmark
 
           <div key={index}>
              <a href={treeItem.url} target="_blank">
-               <img className="m-auto rounded-md" src={"https://www.google.com/s2/favicons?domain=" + treeItem.url + "&sz=32"} style={{width: 32, height: 32}} alt="" />
+               <img className="m-auto rounded-md" src={"https://www.google.com/s2/favicons?domain=" + treeItem.url + "&sz=32"} style={{width: 32, height: 32}} alt="" onError={({ currentTarget }) => {
+    currentTarget.onerror = null;
+    currentTarget.src="bookmark2.svg";
+  }}/>
                <div className="mt-2 text-xs text-ellipsis line-clamp-2 text-white text-center">{treeItem.title}</div>
              </a>    
            </div>
@@ -34,7 +37,7 @@ export const Bookmark:React.FC<BookmarkProps> = ({setBookmarkModalOpen, bookmark
 
   return (
     <>
-      <div className="bg-black/50 p-4 rounded-lg m-2 mb-8">
+      <div className="bg-black/25 p-4 rounded-lg m-2 mb-8">
         <div className="grid grid-cols-10 gap-4">
             {renderBookmarks(bookmarkTree)}
             <button onClick={onCreateClick}>

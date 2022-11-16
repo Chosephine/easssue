@@ -405,7 +405,7 @@ export const popupApi = async (newsUrl: string) => {
 export const trendAPI = async () => {
   try {
     const { data } = await axios({
-      url: BASE_URL + `/trend`,
+      url: BASE_URL + `/trend/v2`,
       // responseType: 'json',
       method: 'GET',
       // charset: 'utf-8',

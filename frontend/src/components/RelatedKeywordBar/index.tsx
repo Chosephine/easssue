@@ -7,7 +7,7 @@ export const RelatedKeywordBar: React.FC<RelatedKeywordBarProps> = ({keywordList
     {keywordList.map((item: any, index: any) => {
       return (
       <div key={index} className="m-2">
-        <RelatedKeywordButton content={item} index={index} relSelect={relSelect} setRelSelect={setRelSelect}/>
+        <RelatedKeywordButton content={item.kwdName} index={item.kwdId} relSelect={relSelect} setRelSelect={setRelSelect}/>
       </div>
       ) 
     })}

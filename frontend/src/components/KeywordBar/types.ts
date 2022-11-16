@@ -4,4 +4,5 @@ export interface KeywordBarProps {
   setSubSelect: Function;
   setKeywordTitle: Function;
   setKeywordId: Function;
+  setKeywordModalOpen: Function;
 }

@@ -12,4 +12,9 @@ export interface newsResponse {
   page : number;
 	last : boolean;
 	newsList: News[];
+	
+}
+
+export interface newsBoardProps {
+	setKeywordModalOpen: Function;
 }
