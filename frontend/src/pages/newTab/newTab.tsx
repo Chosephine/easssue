@@ -94,8 +94,8 @@ const App: React.FC<{}> = () => {
           />
         </div>
         <div className="flex flex-row justify-center h-full">
-          <div className="w-1/4"></div>
-          <div className="w-1/2">
+          <div className="w-0 2xl:w-1/4"></div>
+          <div className="w-1/2 min-w-[960px]">
             <Scrollbars
               autoHideTimeout={1000}
               autoHideDuration={200}
@@ -109,7 +109,7 @@ const App: React.FC<{}> = () => {
               />
             </Scrollbars>
           </div>
-          <div className="w-1/4">
+          <div className="w-0 xl:w-1/4">
             <RealtimeKeyword />
           </div>
         </div>

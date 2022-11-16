@@ -29,7 +29,6 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
         </button>
         <button className="mx-2" style={{width: 32, height: 32}} onClick={onKeywordClick}>
           <img src="kwd_add.svg" alt="" />
-
         </button>
       </div>
     </>

@@ -38,7 +38,7 @@ export const Bookmark:React.FC<BookmarkProps> = ({setBookmarkModalOpen, bookmark
         <div className="grid grid-cols-10 gap-4">
             {renderBookmarks(bookmarkTree)}
             <button onClick={onCreateClick}>
-              <img className="m-auto"  src="add-bookmarks.png" />
+              <img className="m-auto"  style={{width: 32, height: 32}} src="bookmark.svg" />
               <div className="mt-2 text-xs text-ellipsis line-clamp-2 text-white">북마크 추가</div>
             </button>
           </div>

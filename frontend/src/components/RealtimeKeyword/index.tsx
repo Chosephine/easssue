@@ -32,7 +32,7 @@ export const RealtimeKeyword = () => {
 
   return (
     <div
-      className="p-2 bg-black/50 rounded-xl m-8"
+      className="xl:p-2 bg-black/50 rounded-xl m-8 max-w-[360px]"
       onMouseOver={() => setIsHovering(1)}
       onMouseOut={() => setIsHovering(0)}
     >
@@ -42,7 +42,7 @@ export const RealtimeKeyword = () => {
             return (
               <div key={index}>
                 <div className="text-lg text-white">
-                  {index + 1} {value}
+                <span className="font-black inline-block text-center w-[20px]"> {index + 1}  </span> &nbsp; {value}
                 </div>
               </div>
             );
@@ -52,9 +52,8 @@ export const RealtimeKeyword = () => {
         trend.map((value, index) => {
           return (
             <div key={index}>
-              
                 <div className="text-lg text-white">
-                  {index + 1} <a href={`https://www.google.com/search?q=${value}`}> {value} </a>
+                  <span className="font-black inline-block text-center w-[20px]"> {index + 1}  </span> <a href={`https://www.google.com/search?q=${value}`}> &nbsp; {value}</a>
                 </div>
             </div>
           );

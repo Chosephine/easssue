@@ -22,6 +22,7 @@ export const KeywordButton: React.FC<KeywordButtonProps> = ({
             ? "rgba(255, 255, 255, 0.5)"
             : "rgba(0, 0, 0, 0.5)",
         color: subSelect === index ? "rgb(0, 0 ,0)" : "rgb(255, 255, 255)",
+        fontSize: (content.length > 5) ? "0.75rem" : "1rem", lineHeight: "1.5rem"
       }}
       onClick={onButtonClick}
     >
