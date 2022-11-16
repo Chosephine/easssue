@@ -49,6 +49,7 @@ export const authSlice = createSlice({
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${action.payload.accessToken}`;
+      window.location.reload()
     })
     .addCase(signUpAndSetToken.fulfilled, (state,action)=>{
       state.token = action.payload;
