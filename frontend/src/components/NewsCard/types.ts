@@ -3,7 +3,7 @@ type News = {
 	title : string;
 	link : string;
 	pubDate : string;
-	summary : string;
+	summary : string[];
 	keywords : string[];
 	img : string;
 }

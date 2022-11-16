@@ -7,22 +7,26 @@ import { KeywordResponse } from "@/components/BrowserKeyword/types";
 import './contentScript.css'
 console.log("hello")
 const App: React.FC<{}> = () => {
-  const [trend, setTrend] = useState<KeywordResponse>({});
-  const [update, setUpdate] = useState(true)
+  const [trend, setTrend] = useState<string[]>([]);
+  const [update, setUpdate] = useState(0)
   const [host, setHost] = useState("")
   const fetchTrend = (url:any) => {
     console.log(url)
     chrome.runtime.sendMessage({url}, messageResponse => {
       console.log(messageResponse.body)
-      setTrend(messageResponse.body)
+      setTrend(()=>messageResponse.body)
+      setUpdate(1)
     })
   }
   useEffect(() => {
-    fetchTrend('https://www.nate.com/main/srv/news/data/keywordList.today.json?v=202104300430')
+    fetchTrend('https://www.easssue.com/api/trend')
+    // fetchTrend('https://www.nate.com/js/data/jsonLiveKeywordDataV1.js?v=202211140925')
     setHost(window.location.host)
   }, []);
   return (
-    <BrowserKeyword trend={trend} host={host}/>
+    <>
+    {update ? (<BrowserKeyword trend={trend} host={host}/>) : ("")}
+    </>
   )
 }
 const fr = new DocumentFragment
@@ -31,7 +35,7 @@ const container2 = document.querySelector("#NM_WEATHER") || fr
 const container3 = document.querySelector(".lnb_group") || fr
 const child = document.createElement("div")
 const child2 = document.createElement("div")
-child.style.height = "100%"
+child.style.height = "34px"
 child2.style.position = "absolute"
 child2.style.left = "800px"
 child2.style.height = "100%"

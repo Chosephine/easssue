@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { trendAPI } from "@/modules/api";
 
 export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) => {
+  console.log(trend)
   const [isHovering, setIsHovering] = useState(0);
   const [isGoogle, setIsGoogle] = useState(false);
   const fr = new DocumentFragment
@@ -32,11 +33,11 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
   return (
     <div style={{height: "100%", minWidth: 270, maxWidth: 270, display: "block", alignItems: "center", backgroundColor: (isGoogle)? bg : naverBg}} onMouseOver={() => setIsHovering(1)} onMouseOut={() => setIsHovering(0)} >
         <Slider {...settings} className="keyword">
-        {Object.values(trend).map((value, index) => {
+        {trend.map((value, index) => {
             return (
               <div key={index}>
                 <div className="keyword-text">
-                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`} style={{textDecoration: "none"}}>{value.keyword_name}</a>
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value}`} style={{textDecoration: "none"}}>{value}</a>
                 </div>
               </div>
             );
@@ -44,11 +45,11 @@ export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) =>
         </Slider>
         <div className="keyword-box"  style={{display: !isHovering? "none" : "block"}} onMouseOut={() => setIsHovering(0)} >
             <div className="keyword-title">실시간 키워드</div>
-            {Object.values(trend).map((value, index) => {
+            {trend.map((value, index) => {
             return (
               <div key={index}>
                 <div className="box-text">
-                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value.keyword_name}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value.keyword_name}`} style={{textDecoration: "none"}}> &nbsp; {value.keyword_name}</a>
+                  <span className="font-bold"> {index + 1}  </span> <a href={(isGoogle)?  `https://${host}/search?q=${value}` : `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${value}`} style={{textDecoration: "none"}}> &nbsp; {value}</a>
                 </div>
             </div>
             );
