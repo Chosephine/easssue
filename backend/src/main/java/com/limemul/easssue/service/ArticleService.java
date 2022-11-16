@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,8 +63,9 @@ public class ArticleService {
     }
 
     public KwdArticleDto getSubsArticle(Kwd kwd, Integer page){
-        // 연관키워드 리스트
-        List<RelKwd> relKwds = relKwdRepo.findAllByFromKwd(kwd);
+        // 연관키워드 리스트 (최신 5개)
+        Pageable relKwdPageable=PageRequest.of(0,5, Sort.by("regDate").descending());
+        List<Kwd> relKwds = relKwdRepo.findDistinctByFromKwd(kwd,relKwdPageable);
         List<KwdDto> relKwdDtoList = relKwds.stream().map(KwdDto::new).collect(Collectors.toList());
 
         // 기사 리스트
