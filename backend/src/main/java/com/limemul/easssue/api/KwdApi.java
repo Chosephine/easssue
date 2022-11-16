@@ -151,6 +151,10 @@ public class KwdApi {
         //사용자 정보 불러오기
         User user = getUser(headers);
 
+        if(kwdListDto.getKwdList().size()>15){
+            throw new IllegalArgumentException("구독 키워드는 15개를 초과할 수 없습니다.");
+        }
+
         updateKwdList(user, kwdListDto.getKwdList(), UserKwdType.s);
 
         log.info("[Finished request] PUT /keyword/subscribe");
