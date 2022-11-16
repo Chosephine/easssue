@@ -3,6 +3,7 @@ import { gsap, Back } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
 import styled from 'styled-components';
 import Main from './pages/Main';
+import Dash from './pages/DashBoard'
 export default function App() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -28,13 +29,41 @@ export default function App() {
         ease: 'power3',
       }
     );
-    gsap.to('.orange p', {
-      scrollTrigger: '.orange',
-      duration: 0.2,
-      delay: 2,
-      makers: true,
-      rotation: 360,
-    });
+    gsap.fromTo(
+      '.radar',
+      {
+        opacity: 0,
+        x: '150vw',
+      },
+      {
+        scrollTrigger: '.dash',
+        trigger: '.radar',
+        marker: true,
+        duration: 2,
+        delay: 0.5,
+        opacity: 1,
+        x: '0',
+        ease: 'power3',
+      }
+    );
+    gsap.fromTo(
+      '.heatmap',
+      {
+        opacity: 0,
+        x: '-50vw',
+      },
+      {
+        scrollTrigger: '.dash',
+        trigger: '.heatmap',
+        marker: true,
+        duration: 2,
+        delay: 0.5,
+        opacity: 1,
+        x: '0',
+        ease: 'power3',
+      }
+    );
+    
 
     gsap.to('.red', {
       scrollTrigger: {
@@ -59,9 +88,7 @@ export default function App() {
     <>
       <div className="container">
         <Main />
-        <section className="panel orange">
-          <p>This element will spin.</p>
-        </section>
+        <Dash/>
 
         <section className="panel red">
           <p>This background color will change</p>
