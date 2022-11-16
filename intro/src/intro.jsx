@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/wa
 import styled from 'styled-components';
 import Main from './pages/Main';
 import Dash from './pages/DashBoard'
+import Keyword from './pages/keyword'
 export default function App() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +13,7 @@ export default function App() {
       toggleActions: 'restart pause resume pause',
       scroller: '.container',
     });
+    const searchResult = gsap.utils.toArray('.search-result')
     gsap.fromTo(
       '.main',
       {
@@ -64,7 +66,17 @@ export default function App() {
       }
     );
     
-
+    gsap.fromTo(searchResult,{
+      opacity: 0,
+    },{scrollTrigger: '.keyword',
+    trigger: '.key-input',
+      marker: true,
+      duration: 2,
+      delay: 0.5,
+      opacity: 1,
+      x: '0',
+      ease: 'power3',
+    })
     gsap.to('.red', {
       scrollTrigger: {
         trigger: '.red p',
@@ -89,10 +101,7 @@ export default function App() {
       <div className="container">
         <Main />
         <Dash/>
-
-        <section className="panel red">
-          <p>This background color will change</p>
-        </section>
+        <Keyword/>
 
         <section className="panel blue yoyo">
           <p>Yoyo Text!</p>
