@@ -7,8 +7,8 @@ const Main = () => {
     <>
       <section className="section02 panel">
         <main className="main flex h-[150px]">
-          <div className="block text-6xl">있슈 easssue</div>
-          <img className="logo w-[150px] h-[150px]" src="biglogo.png" alt="" />
+          <div className="block text-6xl">있슈 <span className=''>easssue</span></div>
+          <img className="logo w-[200px] h-[200px]" src="biglogo.png" alt="" />
         </main>
       </section>
     </>
