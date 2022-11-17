@@ -3,7 +3,7 @@ import KeywordInput from '../components/KeywordInput';
 const Keyword = () => {
   return (
     <>
-      <section className="panel p-10 ">
+      <section className="panel p-10 font-service">
         <div className="keyword items-center">
           <KeywordInput />
         </div>

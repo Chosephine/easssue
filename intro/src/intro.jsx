@@ -6,6 +6,7 @@ import Main from './pages/Main';
 import Dash from './pages/DashBoard';
 import Keyword from './pages/keyword';
 import Popup from './pages/PopUp';
+import News from './pages/News'
 export default function App() {
   const [toggle, setToggle] = useState(false);
   const toggleHandler = ()=>{
@@ -147,14 +148,12 @@ export default function App() {
   return (
     <>
       <div className={`container overflow-hidden overflow-y-scroll `}>
+        <News/>
         <Main />
         <Dash />
         <Keyword />
         <Popup toggle={toggle} toggleHandler={toggleHandler}/>
 
-        <section className="panel blue yoyo">
-          <p>Yoyo Text!</p>
-        </section>
 
         <section className="panel">
           <h1>Pair with CSS Scroll Snapping</h1>
