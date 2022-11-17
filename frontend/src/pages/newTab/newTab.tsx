@@ -103,7 +103,7 @@ const App: React.FC<{}> = () => {
             </Scrollbars>
           </div>
           <div className="w-0 xl:w-2/5 2xl:w-1/5">
-            <div className="h-[4rem] p-2">
+            <div className="h-[4rem] mt-6 mb-5 mr-6 p-2">
             <Settingbar
               setSettingModalOpen={setSettingModalOpen}
               setDashboardModalOpen={setDashboardModalOpen}
