@@ -390,6 +390,9 @@ export const popupApi = async (newsUrl: string) => {
         url: newsUrl,
       },
     });
+    if(data.error){
+      console.error('popup data api err : ', data.error);
+    }
     return data;
   } catch (error) {
     console.error('popup data api err : ', error);
