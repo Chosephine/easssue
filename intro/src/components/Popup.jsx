@@ -38,7 +38,7 @@ const PopUpComponent = ({ toggle }) => {
                 </h2>
               </div>
               <img
-                className="ml-3 h-[160px] w-[370px]"
+                className="word-cloud ml-3 h-[160px] w-[370px]"
                 src="wordCloud.png"
                 alt="keyword cloud"
               />
@@ -47,11 +47,11 @@ const PopUpComponent = ({ toggle }) => {
                   기사 요약
                 </h2>
               </div>
-              <div className="summary w-[100%] px-2 font-service">
-                <div className="popup-p text-lg ml-1 mb-3 ">{`다양한 페이지에서 사용해보세요`}</div>
-                <div className="popup-p text-lg ml-1 mb-3">{`어떤 글이든 중심 키워드를 추출해드립니다`}</div>
+              {!isLoading && <div className="summary w-[100%] px-2 font-service">
+                <div className={`popup-p text-lg ml-1 mb-3`}>{`우측상단 아이콘을 눌러 사용해보세요`}</div>
+                <div className="popup-p text-lg ml-1 mb-3">{`어떤 글이든 중심 키워드를 추출하고`}</div>
                 <div className="popup-p text-lg ml-1 mb-3">{`긴 글을 3줄 요약합니다`}</div>
-              </div>
+              </div>}
             </div>
           )}
         </div>

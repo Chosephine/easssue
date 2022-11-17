@@ -8,7 +8,7 @@ const Keyword = () => {
           <KeywordInput />
         </div>
         <div className='keyword-text font-service ml-10'>
-          <div className='text-[1.8rem]'>{"나만의 키워드를 구독하고 구독 한 키워드 기사들 확인"}</div>
+          <div className='text-[1.4rem]'>{"나만의 키워드를 구독하면"}</div>
         </div>
       </section>
     </>

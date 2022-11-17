@@ -21,6 +21,7 @@ export default function App() {
     });
     const searchResult = gsap.utils.toArray('.search-result');
     const summary = gsap.utils.toArray('.popup-p');
+    const newsCard = gsap.utils.toArray('.news-card');
     gsap.fromTo(
       '.main',
       {
@@ -116,42 +117,79 @@ export default function App() {
         y:'-100px'
       },
       {
-        scrollTrigger: '.summary',
-        trigger: '.summary',
+        scrollTrigger: '.pop-pop',
+        trigger: '.word-cloud',
         stagger:0.3,
         duration: 2,
-        delay: 0.5,
+        delay: 5,
         opacity: 1,
         x: '0',
         y: '0',
         ease: 'power3',
       }
     );
-    gsap.to('.red', {
-      scrollTrigger: {
-        trigger: '.red p',
-        scrub: true,
+    gsap.fromTo(
+      '.news-container',{
+        y:'-30vh',
+        opacity: 0,
+      },{
+        scrollTrigger: '.news-board',
+        trigger: '.news-container',
+        duration:1,
+        opacity: 1,
+        delay: 0.5,
+        y:'0'
+      }
+    )
+    gsap.fromTo('.news-p',{
+      opacity:0
+    },{
+      duration:2,
+      opacity: 1
+    })
+    gsap.fromTo(
+      newsCard,
+      {
+        opacity: 0,
+        y:'-100px'
       },
-      duration: 3,
-      backgroundColor: '#FFA',
-      ease: 'power3',
-    });
+      {
+        scrollTrigger: '.news-board',
+        trigger: '.news-container',
+        stagger:0.4,
+        duration: 2,
+        delay: 0.8,
+        opacity: 1,
+        x: '0',
+        y: '0',
+        ease: 'power3',
+      }
+    );
+    // gsap.to('.red', {
+    //   scrollTrigger: {
+    //     trigger: '.red p',
+    //     scrub: true,
+    //   },
+    //   duration: 3,
+    //   backgroundColor: '#FFA',
+    //   ease: 'power3',
+    // });
 
-    gsap.to('.yoyo p', {
-      scrollTrigger: '.yoyo',
-      scale: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: 'power2',
-    });
+    // gsap.to('.yoyo p', {
+    //   scrollTrigger: '.yoyo',
+    //   scale: 2,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: 'power2',
+    // });
   }, []);
   return (
     <>
       <div className={`container overflow-hidden overflow-y-scroll `}>
-        <News/>
         <Main />
-        <Dash />
         <Keyword />
+        <News/>
+        <Dash />
         <Popup toggle={toggle} toggleHandler={toggleHandler}/>
 
 
