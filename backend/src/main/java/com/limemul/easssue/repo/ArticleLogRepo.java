@@ -32,10 +32,10 @@ public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
      *  날짜 오름차순 정렬
      */
     @Query(value = "select date_format(click_time,'%Y-%m-%d') as date, count(*) as count from article_log " +
-            "where user_id=:user and click_time>:click_time group by date order by date",
+            "where user_id=:user and click_time>:clickTime group by date order by date",
             nativeQuery = true)
     List<GrassValueDto> countByUserAndClickTimeAfterGroupByClickTime(
-            @Param("user") User user, @Param("click_time") LocalDateTime clickTime);
+            @Param("user") User user, @Param("clickTime") LocalDateTime clickTime);
 
     /**
      * 해당 사용자의 해당 날짜에 읽은 기사 정보 조회

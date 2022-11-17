@@ -51,7 +51,7 @@ public class ArticleLogService {
      */
     public List<ArticleLog> getArticleLogByReadDate(User user,LocalDate date){
         //서버 시간과 DB 시간이 9시간 차이나는 문제
-        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.of(9,0)));
+        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN).minusHours(9));
     }
 
     /**
