@@ -50,7 +50,8 @@ public class ArticleLogService {
      *  해당 유저가 해당 날짜에 읽은 기사 정보 리스트 반환
      */
     public List<ArticleLog> getArticleLogByReadDate(User user,LocalDate date){
-        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN));
+        //서버 시간과 DB 시간이 9시간 차이나는 문제
+        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.of(9,0)));
     }
 
     /**

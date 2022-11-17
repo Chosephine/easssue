@@ -33,6 +33,7 @@ public class ArticleDto {
         newsId = article.getId();
         title = article.getTitle();
         link = article.getLink();
+        //서버 시간과 DB 시간이 9시간 차이나는 문제
         pubDate = article.getPubDate().plusHours(9L);
         summary = Arrays.stream(article.getSummary().split("\n")).toList();
         img = article.getImg();
