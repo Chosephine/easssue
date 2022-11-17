@@ -1,6 +1,6 @@
 import React from "react";
 import { SettingbarProps } from "./types";
-export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen, setKeywordModalOpen}) => {
+export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen}) => {
   const onHistoryClick = () => {
     chrome.tabs.create({
       url: "chrome://history"
@@ -12,23 +12,17 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
   const onDashboardClick = () => {
     setDashboardModalOpen(true)
   }
-  const onKeywordClick = () => {
-    setKeywordModalOpen(true)
-  }
   return (
     <>
       <div className="flex justify-end">
-        <button className="mx-2" onClick={onHistoryClick}>
-          <img className="m-auto" src="history_32.png" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onHistoryClick}>
+          <img className="m-auto" src="history.svg" />
         </button>
-        <button className="mx-2" onClick={onSettingClick}>
-          <img src="setting_32.png" alt="" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onSettingClick}>
+          <img src="settings.svg" alt="" />
         </button>
-        <button className="mx-2" onClick={onDashboardClick}>
-          <img src="hexagonal_32.png" alt="" />
-        </button>
-        <button className="p-1 mx-2 hover:cursor-pointer" onClick={onKeywordClick}>
-          <img onClick={onKeywordClick} src="plus_32.png" alt="" />
+        <button className="mx-2" style={{width: 32, height: 32}} onClick={onDashboardClick}>
+          <img src="dashboards_v1.svg" alt="" />
         </button>
       </div>
     </>

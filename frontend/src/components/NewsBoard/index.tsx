@@ -3,15 +3,16 @@ import { NewsCard } from "../NewsCard";
 import { KeywordBar } from "../KeywordBar";
 import { RelatedKeywordBar } from "../RelatedKeywordBar";
 import { getNews, getKeyWordNews } from "@/modules/api";
-import { newsResponse } from "./types";
+import { newsBoardProps, newsResponse } from "./types";
 import { useSelector } from "react-redux";
 import { RootState } from "@/modules/store";
-export const NewsBoard: FC = () => {
+export const NewsBoard: FC<newsBoardProps> = ({setKeywordModalOpen}) => {
   const [subSelect, setSubSelect] = useState(-1);
   const [relSelect, setRelSelect] = useState(0);
   const [keywordTitle, setKeywordTitle] = useState("인기 & 추천");
   const [keywordId, setKeywordId] = useState(-1);
   const [pageNum, setPageNum] = useState(0);
+  const [relList, setRelList] = useState([{kwdName : "인기"}]);
   const [newsObject, setNewsObject] = useState<newsResponse>({
     page: 0,
     last: false,
@@ -49,6 +50,8 @@ export const NewsBoard: FC = () => {
           setPageNum(0)
         }
         setNewsObject(data);
+        setRelList([{ kwdName :"인기"}])
+        setRelSelect(0)
       });
     }
     else {
@@ -58,6 +61,8 @@ export const NewsBoard: FC = () => {
         }
         console.log(data)
         setNewsObject(data);
+        setRelList(data.kwdList)
+        setRelSelect(-1)
       });
     }
   }
@@ -69,17 +74,18 @@ export const NewsBoard: FC = () => {
         setSubSelect={setSubSelect}
         setKeywordTitle={setKeywordTitle}
         setKeywordId={setKeywordId}
+        setKeywordModalOpen={setKeywordModalOpen}
       />
-      <div className="bg-black/50 rounded-lg my-4 mx-2 p-4">
-        <div className="text-white text-xl">{keywordTitle}</div>
+      <div className="bg-black/25 rounded-lg my-4 mx-2 p-4 relative">
+        <div className="text-white mx-2 text-2xl">{keywordTitle}</div>
         <div>
           <RelatedKeywordBar
-            keywordList={keywords}
+            keywordList={relList}
             relSelect={relSelect}
             setRelSelect={setRelSelect}
           />
-          <button className="mx-2" onClick={onPageClick}>
-          <img className="m-auto" src="refresh_32.png" />
+          <button className="mx-2 absolute top-4 right-2" onClick={onPageClick}>
+          <img className="m-auto" style={{width: 28, height: 28}} src="refresh.svg" />
         </button>
         </div>
         <div className="grid grid-cols-3 gap-4">

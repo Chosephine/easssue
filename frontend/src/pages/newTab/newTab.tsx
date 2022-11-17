@@ -86,30 +86,29 @@ const App: React.FC<{}> = () => {
           backgroundImage: !!imgUrl ? 'url(' + imgUrl + ')' : 'url(default-background.png)',
         }}
       >
-        <div className="h-[4rem] p-2">
-          <Settingbar
-            setSettingModalOpen={setSettingModalOpen}
-            setDashboardModalOpen={setDashboardModalOpen}
-            setKeywordModalOpen={setKeywordModalOpen}
-          />
-        </div>
         <div className="flex flex-row justify-center h-full">
-          <div className="w-1/4"></div>
-          <div className="w-1/2">
+          <div className="w-0 2xl:w-1/5"></div>
+          <div className="w-3/5 min-w-[1152px]">
             <Scrollbars
               autoHideTimeout={1000}
               autoHideDuration={200}
               autoHide={true}
             >
               <Searchbar />
-              <NewsBoard />
+              <NewsBoard setKeywordModalOpen={setKeywordModalOpen}/>
               <Bookmark
                 setBookmarkModalOpen={setBookmarkModalOpen}
                 bookmarkTree={bookmarkTree}
               />
             </Scrollbars>
           </div>
-          <div className="w-1/4">
+          <div className="w-0 xl:w-2/5 2xl:w-1/5">
+            <div className="h-[4rem] p-2">
+            <Settingbar
+              setSettingModalOpen={setSettingModalOpen}
+              setDashboardModalOpen={setDashboardModalOpen}
+            />
+          </div>
             <RealtimeKeyword />
           </div>
         </div>
