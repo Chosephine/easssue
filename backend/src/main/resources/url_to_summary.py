@@ -21,9 +21,9 @@ stop_words = '아 휴 아이구 아이쿠 아이고 어 나 우리 저희 따라
 def url_to_summary(url):
     # print(url)
 
-    if 'blog.naver.com' in url:
+    if 'blog.naver.com' in url and 'm.blog.naver.com' not in url:
         link = url.split('blog.naver.com')
-        url = f'{link[0]}m.{link[1]}'
+        url = f'{link[0]}m.blog.naver.com{link[1]}'
 
     ### url 입력 시 기사 본문 가져오기
     article = Article(url, language='ko')
