@@ -3,8 +3,8 @@ import { gsap, Back } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
 import styled from 'styled-components';
 import Main from './pages/Main';
-import Dash from './pages/DashBoard'
-import Keyword from './pages/keyword'
+import Dash from './pages/DashBoard';
+import Keyword from './pages/keyword';
 export default function App() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -13,7 +13,7 @@ export default function App() {
       toggleActions: 'restart pause resume pause',
       scroller: '.container',
     });
-    const searchResult = gsap.utils.toArray('.search-result')
+    const searchResult = gsap.utils.toArray('.search-result');
     gsap.fromTo(
       '.main',
       {
@@ -65,18 +65,45 @@ export default function App() {
         ease: 'power3',
       }
     );
-    
-    gsap.fromTo(searchResult,{
-      opacity: 0,
-    },{scrollTrigger: '.keyword',
-    trigger: '.key-input',
-      marker: true,
-      duration: 2,
-      delay: 0.5,
-      opacity: 1,
-      x: '0',
-      ease: 'power3',
-    })
+    gsap.fromTo(
+      '.key-input',{
+        x:'-40vw'
+      },{
+        scrollTrigger: '.keyword',
+        trigger: '.key-input',
+        x:'0'
+      }
+    )
+    gsap.fromTo(
+      '.keyword-text',{
+        y:'-50vh'
+      },{
+        scrollTrigger: '.keyword',
+        trigger: '.key-input',
+        duration:1,
+        y:'0'
+      }
+    )
+    gsap.fromTo(
+      searchResult,
+      {
+        opacity: 0,
+        y:'-100px'
+      },
+      {
+        scrollTrigger: '.keyword',
+        trigger: '.key-input',
+        marker: true,
+        stagger:0.3,
+        duration: 2,
+        delay: 0.5,
+        opacity: 1,
+        x: '0',
+        y: '0',
+        ease: 'power3',
+      }
+    );
+
     gsap.to('.red', {
       scrollTrigger: {
         trigger: '.red p',
@@ -100,8 +127,8 @@ export default function App() {
     <>
       <div className="container">
         <Main />
-        <Dash/>
-        <Keyword/>
+        <Dash />
+        <Keyword />
 
         <section className="panel blue yoyo">
           <p>Yoyo Text!</p>

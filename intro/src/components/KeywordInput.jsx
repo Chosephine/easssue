@@ -14,7 +14,7 @@ const KeywordInput = () => {
   ];
   return (
     <>
-      <div className="key-input w-[50%] pr-2 mr-2 border-r-2">
+      <div className="key-input w-[30vw] pr-2 mr-2 border-r-2">
         <div className="mb-3 text-xl">{'키워드 검색하기'}</div>{' '}
         <div className="relative">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -38,7 +38,7 @@ const KeywordInput = () => {
             type="text"
             id="default-search"
             className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder={'키워드'}
+            value={"키워드"}
           />
         </div>
         <ul className="h-[70%] pt-2 overflow-auto w-[100%]">
