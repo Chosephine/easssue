@@ -32,7 +32,7 @@ export const KeywordBar: React.FC<KeywordBarProps> = ({
       )}
       <div className="m-2 justify-self-center">
       <div className="flex w-full rounded-full p-1 bg-black/25 h-[36px] justify-center items-center">
-        <button className="mx-2" style={{width: 28, height: 28}} onClick={onKeywordClick}>
+        <button className="mx-2" style={{width: 16, height: 16}} onClick={onKeywordClick}>
           <img src="kwd_add.svg" alt="" />
         </button>
       </div>   

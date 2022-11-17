@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { KeywordResponse } from "./types";
 import { trendAPI } from "@/modules/api";
 import { RootState } from "@/modules/store";
+import { border } from "@mui/system";
 
 export const RealtimeKeyword = () => {
   const [isHovering, setIsHovering] = useState(0);
@@ -34,9 +35,10 @@ export const RealtimeKeyword = () => {
   return (
     <div className="max-w-[360px]" style={{width: 'calc(100% - 32px)'}}>
       <div
-        className="xl:p-2 bg-black/25 rounded-xl ml-8"
+        className="xl:p-2 bg-black/25 rounded-t-xl ml-8"
+        style={{ borderRadius: !isHovering ? "0.75rem" : ""}}
         onMouseOver={() => setIsHovering(1)}
-        onMouseOut={() => setIsHovering(0)}
+        onMouseLeave={() => setIsHovering(0)}
       >
         <Slider {...settings}>
           {trend.map((value, index) => {
@@ -55,8 +57,10 @@ export const RealtimeKeyword = () => {
         </Slider>
       </div>
       <div
-        className="ml-8 p-2 bg-black/25 rounded-xl my-2"
-        style={{ display: !isHovering ? "none" : "block", width: 'calc(100% - 32px)' }}
+        className="ml-8 p-2 bg-black/25 rounded-b-xl"
+        style={{ display: !isHovering ? "none" : "block", width: 'calc(100% - 32px)'}}
+        onMouseOver={() => setIsHovering(1)}
+        onMouseLeave={() => setIsHovering(0)}
       >
         {trend.map((value, index) => {
           return (

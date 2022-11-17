@@ -149,6 +149,7 @@ export const getRecommendKeywords = async () => {
       method: 'GET',
     });
     console.log('recommend', data);
+    return data;
   } catch (error) {
     console.error('recommend keywords error : ', error);
   }
@@ -301,6 +302,30 @@ export const getKeyWordNews = async (
   try {
     const { data } = await axios({
       url: BASE_URL + `/news/subscribe/${keywordNumber}/page/${pageNumber}`,
+      method: 'GET',
+    });
+    console.log('getKewNews Data : ', data);
+    return data;
+  } catch (error) {
+    console.error('keyword news error: ' + error);
+  }
+};
+
+/**
+ * * get news by keyword
+ * @param {number} keywordNumber - keyword number
+ * @param {number} pageNumber - page number
+ * @method GET
+ * @url /news/recommend/{keywordNumber}/page/{pageNumber}
+ */
+
+export const getRecommendNews = async (
+  keywordNumber: number,
+  pageNumber: number
+) => {
+  try {
+    const { data } = await axios({
+      url: BASE_URL + `/news/recommend/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
     console.log('getKewNews Data : ', data);

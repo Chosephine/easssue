@@ -19,7 +19,7 @@ const App: React.FC<{}> = () => {
     })
   }
   useEffect(() => {
-    fetchTrend('https://www.easssue.com/api/trend')
+    fetchTrend('https://www.easssue.com/api/trend/v2')
     // fetchTrend('https://www.nate.com/js/data/jsonLiveKeywordDataV1.js?v=202211140925')
     setHost(window.location.host)
   }, []);
