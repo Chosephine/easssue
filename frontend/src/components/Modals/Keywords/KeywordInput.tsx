@@ -55,8 +55,8 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
 
   return (
     <>
-      <div className="w-[50%] pr-2 mr-2 border-r-2">
-        <div className="mb-3 text-xl font-bold">{'키워드 검색하기'}</div>
+      <div className="w-[60%] pr-2 mr-3 border-r-2">
+        <div className="mb-3 text-2xl font-bold">{'키워드 검색하기'}</div>
         {/* <input
           className="w-[100%] m-0 border-blue-300 border-2"
           type="text"
@@ -64,7 +64,7 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
           placeholder={"키워드를 입력하세요 :)"}
         /> */}
         <div className="relative">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <div className="flex absolute inset-y-0 left-0 items-center pl-5 pointer-events-none">
             <svg
               aria-hidden="true"
               className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -84,12 +84,12 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
           <input
             type="text"
             id="default-search"
-            className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block ml-2 p-3 pl-10 w-[95%] text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={onChange}
             placeholder={'키워드를 입력하세요 :)'}
           />
         </div>
-        <ul className="h-[70%] pt-2 overflow-auto w-[100%]">
+        <ul className="h-[77%] pt-2 overflow-auto w-[100%]">
           <Scrollbars
             autoHideTimeout={1000}
             autoHideDuration={200}
@@ -110,7 +110,7 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
                     <div className="flex items-center justify-between w-full p-2 lg:rounded-full md:rounded-full hover:bg-gray-100 cursor-pointer border-2 rounded-lg">
                       <div className="lg:flex md:flex items-center">
                         <div className="flex flex-col">
-                          <div className="text-sm pl-2 leading-3 text-gray-700 font-bold w-full">
+                          <div className="text-lg pl-2 leading-3 text-gray-700 font-bold w-full">
                             {searchResultItem.kwdName}
                           </div>
                         </div>
