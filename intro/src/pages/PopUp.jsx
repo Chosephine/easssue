@@ -7,7 +7,7 @@ const Popup = ({toggle,toggleHandler}) => {
   }
   return (
     <>
-      <section className="panel pr-[150px]">
+      <section className="panel pop-pop pr-[150px] font-service">
         <img
           onClick={onClickHandler}
             className={`relative transition ${toggle ? 'translate-y-[-35vh] scale-50' :  "hover:cursor-pointer"} duration-700  w-[150px] h-[150px] left-[50%] z-[10]`}

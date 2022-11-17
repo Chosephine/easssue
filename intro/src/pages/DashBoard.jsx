@@ -4,7 +4,7 @@ import { RadarChart } from '../components/Radar';
 const Dash = () => {
   return (
     <>
-    <section className="panel">
+    <section className="panel font-service">
       <div className='dash flex flex-col w-[100%] items-center'>
       <RadarChart/>
       <HeatMapCalendar />

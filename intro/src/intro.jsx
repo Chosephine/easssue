@@ -6,6 +6,7 @@ import Main from './pages/Main';
 import Dash from './pages/DashBoard';
 import Keyword from './pages/keyword';
 import Popup from './pages/PopUp';
+import News from './pages/News'
 export default function App() {
   const [toggle, setToggle] = useState(false);
   const toggleHandler = ()=>{
@@ -20,6 +21,7 @@ export default function App() {
     });
     const searchResult = gsap.utils.toArray('.search-result');
     const summary = gsap.utils.toArray('.popup-p');
+    const newsCard = gsap.utils.toArray('.news-card');
     gsap.fromTo(
       '.main',
       {
@@ -29,7 +31,6 @@ export default function App() {
       {
         scrollTrigger: '.section02',
         trigger: '.main img',
-        marker: true,
         duration: 1,
         delay: 1,
         opacity: 1,
@@ -46,7 +47,6 @@ export default function App() {
       {
         scrollTrigger: '.dash',
         trigger: '.radar',
-        marker: true,
         duration: 2,
         delay: 0.5,
         opacity: 1,
@@ -63,7 +63,6 @@ export default function App() {
       {
         scrollTrigger: '.dash',
         trigger: '.heatmap',
-        marker: true,
         duration: 2,
         delay: 0.5,
         opacity: 1,
@@ -102,7 +101,6 @@ export default function App() {
       {
         scrollTrigger: '.keyword',
         trigger: '.key-input',
-        marker: true,
         stagger:0.3,
         duration: 2,
         delay: 0.5,
@@ -119,52 +117,80 @@ export default function App() {
         y:'-100px'
       },
       {
-        scrollTrigger: '.summary',
-        trigger: '.summary',
-        marker: true,
+        scrollTrigger: '.pop-pop',
+        trigger: '.word-cloud',
         stagger:0.3,
         duration: 2,
-        delay: 0.5,
+        delay: 5,
         opacity: 1,
         x: '0',
         y: '0',
         ease: 'power3',
       }
     );
-    gsap.to('.red', {
-      scrollTrigger: {
-        trigger: '.red p',
-        markers: true,
-        scrub: true,
+    gsap.fromTo(
+      '.news-container',{
+        y:'-30vh',
+        opacity: 0,
+      },{
+        scrollTrigger: '.news-board',
+        trigger: '.news-container',
+        duration:1,
+        opacity: 1,
+        delay: 0.5,
+        y:'0'
+      }
+    )
+    gsap.fromTo('.news-p',{
+      opacity:0
+    },{
+      duration:2,
+      opacity: 1
+    })
+    gsap.fromTo(
+      newsCard,
+      {
+        opacity: 0,
+        y:'-100px'
       },
-      duration: 3,
-      backgroundColor: '#FFA',
-      ease: 'power3',
-    });
+      {
+        scrollTrigger: '.news-board',
+        trigger: '.news-container',
+        stagger:0.4,
+        duration: 2,
+        delay: 0.8,
+        opacity: 1,
+        x: '0',
+        y: '0',
+        ease: 'power3',
+      }
+    );
+    // gsap.to('.red', {
+    //   scrollTrigger: {
+    //     trigger: '.red p',
+    //     scrub: true,
+    //   },
+    //   duration: 3,
+    //   backgroundColor: '#FFA',
+    //   ease: 'power3',
+    // });
 
-    gsap.to('.yoyo p', {
-      scrollTrigger: '.yoyo',
-      scale: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: 'power2',
-    });
+    // gsap.to('.yoyo p', {
+    //   scrollTrigger: '.yoyo',
+    //   scale: 2,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: 'power2',
+    // });
   }, []);
   return (
     <>
       <div className={`container overflow-hidden overflow-y-scroll `}>
         <Main />
-        <Dash />
         <Keyword />
+        <News/>
+        <Dash />
         <Popup toggle={toggle} toggleHandler={toggleHandler}/>
-
-        <section className="panel blue yoyo">
-          <p>Yoyo Text!</p>
-        </section>
-
-        <section className="panel">
-          <h1>Pair with CSS Scroll Snapping</h1>
-        </section>
         <Main />
       </div>
     </>
