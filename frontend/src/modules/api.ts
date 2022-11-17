@@ -14,7 +14,6 @@ export const BASE_URL = 'https://www.easssue.com/api';
 
 export const login = async (email: string, pwd: string) => {
   try {
-    console.log('email, pwd :', email, pwd);
     const { data } = await axios({
       url: BASE_URL + '/user/login',
       method: 'POST',
@@ -23,7 +22,6 @@ export const login = async (email: string, pwd: string) => {
         pwd,
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('loginError : ', error);
@@ -49,7 +47,6 @@ export const signUp = async (email: string, pwd: string) => {
       },
     });
     if (data) {
-      console.log('signup successful,', data);
       return login(email, pwd);
     }
   } catch (error) {
@@ -70,7 +67,6 @@ export const checkDuplicateEmail = async (email: string) => {
       url: BASE_URL + `/user/check/${email}`,
       method: 'GET',
     });
-    console.log(data);
     return data
   } catch (error) {
     
@@ -89,7 +85,6 @@ export const jwtCheck = async ()=>{
       url : BASE_URL + '/user/jwt',
       method : 'GET'
     });
-    console.log("jwt check:", data);
     
     return data;
   } catch (error) {
@@ -112,7 +107,6 @@ export const getSubscribeKeywords = async () => {
       url: BASE_URL + '/keyword/subscribe',
       method: 'GET',
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('subscribe keywords error : ', error);
@@ -130,7 +124,6 @@ export const getBanKeywords = async () => {
       url: BASE_URL + '/keyword/ban',
       method: 'GET',
     });
-    console.log('get ban keywords:', data);
     return data;
   } catch (error) {
     console.error('get ban keywords error : ', error);
@@ -148,7 +141,6 @@ export const getRecommendKeywords = async () => {
       url: BASE_URL + '/keyword/recommend',
       method: 'GET',
     });
-    console.log('recommend', data);
     return data;
   } catch (error) {
     console.error('recommend keywords error : ', error);
@@ -176,7 +168,6 @@ export const putAllKeywordList = async (
         banKwdList : banKeywordList
       }
     });
-    console.log(data);
   } catch (error) {
     console.error('put all keyword list error:', error);
   }
@@ -201,7 +192,6 @@ export const putSubscribeKeywords = async (
           kwdList: keywordLists,
         },
       });
-      console.log(data);
     } catch (error) {
       console.error('subscribe keywords put error : ', error);
     }
@@ -221,7 +211,6 @@ export const putSubscribeKeywords = async (
 export const putBanKeywords = async (
   keywordLists: { kwdId: number; kwdName: string }[]
 ) => {
-  console.log('put ban data:', keywordLists);
 
   try {
     const { data } = await axios({
@@ -231,7 +220,6 @@ export const putBanKeywords = async (
         kwdList: keywordLists,
       },
     });
-    console.log('ban keyword', data);
   } catch (error) {
     console.error('ban keywords put error : ', error);
   }
@@ -245,11 +233,9 @@ export const putBanKeywords = async (
  */
 
 export const searchKeyword = async (value: string) => {
-  console.log(value);
 
   // const keyDecode = encodeURI(value);
   const deUrl = encodeURI(BASE_URL + `/keyword/search/${value}`);
-  console.log(deUrl);
 
   try {
     const { data } = await axios({
@@ -260,7 +246,6 @@ export const searchKeyword = async (value: string) => {
         'Content-type': 'application/json',
       },
     });
-    console.log('kwdList : ', data.kwdList);
     return data.kwdList;
   } catch (error) {
     console.error('search keywords error : ', error);
@@ -280,7 +265,6 @@ export const getNews = async (pageNumber: number) => {
     const { data }= await axios({
       url: BASE_URL + `/news/popular/v2/page/${pageNumber}`,
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('get news error: ' + error);
@@ -304,7 +288,6 @@ export const getKeyWordNews = async (
       url: BASE_URL + `/news/subscribe/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
-    console.log('getKewNews Data : ', data);
     return data;
   } catch (error) {
     console.error('keyword news error: ' + error);
@@ -328,7 +311,6 @@ export const getRecommendNews = async (
       url: BASE_URL + `/news/recommend/${keywordNumber}/page/${pageNumber}`,
       method: 'GET',
     });
-    console.log('getKewNews Data : ', data);
     return data;
   } catch (error) {
     console.error('keyword news error: ' + error);
@@ -348,7 +330,6 @@ export const newsLogApi = async (newsId: number) => {
       url: BASE_URL + `/news/log/${newsId}`,
       method: 'POST',
     });
-    console.log(data);
   } catch (error) {}
 };
 
@@ -366,7 +347,6 @@ export const getDashBoardInfo = async () => {
       url: BASE_URL + '/dash/info',
       method: 'GET',
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('dash board info api error: ' + error);
@@ -386,7 +366,6 @@ export const getNewsHistory = async (fullDate: string) => {
       url: BASE_URL + `/dash/news/${fullDate}`,
       method: 'GET',
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('get News history failed : ', error);
@@ -411,7 +390,6 @@ export const popupApi = async (newsUrl: string) => {
         url: newsUrl,
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error('popup data api err : ', error);

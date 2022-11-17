@@ -8,7 +8,6 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
     setSettingModalOpen(false)
   }
   const onSaveClick = () => {
-    console.log(bgimg)
     chrome.storage.local.set({'bgimg': bgimg}, ()=> {
     } )
     setSettingModalOpen(false)
@@ -39,8 +38,8 @@ export const SettingModal: React.FC<SettingModalProps> = ({setSettingModalOpen})
             이미지 불러오기
           </label>
           <input id="input-file" style={{display: "none"}} type="file" onChange={handleClickInput} />
-          <div className="preview self-center">
-        {imageSrc && <img style={{width: 640, height: 360}}src={imageSrc} alt="preview-img" />}
+          <div className="preview self-center" style={{width: "50%", height:"50%"}}>
+        {imageSrc && <img style={{width: "100%", height: "100%"}}src={imageSrc} alt="preview-img" />}
         </div>
           <button className="absolute right-3 bottom-3 justify-center m-2 w-[120px] text-center flex bg-gradient-to-r from-[#6183e7] to-[#1ec4c4] hover:from-green-600 hover:to-blue-600 focus:outline-none text-white text-base uppercase font-bold shadow-md rounded-full p-2" onClick={onSaveClick}> 배경화면 변경</button>
         </div>

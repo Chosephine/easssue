@@ -59,7 +59,6 @@ export const authSlice = createSlice({
       ] = `Bearer ${action.payload.accessToken}`;
     })
     .addCase(userStateCheck.fulfilled, (state,action)=>{
-      console.log(current(state));
       
       if (!action.payload) {
         state.isLogin = false;

@@ -5,15 +5,12 @@ import { createRoot } from "react-dom/client";
 import { BrowserKeyword } from "@/components/BrowserKeyword";
 import { KeywordResponse } from "@/components/BrowserKeyword/types";
 import './contentScript.css'
-console.log("hello")
 const App: React.FC<{}> = () => {
   const [trend, setTrend] = useState<string[]>([]);
   const [update, setUpdate] = useState(0)
   const [host, setHost] = useState("")
   const fetchTrend = (url:any) => {
-    console.log(url)
     chrome.runtime.sendMessage({url}, messageResponse => {
-      console.log(messageResponse.body)
       setTrend(()=>messageResponse.body)
       setUpdate(1)
     })

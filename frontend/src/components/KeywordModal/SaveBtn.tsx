@@ -21,7 +21,6 @@ export const KeywordModalSaveBtn: FC<KeywordModalProps> = ({
     await putSubscribeKeywords(subScribeKwdList, subKeyLength);
     // putAllKey  wordList(subScribeKwdList,banKwdList);
     setKeywordModalOpen(false);
-    console.log(subScribeKwdList, banKwdList);
   };
   return (
     <>

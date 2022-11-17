@@ -7,7 +7,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import { trendAPI } from "@/modules/api";
 
 export const BrowserKeyword: React.FC<BrowserKeywordProp> = ({ trend, host }) => {
-  console.log(trend)
   const [isHovering, setIsHovering] = useState(0);
   const [isGoogle, setIsGoogle] = useState(false);
   const fr = new DocumentFragment

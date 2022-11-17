@@ -29,44 +29,36 @@ export const NewsBoard: FC<newsBoardProps> = ({setKeywordModalOpen}) => {
   useEffect(() => {
     getNews(0).then((data) => {
       getRecommendKeywords().then((data:any) => {
-        console.log(data.kwdList)
         setRelList(data.kwdList)
         setRecommendList(data.kwdList)
         }
       )
       setNewsObject(data);
-      console.log(newsObject);
     });
   }, []);
   useEffect(() => {
-    console.log(12)
     setPageNum(0)
     fetchArticle(0)
   }, [keywordTitle]);
   useEffect(() => {
-    console.log(13)
     setPageNum(0)
     fetchRelArticle(0)
   }, [relSelect])
   useEffect(() => {
-    console.log(15)
     if(relSelect === -1){
       fetchArticle(pageNum)
     }
     else {
       fetchRelArticle(pageNum)
     }
-    console.log(newsObject)
   }, [pageNum])
   useEffect(() => {
-    console.log(3, relList)
   },[relList])
   const onPageClick = () => {
     setPageNum((pageNum + 1) % 10)
 
   }
   const fetchArticle = (pageNum:number) => {
-    console.log(1, recommendList)
     if(subSelect === -1) {
       getNews(pageNum).then((data) => {
         if (data.newsList.length === 0) {
@@ -84,7 +76,6 @@ export const NewsBoard: FC<newsBoardProps> = ({setKeywordModalOpen}) => {
         if (data.newsList.length === 0) {
           setPageNum(0)
         }
-        console.log(data)
         setNewsObject(data);
         setRelList(data.kwdList)
         setRelSelect(-1)
@@ -93,7 +84,6 @@ export const NewsBoard: FC<newsBoardProps> = ({setKeywordModalOpen}) => {
   }
 
   const fetchRelArticle = (pageNum:number) => {
-    console.log(relSelect)
     if(relSelect === -1) {
       if(subSelect === -1) {
         getNews(pageNum).then((data) => {
@@ -118,7 +108,6 @@ export const NewsBoard: FC<newsBoardProps> = ({setKeywordModalOpen}) => {
         if (data.newsList.length === 0) {
           setPageNum(0)
         }
-        console.log(data)
         setNewsObject(data);
       });
     }

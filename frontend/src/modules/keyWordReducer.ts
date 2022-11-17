@@ -19,7 +19,6 @@ export const getSubscribeKeywordsRedux = createAsyncThunk(
   'getSubscribeKeywords',
   async () => {
     const data = await getSubscribeKeywords();
-    console.log('sub list : ',data);
     return data;
   }
 );
@@ -27,7 +26,6 @@ export const getBanKeywordsRedux = createAsyncThunk(
   'getBanKeywords',
   async () => {
     const data = await getBanKeywords();
-    console.log(data);
     return data;
   }
 );
@@ -59,7 +57,6 @@ export const keywordSlice = createSlice({
     },
     removeKeyword: (state, action) => {
       const data = state.subScribeKwdList.filter((keyword) => {
-        console.log(keyword, action.payload.kwdId);
 
         return keyword.kwdId != action.payload;
       });
@@ -75,7 +72,6 @@ export const keywordSlice = createSlice({
     endDropChangeList: (state, action) => {
       if (!action.payload.destination) return;
       const keywords = [...state.subScribeKwdList];
-      console.log(keywords.map((a) => current(a)));
       const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
       keywords.splice(action.payload.destination.index, 0, reorderedItem);
       state.subScribeKwdList = keywords;
@@ -83,7 +79,6 @@ export const keywordSlice = createSlice({
     endDropChangeBanList: (state, action) => {
       if (!action.payload.destination) return;
       const keywords = [...state.banKwdList];
-      console.log(keywords.map((a) => current(a)));
       const [reorderedItem] = keywords.splice(action.payload.source.index, 1);
       keywords.splice(action.payload.destination.index, 0, reorderedItem);
       state.banKwdList = keywords;
@@ -91,7 +86,6 @@ export const keywordSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getSubscribeKeywordsRedux.fulfilled, (state, action) => {
-      console.log(action.payload.kwdList);
       state.subScribeKwdList = action.payload.kwdList;
       const keyLength = action.payload.kwdList.length;
       state.subKeyLength = keyLength;

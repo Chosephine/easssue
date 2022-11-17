@@ -29,7 +29,6 @@ export const PopupIndex: FC<PopupIndexProps> = () => {
       setIsLoading(()=>true)
       setResultError(()=>false)
       if (title)setThisTitle(()=>title);
-      console.log(url, title);
       if (typeof url === 'string') {
         const data: PopupData = await popupApi(url);
         if (!data.error) {

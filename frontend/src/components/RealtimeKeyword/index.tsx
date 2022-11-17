@@ -26,8 +26,6 @@ export const RealtimeKeyword = () => {
 
   useEffect(() => {
     trendAPI().then((data) => {
-      console.log(7);
-      console.log(data);
       setTrend(data.trend);
     });
   }, []);

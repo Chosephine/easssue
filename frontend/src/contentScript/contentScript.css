@@ -14,6 +14,9 @@
   padding-bottom: 11px;
 }
 
+.slick-list {
+  height: 18px;
+}
 .keyword-box {
   padding: 8px;
   width: 270px;
