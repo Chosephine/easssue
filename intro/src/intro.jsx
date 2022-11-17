@@ -1,11 +1,16 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect,useState } from 'react';
 import { gsap, Back } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
 import styled from 'styled-components';
 import Main from './pages/Main';
 import Dash from './pages/DashBoard';
 import Keyword from './pages/keyword';
+import Popup from './pages/PopUp';
 export default function App() {
+  const [toggle, setToggle] = useState(false);
+  const toggleHandler = ()=>{
+    setToggle(()=>!toggle)
+  }
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +19,7 @@ export default function App() {
       scroller: '.container',
     });
     const searchResult = gsap.utils.toArray('.search-result');
+    const summary = gsap.utils.toArray('.popup-p');
     gsap.fromTo(
       '.main',
       {
@@ -76,11 +82,14 @@ export default function App() {
     )
     gsap.fromTo(
       '.keyword-text',{
-        y:'-50vh'
+        y:'-30vh',
+        opacity: 0,
       },{
         scrollTrigger: '.keyword',
         trigger: '.key-input',
         duration:1,
+        opacity: 1,
+        delay: 0.5,
         y:'0'
       }
     )
@@ -103,7 +112,25 @@ export default function App() {
         ease: 'power3',
       }
     );
-
+    gsap.fromTo(
+      summary,
+      {
+        opacity: 0,
+        y:'-100px'
+      },
+      {
+        scrollTrigger: '.summary',
+        trigger: '.summary',
+        marker: true,
+        stagger:0.3,
+        duration: 2,
+        delay: 0.5,
+        opacity: 1,
+        x: '0',
+        y: '0',
+        ease: 'power3',
+      }
+    );
     gsap.to('.red', {
       scrollTrigger: {
         trigger: '.red p',
@@ -125,10 +152,11 @@ export default function App() {
   }, []);
   return (
     <>
-      <div className="container">
+      <div className={`container overflow-hidden overflow-y-scroll `}>
         <Main />
         <Dash />
         <Keyword />
+        <Popup toggle={toggle} toggleHandler={toggleHandler}/>
 
         <section className="panel blue yoyo">
           <p>Yoyo Text!</p>
