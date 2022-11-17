@@ -12,7 +12,7 @@ const NewsCard = ({ bgColor,title }) => {
             <div className="text-white text-xl text-ellipsis line-clamp-4 m-2"></div>
           </div>
 
-          <div className=" text-xl mx-2 font-bold text-ellipsis line-clamp-2 h-[56px]">
+          <div className=" text-xl mx-2 font-[800] text-ellipsis line-clamp-2 h-[56px]">
             {title}
           </div>
         </a>
