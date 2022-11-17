@@ -29,7 +29,6 @@ export default function App() {
       {
         scrollTrigger: '.section02',
         trigger: '.main img',
-        marker: true,
         duration: 1,
         delay: 1,
         opacity: 1,
@@ -46,7 +45,6 @@ export default function App() {
       {
         scrollTrigger: '.dash',
         trigger: '.radar',
-        marker: true,
         duration: 2,
         delay: 0.5,
         opacity: 1,
@@ -63,7 +61,6 @@ export default function App() {
       {
         scrollTrigger: '.dash',
         trigger: '.heatmap',
-        marker: true,
         duration: 2,
         delay: 0.5,
         opacity: 1,
@@ -102,7 +99,6 @@ export default function App() {
       {
         scrollTrigger: '.keyword',
         trigger: '.key-input',
-        marker: true,
         stagger:0.3,
         duration: 2,
         delay: 0.5,
@@ -121,7 +117,6 @@ export default function App() {
       {
         scrollTrigger: '.summary',
         trigger: '.summary',
-        marker: true,
         stagger:0.3,
         duration: 2,
         delay: 0.5,
@@ -134,7 +129,6 @@ export default function App() {
     gsap.to('.red', {
       scrollTrigger: {
         trigger: '.red p',
-        markers: true,
         scrub: true,
       },
       duration: 3,
