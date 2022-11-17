@@ -14,7 +14,7 @@ const Main = () => {
 
           <div className="flex justify-center w-full flex-col mr-[4rem] font-service">
             <div className="text-[1.5rem] border-gray-400 border-b-2">
-              책상앞에서 세상을 알다.
+              책상 앞에서 세상을 알다.
             </div>
             <div className="font-title h-full flex justify-center items-end text-[6rem] pb-2">
               <div>{'있슈'}</div> <div className='text-[4rem]'>easssue</div>
