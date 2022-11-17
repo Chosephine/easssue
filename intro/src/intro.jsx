@@ -191,11 +191,6 @@ export default function App() {
         <News/>
         <Dash />
         <Popup toggle={toggle} toggleHandler={toggleHandler}/>
-
-
-        <section className="panel">
-          <h1>Pair with CSS Scroll Snapping</h1>
-        </section>
         <Main />
       </div>
     </>
