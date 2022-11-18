@@ -25,7 +25,7 @@ const TrendComponent = () => {
     {!isHovering && <div className="font-service ml-8 text-gray-500">마우스를 올려 보세요</div>}
     <div className="max-w-[360px]" style={{width: 'calc(100% - 32px)'}}>
       <div
-        className="xl:p-2 bg-black/25 rounded-t-xl ml-8"
+        className="px-2 bg-black/25 rounded-t-xl ml-8"
         style={{ borderRadius: !isHovering ? "0.75rem" : ""}}
         onMouseOver={() => setIsHovering(1)}
         onMouseLeave={() => setIsHovering(0)}
