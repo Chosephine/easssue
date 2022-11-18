@@ -6,11 +6,11 @@ const HeatMapCalendar = () => {
   return (
     <>
       <div className="heatmap h-[100%] mr-[289px] flex items-center">
-        <div className="calendar-text text-[1.4rem] w-[430px] font-service mr-10">
+        <div className="calendar-text text-[22.4px] w-[430px] font-service mr-[40px]">
           <div>{`사용자의 이용 내역 확인을 위한 캘린더 히트맵`}</div>
         </div>
-        <div  className=" bg-slate-300  border-[1px] border-black flex justify-center h-[15rem] w-[15rem]">
-          <div className="h-full flex p-5 mx-5">
+        <div  className=" bg-slate-300  border-[1px] border-black flex justify-center h-[240px] w-[240px]">
+          <div className="h-full flex p-[20px] mx-[20px]">
             <ReactCalendarHeatmap
               startDate={new Date('2022-10-31')}
               endDate={new Date('2022-12-01')}
