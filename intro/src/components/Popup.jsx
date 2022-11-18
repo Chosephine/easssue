@@ -4,7 +4,6 @@ const PopUpComponent = ({ toggle }) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      console.log('이거확인');
       setIsLoading(() => false);
     }, 2000);
   }, []);

@@ -10,7 +10,6 @@ import { PopupIndex } from '@/components/Popup'
 const App: React.FC<{}> = () => {
   const now = new Date();
   useEffect(() =>{
-    console.log('popup render', now);
     
   },[])
 

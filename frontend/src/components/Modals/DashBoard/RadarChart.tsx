@@ -15,7 +15,7 @@ import type { GraphDataType } from './types';
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 export const RadarChart: FC<GraphDataType> = ({ labels, data }) => {
-  console.log(labels, data);
+  // console.log(labels, data);
   const dataset = {
     labels,
     datasets: [

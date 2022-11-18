@@ -19,7 +19,7 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
           const res = await searchKeyword(inputKeyword);
           resolve(setSearchResult(() => res));
         });
-        console.log('searchResult', searchResult);
+        // console.log('searchResult', searchResult);
       };
       getSearchResult();
     }
@@ -29,7 +29,7 @@ const KeyInput: FC<ModeProps> = ({mode}) => {
     () =>
       debounce((keyword) => {
         setInputKeyword(() => keyword);
-        console.log('debounce value : ', inputKeyword);
+        // console.log('debounce value : ', inputKeyword);
       }, 500),
     [inputKeyword]
   );
