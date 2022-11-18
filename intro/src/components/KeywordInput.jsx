@@ -3,13 +3,13 @@ import React from 'react';
 const KeywordInput = () => {
   const searchResult = [
     {
-      kwdName: '키워드1',
+      kwdName: '있슈 easssue',
     },
     {
-      kwdName: '키워드2',
+      kwdName: 'SSAFY',
     },
     {
-      kwdName: '키워드3',
+      kwdName: '구글',
     },
   ];
   return (
@@ -24,12 +24,12 @@ const KeywordInput = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+              xmlstroke-linecapns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               ></path>
             </svg>
@@ -38,14 +38,14 @@ const KeywordInput = () => {
             type="text"
             id="default-search"
             className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            value={"키워드"}
+            defaultValue={"키워드"}
           />
         </div>
         <ul className="h-[70%] pt-2 overflow-auto w-[100%]">
           {searchResult &&
-            searchResult.map((searchResultItem) => {
+            searchResult.map((searchResultItem, index) => {
               return (
-                <div className="search-result flex flex-col gap-4 lg:p-0 p-2  rounde-lg m-2">
+                <div key={index} className="search-result flex flex-col gap-4 lg:p-0  rounde-lg my-2">
                   <div className="flex items-center justify-between w-full p-2 lg:rounded-full md:rounded-full hover:bg-gray-100 cursor-pointer border-2 rounded-lg">
                     <div className="lg:flex md:flex items-center">
                       <div className="flex flex-col">
@@ -62,9 +62,9 @@ const KeywordInput = () => {
                       fill="currentColor"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>

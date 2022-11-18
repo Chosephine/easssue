@@ -6,7 +6,7 @@ const HeatMapCalendar = () => {
   return (
     <>
       <div className="heatmap h-[100%] mr-[289px] flex items-center">
-        <div className="calendar-text text-[22.4px] w-[430px] font-service mr-[40px]">
+        <div className="calendar-text text-[30px] w-[400px] font-service mr-[40px]">
           <div>{`사용자의 이용 내역 확인을 위한 캘린더 히트맵`}</div>
         </div>
         <div  className=" bg-slate-300  border-[1px] border-black flex justify-center h-[240px] w-[240px]">

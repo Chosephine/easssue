@@ -90,11 +90,11 @@ export const RadarChart = () => {
   };
   return (
     <>
-      <div className="radar h-[100%] flex items-center ml-[174px]">
+      <div className="radar h-[100%] flex items-center ml-[243px]">
         <div className="bg-slate-300 m-[-1px] border-[1px] border-black p-[20px] flex justify-center h-[240px] w-[240px]">
             <Radar data={dataset} style={{ height: '' }} options={options} />
         </div>
-          <div className="font-service w-[431px] text-[24px] ml-[40px] pl-[32px]">
+          <div className="font-service w-[530px] text-[30px] ml-[40px] pl-[32px]">
             <div>{`사용자의 이용 내역을 바탕으로 그려지는 방사형 그래프`}</div>
           </div>
       </div>

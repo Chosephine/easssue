@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React,{useState} from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { KeywordResponse } from "./types";
-import { trendAPI } from "@/modules/api";
-import { RootState } from "@/modules/store";
-
-export const RealtimeKeyword = () => {
+const TrendComponent = () => {
   const [isHovering, setIsHovering] = useState(0);
-  const [trend, setTrend] = useState<string[]>([]);
+  const [trend, setTrend] = useState(["있슈","easssue","이슈 트래킹","워드 클라우드","키워드","chrome","SSAFY","라임물","빅데이터","익스텐션"]);
   const settings = {
     dots: false,
     infinite: true,
@@ -18,18 +13,16 @@ export const RealtimeKeyword = () => {
     vertical: true,
     verticalSwiping: true,
     autoplay: true,
-    speed: 1500,
-    autoplaySpeed: 4000,
+    speed: 1000,
+    autoplaySpeed: 2500,
     pauseOnHover: false
   };
 
-  useEffect(() => {
-    trendAPI().then((data) => {
-      setTrend(data.trend);
-    });
-  }, []);
-
   return (
+    <>
+    <div className="trend-unit font-service">
+
+    {!isHovering && <div className="font-service ml-8 text-gray-500">마우스를 올려 보세요</div>}
     <div className="max-w-[360px]" style={{width: 'calc(100% - 32px)'}}>
       <div
         className="xl:p-2 bg-black/25 rounded-t-xl ml-8"
@@ -54,7 +47,7 @@ export const RealtimeKeyword = () => {
         </Slider>
       </div>
       <div
-        className="ml-8 p-2 bg-black/25 rounded-b-xl"
+        className="ml-8 p-2 bg-black/25 rounded-b-xl mb-[45px]"
         style={{ display: !isHovering ? "none" : "block", width: 'calc(100% - 32px)'}}
         onMouseOver={() => setIsHovering(1)}
         onMouseLeave={() => setIsHovering(0)}
@@ -77,5 +70,9 @@ export const RealtimeKeyword = () => {
         })}
       </div>
     </div>
+    </div>
+    </>
   );
 };
+
+export default TrendComponent;

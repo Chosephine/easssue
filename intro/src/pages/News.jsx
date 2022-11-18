@@ -9,10 +9,10 @@ const News = () => {
       <div className='news-board flex w-[100%] justify-center items-center'>
         <div className='news-container scale-75 w-[40vw] grid grid-cols-2 gap-4  rounded-lg p-4 '>
         {colors.map((bgColor, index)=>{
-          return <NewsCard bgColor={bgColor} title={title[index]}/>
+          return <NewsCard key={index} bgColor={bgColor} title={title[index]}/>
         })}
         </div>
-        <div className='news-p text-[1.4rem] font-service'>
+        <div className='news-p text-[35px] font-service'>
           키워드별로 뉴스를 받아볼 수 있어요
         </div>
       </div>
