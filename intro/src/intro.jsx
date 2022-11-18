@@ -210,7 +210,7 @@ export default function App() {
         trigger: '.trend-text',
         stagger: 0.4,
         duration: 2,
-        delay: 0.8,
+        delay: 0,
         opacity: 1,
         x: '0',
         y: '0',
