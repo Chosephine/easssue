@@ -1,6 +1,6 @@
 import React from "react";
 import { SettingbarProps } from "./types";
-export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen, setKeywordModalOpen}) => {
+export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setDashboardModalOpen}) => {
   const onHistoryClick = () => {
     chrome.tabs.create({
       url: "chrome://history"
@@ -12,24 +12,24 @@ export const Settingbar: React.FC<SettingbarProps> = ({setSettingModalOpen, setD
   const onDashboardClick = () => {
     setDashboardModalOpen(true)
   }
-  const onKeywordClick = () => {
-    setKeywordModalOpen(true)
-  }
   return (
     <>
       <div className="flex justify-end">
-        <button className="mx-2" onClick={onHistoryClick}>
-          <img className="m-auto" src="history_32.png" />
+      <button className="flex w-0 xl:w-[40px] rounded-full  bg-black/25 h-[36px] justify-center items-center mx-1" onClick={onHistoryClick}>
+      <button className="mx-2" style={{width: 16, height: 16}} >
+          <img className="m-auto" src="history.svg" />
         </button>
-        <button className="mx-2" onClick={onSettingClick}>
-          <img src="setting_32.png" alt="" />
+      </button> 
+      <button className="flex w-0 xl:w-[40px] rounded-full  bg-black/25 h-[36px] justify-center items-center mx-1" onClick={onSettingClick}>
+        <button className="mx-2" style={{width: 16, height: 16}} >
+          <img src="settings.svg" alt="" />
         </button>
-        <button className="mx-2" onClick={onDashboardClick}>
-          <img src="hexagonal_32.png" alt="" />
+      </button>
+      <button className="flex w-0 xl:w-[40px] rounded-full bg-black/25 h-[36px] justify-center items-center mx-1" onClick={onDashboardClick}>
+      <button className="mx-2" style={{width: 16, height: 16}} >
+          <img src="dashboards_v1.svg" alt="" />
         </button>
-        <button className="mx-2" onClick={onKeywordClick}>
-          <img src="plus_32.png" alt="" />
-        </button>
+      </button>
       </div>
     </>
   );

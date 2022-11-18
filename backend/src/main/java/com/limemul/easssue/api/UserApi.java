@@ -5,9 +5,13 @@ import com.limemul.easssue.api.dto.user.UserInfoDto;
 import com.limemul.easssue.entity.User;
 import com.limemul.easssue.jwt.JwtProvider;
 import com.limemul.easssue.service.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static com.limemul.easssue.jwt.JwtProperties.*;
 
@@ -83,5 +87,33 @@ public class UserApi {
 
         log.info("[Finished request] GET /user/check/{}", email);
         return findUser == null;
+    }
+
+    /**
+     * jwt 존재 및 만료 여부 확인
+     */
+    @GetMapping("/jwt")
+    public boolean isSignedIn(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] GET /user/test");
+
+        try {
+            Optional<User> optionalUser = JwtProvider.getUserFromJwt(userService, headers);
+            if(optionalUser.isEmpty()){
+                //토큰 없으면 false 반환
+                log.info("no jwt");
+                log.info("[Finished request] GET /user/test");
+                return false;
+            }else{
+                //토큰 있고 만료 안됐으면 true 반환
+                log.info("jwt ok");
+                log.info("[Finished request] GET /user/test");
+                return true;
+            }
+        }catch (ExpiredJwtException e){
+            //토큰 있지만 만료 됐으면 false 반환
+            log.info("expired jwt");
+            log.info("[Finished request] GET /user/test");
+            return false;
+        }
     }
 }

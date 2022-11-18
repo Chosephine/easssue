@@ -5,7 +5,15 @@ module.exports = {
     './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        dohyeon: ['Do Hyeon'],
+      },
+
+    },
+  },
+  variants: {
+    lineClamp: ['responsive', 'hover']
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

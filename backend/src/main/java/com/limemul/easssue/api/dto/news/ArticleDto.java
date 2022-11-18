@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,7 +23,7 @@ public class ArticleDto {
 
     private LocalDateTime pubDate;
 
-    private String summary;
+    private List<String> summary;
 
     private String img;
 
@@ -32,8 +33,9 @@ public class ArticleDto {
         newsId = article.getId();
         title = article.getTitle();
         link = article.getLink();
-        pubDate = article.getPubDate();
-        summary = article.getSummary();
+        //서버 시간과 DB 시간이 9시간 차이나는 문제
+        pubDate = article.getPubDate().plusHours(9L);
+        summary = Arrays.stream(article.getSummary().split("\n")).toList();
         img = article.getImg();
         keywords = article.getArticleKwds().stream().sorted((o1, o2) -> o2.getCount() - o1.getCount())
                 .limit(3).map(ArticleKwd::getKwd).map(Kwd::getName).toList();

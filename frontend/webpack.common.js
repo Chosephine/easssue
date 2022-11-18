@@ -2,7 +2,6 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 module.exports = {
   entry: {
     popup: path.resolve('src/pages/popup/popup.tsx'),
@@ -37,7 +36,6 @@ module.exports = {
     },
   },
   plugins: [
-    new Dotenv(),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
@@ -69,7 +67,7 @@ function getHtmlPlugins(chunks) {
   return chunks.map(
     (chunk) =>
       new HtmlPlugin({
-        title: 'extension-test',
+        title: '새 탭',
         filename: `${chunk}.html`,
         chunks: [chunk],
       })

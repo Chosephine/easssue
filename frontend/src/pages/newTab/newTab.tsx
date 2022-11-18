@@ -19,6 +19,7 @@ import { KeywordModal } from "@/components/KeywordModal";
 //api
 import axios from 'axios'
 import { getNews,trendAPI,getRecommendKeywords,newsLogApi  } from '@modules/api'
+import { userStateCheck } from '@/modules/auth';
 import { getSubscribeKeywordsRedux } from '@/modules/keyWordReducer';
 
 
@@ -50,10 +51,18 @@ const App: React.FC<{}> = () => {
     if(accessToken !== ''){
       axios.defaults.headers.common['Authorization'] = `${accessToken}`;
     }
-    trendAPI();
-    // 키워드 어디서부터 내려줄지? 
-    getRecommendKeywords()
-    dispatch(getSubscribeKeywordsRedux());
+    const getInitialData = async ()=>{
+      const jwtStatus = await dispatch(userStateCheck()).unwrap();
+      console.log("jwtStatus", jwtStatus);
+      if(accessToken !== ''){
+      axios.defaults.headers.common['Authorization'] = `${accessToken}`;
+    }
+    await trendAPI();
+    await getRecommendKeywords()
+    await dispatch(getSubscribeKeywordsRedux());
+      // return jwtStatus.data;
+    }
+    getInitialData();
   }, []);
   const fetchBookmarks = () => {
     chrome.bookmarks.getChildren('1', (bookmarkTreeNodes) => {
@@ -64,7 +73,7 @@ const App: React.FC<{}> = () => {
   const fetchUrl = () => {
     chrome.storage.local.get(['bgimg'], (result) => {
       setImgUrl(result.bgimg);
-      console.log(result.bgimg)
+      // console.log(result.bgimg)
     });
   };
   return (
@@ -74,33 +83,32 @@ const App: React.FC<{}> = () => {
         style={{
           width: '100vw',
           height: '100vh',
-          backgroundImage: 'url(' + imgUrl + ')' || '',
+          backgroundImage: !!imgUrl ? 'url(' + imgUrl + ')' : 'url(default-background.png)',
         }}
       >
-        <div className="h-8 p-2">
-          <Settingbar
-            setSettingModalOpen={setSettingModalOpen}
-            setDashboardModalOpen={setDashboardModalOpen}
-            setKeywordModalOpen={setKeywordModalOpen}
-          />
-        </div>
-        <div className="flex flex-row h-full">
-          <div className="w-1/4"></div>
-          <div className="w-1/2">
+        <div className="flex flex-row justify-center h-full">
+          <div className="w-0 2xl:w-1/5"></div>
+          <div className="w-3/5 min-w-[1152px]">
             <Scrollbars
               autoHideTimeout={1000}
               autoHideDuration={200}
               autoHide={true}
             >
               <Searchbar />
-              <NewsBoard />
+              <NewsBoard setKeywordModalOpen={setKeywordModalOpen}/>
               <Bookmark
                 setBookmarkModalOpen={setBookmarkModalOpen}
                 bookmarkTree={bookmarkTree}
               />
             </Scrollbars>
           </div>
-          <div className="w-1/4">
+          <div className="w-0 xl:w-2/5 2xl:w-1/5">
+            <div className="h-[4rem] mt-6 mb-5 mr-6 p-2">
+            <Settingbar
+              setSettingModalOpen={setSettingModalOpen}
+              setDashboardModalOpen={setDashboardModalOpen}
+            />
+          </div>
             <RealtimeKeyword />
           </div>
         </div>
@@ -119,7 +127,7 @@ const App: React.FC<{}> = () => {
         ></DashboardModal>
       )}
       {keywordModalOpen && (
-        <KeywordModal setKeywordModalOpen={setKeywordModalOpen}></KeywordModal>
+        <KeywordModal setKeywordModalOpen={setKeywordModalOpen} isLogin={isLogin}></KeywordModal>
       )}
       {/* <button onClick={async()=>{
         try {

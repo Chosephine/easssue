@@ -74,13 +74,7 @@ public class KwdApi {
         log.info("[Starting request] GET /keyword/ban");
 
         // 사용자 정보 불러오기
-        Optional<User> optionalUser = getUserFromJwt(userService, headers);
-
-        if (optionalUser.isEmpty()){
-            throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
-        }
-
-        User user = optionalUser.get();
+        User user = getUser(headers);
         List<UserKwd> banKwdList = userKwdService.getUserKwdList(user,UserKwdType.b);
         log.info("userId: {}, banKwdList size: {}",user.getId(),banKwdList.size());
 
@@ -136,8 +130,10 @@ public class KwdApi {
     public boolean updateUserKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdUpdateDto kwdUpdateDto){
         log.info("[Starting request] PUT /keyword");
 
-        updateKwdList(headers, kwdUpdateDto.getSubscKwdList(), UserKwdType.s);
-        updateKwdList(headers, kwdUpdateDto.getBanKwdList(), UserKwdType.b);
+        User user = getUser(headers);
+
+        updateKwdList(user, kwdUpdateDto.getSubscKwdList(), UserKwdType.s);
+        updateKwdList(user, kwdUpdateDto.getBanKwdList(), UserKwdType.b);
 
         log.info("[Finished request] PUT /keyword");
         return true;
@@ -152,7 +148,14 @@ public class KwdApi {
     public boolean updateSubscKwd(@RequestHeader HttpHeaders headers, @RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/subscribe");
 
-        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.s);
+        //사용자 정보 불러오기
+        User user = getUser(headers);
+
+        if(kwdListDto.getKwdList().size()>15){
+            throw new IllegalArgumentException("구독 키워드는 15개를 초과할 수 없습니다.");
+        }
+
+        updateKwdList(user, kwdListDto.getKwdList(), UserKwdType.s);
 
         log.info("[Finished request] PUT /keyword/subscribe");
         return true;
@@ -167,7 +170,11 @@ public class KwdApi {
     public boolean updateBanKwd(@RequestHeader HttpHeaders headers,@RequestBody KwdListDto kwdListDto){
         log.info("[Starting request] PUT /keyword/ban");
 
-        updateKwdList(headers, kwdListDto.getKwdList(), UserKwdType.b);
+        //사용자 정보 불러오기
+        User user = getUser(headers);
+
+        log.info("ban kwdListDto.getKwdList(): {}",kwdListDto.getKwdList());
+        updateKwdList(user, kwdListDto.getKwdList(), UserKwdType.b);
 
         log.info("[Finished request] PUT /keyword/ban");
         return true;
@@ -198,21 +205,28 @@ public class KwdApi {
     }
 
     /**
-     * 사용자 키워드 수정
-     *  UserKwdType에 따라 구독 또는 금지 키워드 변경
+     * 헤더에서 사용자 정보 불러오기
      */
-    private void updateKwdList(HttpHeaders headers, List<KwdDto> kwdListDto, UserKwdType type) {
+    private User getUser(HttpHeaders headers) {
         //사용자 정보 불러오기
         Optional<User> optionalUser = getUserFromJwt(userService, headers);
 
         //로그인 안하면 예외 발생
-        //todo 예외 던질지 false 반환할지 프론트와 이야기
         if(optionalUser.isEmpty()){
             throw new NoSuchElementException("로그인 후 사용할 수 있는 기능입니다.");
         }
 
-        User user = optionalUser.get();
+        return optionalUser.get();
+    }
+
+    /**
+     * 사용자 키워드 수정
+     *  UserKwdType에 따라 구독 또는 금지 키워드 변경
+     */
+    private void updateKwdList(User user, List<KwdDto> kwdListDto, UserKwdType type) {
         List<Long> kwdIds = kwdListDto.stream().map(KwdDto::getKwdId).toList();
+        log.info("kwdIds: {}",kwdIds);
+
         //받아온 키워드 리스트로 업데이트
         userKwdService.updateUserKwdList(user,kwdIds,type);
     }

@@ -1,5 +1,5 @@
 export interface RelatedKeywordBarProps {
-  keywordList: string[];
+  keywordList: any;
   relSelect: number;
   setRelSelect: Function;
 }

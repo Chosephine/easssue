@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 
@@ -49,18 +50,25 @@ public class ArticleLogService {
      *  해당 유저가 해당 날짜에 읽은 기사 정보 리스트 반환
      */
     public List<ArticleLog> getArticleLogByReadDate(User user,LocalDate date){
-        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN));
+        //서버 시간과 DB 시간이 9시간 차이나는 문제
+        return articleLogRepo.findByUserAndClickTimeAfter(user,LocalDateTime.of(date, LocalTime.MIN).minusHours(9));
     }
 
     /**
      * 읽은 기사 로그 남기기
      *  현재 시간에 해당 유저가 해당 기사 읽었다는 로그 저장
+     *  (같은 기사 여러번 안 들어가게)
      */
     @Transactional
     public ArticleLog logReadArticle(User user,Long articleId){
         Article article = articleRepo.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 기사입니다."));
 
-        return articleLogRepo.save(ArticleLog.of(user,article));
+        Optional<ArticleLog> optionalArticleLog = articleLogRepo.findByUserAndArticle(user,article);
+        if(optionalArticleLog.isEmpty()) {
+            return articleLogRepo.save(ArticleLog.of(user, article));
+        }else{
+            return optionalArticleLog.get();
+        }
     }
 }

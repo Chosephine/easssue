@@ -2,6 +2,7 @@ package com.limemul.easssue.repo;
 
 import com.limemul.easssue.api.dto.dash.GraphValueDto;
 import com.limemul.easssue.api.dto.dash.GrassValueDto;
+import com.limemul.easssue.entity.Article;
 import com.limemul.easssue.entity.ArticleLog;
 import com.limemul.easssue.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
 
@@ -30,10 +32,10 @@ public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
      *  날짜 오름차순 정렬
      */
     @Query(value = "select date_format(click_time,'%Y-%m-%d') as date, count(*) as count from article_log " +
-            "where user_id=:user and click_time>:click_time group by date order by date",
+            "where user_id=:user and click_time>:clickTime group by date order by date",
             nativeQuery = true)
     List<GrassValueDto> countByUserAndClickTimeAfterGroupByClickTime(
-            @Param("user") User user, @Param("click_time") LocalDateTime clickTime);
+            @Param("user") User user, @Param("clickTime") LocalDateTime clickTime);
 
     /**
      * 해당 사용자의 해당 날짜에 읽은 기사 정보 조회
@@ -41,4 +43,9 @@ public interface ArticleLogRepo extends JpaRepository<ArticleLog,Long> {
      */
     @EntityGraph(attributePaths = {"article","category"})
     List<ArticleLog> findByUserAndClickTimeAfter(User user, LocalDateTime clickTime);
+
+    /**
+     * 해당 사용자가 해당 기사 이미 읽었는지 확인
+     */
+    Optional<ArticleLog> findByUserAndArticle(User user, Article article);
 }
