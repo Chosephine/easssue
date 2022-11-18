@@ -47,9 +47,9 @@ const PopUpComponent = ({ toggle }) => {
                 </h2>
               </div>
               {!isLoading && <div className="summary w-[100%] px-2 font-service">
-                <div className={`popup-p text-lg ml-1 mb-3`}>{`우측상단 아이콘을 눌러 사용해보세요`}</div>
+                <div className={`popup-p text-lg ml-1 mb-3`}>{`오른쪽 위 있슈 아이콘을 눌러 사용해보세요`}</div>
                 <div className="popup-p text-lg ml-1 mb-3">{`어떤 글이든 중심 키워드를 추출하고`}</div>
-                <div className="popup-p text-lg ml-1 mb-3">{`긴 글을 3줄 요약합니다`}</div>
+                <div className="popup-p text-lg ml-1 mb-3">{`긴 글을 3줄 요약해드립니다`}</div>
               </div>}
             </div>
           )}

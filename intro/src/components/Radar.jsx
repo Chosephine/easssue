@@ -13,16 +13,16 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 export const RadarChart = () => {
   const labels = [
-    'data1',
-    'data2',
-    'data3',
-    'data4',
-    'data5',
-    'data6',
-    'data7',
-    'data8',
+    'IT/과학',
+    '경제',
+    '문화/생활',
+    '미용/건강',
+    '사회',
+    '스포츠',
+    '연예',
+    '정치',
   ];
-  const data = [80, 95, 70, 80, 83, 90, 70, 75];
+  const data = [80, 95, 60, 80, 83, 90, 60, 70];
   const dataset = {
     labels,
     datasets: [
@@ -67,7 +67,7 @@ export const RadarChart = () => {
         },
         ticks: {
           beginAtZero: true,
-          stepSize: 40,
+          stepSize: 100,
           color: 'white',
           showLabelBackdrop: false, // hide square behind text // 이부분이 숫자 label의 배경 부분.
           font: {
@@ -90,12 +90,12 @@ export const RadarChart = () => {
   };
   return (
     <>
-      <div className="radar h-[100%] flex items-center ml-[243px]">
+      <div className="radar h-[100%] flex items-center ml-[323px]">
         <div className="bg-slate-300 m-[-1px] border-[1px] border-black p-[20px] flex justify-center h-[240px] w-[240px]">
             <Radar data={dataset} style={{ height: '' }} options={options} />
         </div>
-          <div className="font-service w-[530px] text-[30px] ml-[40px] pl-[32px]">
-            <div>{`사용자의 이용 내역을 바탕으로 그려지는 방사형 그래프`}</div>
+          <div className="font-service w-[610px] text-[28px] ml-[40px] pl-[32px]">
+            <div>{`뉴스를 읽으면 내 관심사를 카테고리별로 알려주고,`}</div>
           </div>
       </div>
     </>

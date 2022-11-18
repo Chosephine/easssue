@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewsCard = ({ bgColor,title }) => {
+const NewsCard = ({ bgColor,title,keywords }) => {
   return (
     <>
       <div className="news-card border-[1px] border-gray-300 shadow-md flex flex-col justify-between rounded-xl h-full bg-white/75 relative">
@@ -19,26 +19,16 @@ const NewsCard = ({ bgColor,title }) => {
         <div>
           <div className="text-sm mx-2 text-right">{'1시간 전'}</div>
           <div className="grid grid-cols-3">
-            <div className="mx-1">
-              <div
+              {keywords.map((keyword, index) =>{
+             return <div className="mx-1">
+               <div key={index}
                 className="bg-black/50 text-[0.875rem] rounded-full h-8 text-white p-1 text-center my-2 justify-center text-ellipsis line-clamp-1"
               >
-                {'키워드1'}
+                {keyword}
               </div>
             </div>
-            <div className="mx-1">
-              <div
-                className="bg-black/50 text-[0.875rem] rounded-full h-8 text-white p-1 text-center my-2 justify-center text-ellipsis line-clamp-1"
-              >
-                {'키워드2'}
-              </div>
-            </div><div className="mx-1">
-              <div
-                className="bg-black/50 text-[0.875rem] rounded-full h-8 text-white p-1 text-center my-2 justify-center text-ellipsis line-clamp-1"
-              >
-                {'키워드3'}
-              </div>
-            </div>
+              })}
+              
           </div>
         </div>
       </div>
