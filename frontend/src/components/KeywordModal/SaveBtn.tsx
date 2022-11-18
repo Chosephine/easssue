@@ -18,9 +18,11 @@ export const KeywordModalSaveBtn: FC<KeywordModalProps> = ({
   const saveHandler = async () => {
     //*  벤리스트와 구독 키워드 한번에 보낼 것
     await putBanKeywords(banKwdList);
-    await putSubscribeKeywords(subScribeKwdList, subKeyLength);
+    const result = await putSubscribeKeywords(subScribeKwdList, subKeyLength);
     // putAllKey  wordList(subScribeKwdList,banKwdList);
-    setKeywordModalOpen(false);
+    if(result !== 'key length error'){
+      setKeywordModalOpen(false);
+    }
   };
   return (
     <>

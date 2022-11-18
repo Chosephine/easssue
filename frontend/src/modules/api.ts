@@ -192,11 +192,15 @@ export const putSubscribeKeywords = async (
           kwdList: keywordLists,
         },
       });
+      if(!data.error){
+        return 'success';
+      }
     } catch (error) {
       console.error('subscribe keywords put error : ', error);
     }
   }else{
-    alert('key length error!');
+    alert('15개 이상의 키워드를 넣어 오류가 났습니다.');
+    return 'key length error'
   }
 };
 
