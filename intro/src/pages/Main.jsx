@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { gsap, Back } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; //https://www.youtube.com/watch?v=_-_JCocqNbw
+import ScrollDown from '../components/ScrollDown';
 const Main = () => {
   useEffect(() => {}, []);
   const gotoExtension = () =>{
@@ -9,7 +8,7 @@ const Main = () => {
   return (
     <>
       <section className="section02 panel">
-        <main className="main flex-col">
+        <main className="main flex-col mt-[250px]">
           <div className='flex'>
 
           <div className="flex justify-center w-full flex-col mr-[4rem] font-service">
@@ -25,19 +24,7 @@ const Main = () => {
           <div onClick={gotoExtension} className='text-end mr-[-2px] text-blue-400 hover:cursor-pointer'>
             확장프로그램 설치하기 ↗
           </div>
-          {/* <div className='mt-3 flex'>
-            <div className='text-blue-500'>SSAFY</div>
-            <div className='ml-3 mr-1'>{" D102 "}</div>
-            <div >라임물</div>
-            <div className='mx-1'>:</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-            <div className='mr-1'>ㅇㅇㅇ</div>
-          </div> */}
-          {/* <div class="scroll-down">Scroll down<div class="arrow"></div></div> */}
+            <ScrollDown/>
         </main>
 
       </section>
