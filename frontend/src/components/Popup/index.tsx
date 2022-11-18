@@ -20,7 +20,7 @@ export const PopupIndex: FC<PopupIndexProps> = () => {
     }
 
     chrome.runtime.onInstalled.addListener(async () => {
-      console.log(await getCurrentTab());
+      await getCurrentTab();
     });
 
     const getUrl = async () => {

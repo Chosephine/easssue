@@ -53,7 +53,7 @@ const App: React.FC<{}> = () => {
     }
     const getInitialData = async ()=>{
       const jwtStatus = await dispatch(userStateCheck()).unwrap();
-      console.log("jwtStatus", jwtStatus);
+      // console.log("jwtStatus", jwtStatus);
       if(accessToken !== ''){
       axios.defaults.headers.common['Authorization'] = `${accessToken}`;
     }

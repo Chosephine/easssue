@@ -34,7 +34,7 @@ export const signUpAndSetToken = createAsyncThunk<loginResponse,LoginReq>('signu
 
 export const userStateCheck = createAsyncThunk('jwtCheck', async ()=>{
   const data = await jwtCheck();
-  console.log("redux jwt",data);
+  // console.log("redux jwt",data);
   return data;
 })
 

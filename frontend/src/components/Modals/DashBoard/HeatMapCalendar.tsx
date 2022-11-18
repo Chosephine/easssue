@@ -28,7 +28,7 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
           now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
         }` + '일';
       const data = await getNewsHistory(getToday);
-      console.log(data, korDate);
+      // console.log(data, korDate);
       setClickedDate(() => korDate);
       setNewsList(() => data.newsList);
     };
@@ -47,12 +47,12 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
       isToday = true;
     }
     const data = await getNewsHistory(fullDate);
-    console.log('getNewsHistoryFromDate:', data);
+    // console.log('getNewsHistoryFromDate:', data);
     if (data !== null) {
       const splitDate = fullDate.split('-');
       const korDate = `${splitDate[0]}년 ${splitDate[1]}월 ${splitDate[2]}일`
       setNewsList(() => data.newsList);
-      console.log('korDate:', korDate);
+      // console.log('korDate:', korDate);
       setClickedDate(() =>korDate);
     }
   };
@@ -66,7 +66,7 @@ const HeatMapCalendar: FC<GrassType> = ({ startDate, endDate, values }) => {
           // horizontal={false}
           onClick={(value) => {
             if (value !== null) getNewsHistoryFromDate(value.date);
-            console.log('onClick : ', value);
+            // console.log('onClick : ', value);
           }}
           classForValue={(value) => {
             if (!value) {

@@ -19,7 +19,7 @@ const UserKeyword: FC = () => {
       subKeyLength : state.persistedReducer.keyWordReducer.subKeyLength
     }
   });
-  console.log('kwdList:', subScribeKwdList);
+  // console.log('kwdList:', subScribeKwdList);
   const removeKeywordButton = (keywordId: number) => {
     dispatch(removeKeyword(keywordId));
   };

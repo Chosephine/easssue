@@ -14,8 +14,8 @@ const Popup = ({toggle,toggleHandler}) => {
             src="biglogo.png"
             alt=""
           />
-          {!toggle && <span className="animate-ping relative inline-flex w-[150px] h-[150px]  bg-gradient-to-r from-[#6183e7] to-[#1ec4c4] left-[42.2%] opacity-75"></span>}
-        <div className="popup flex flex-col w-[100%] items-center">
+          {!toggle && <span className="animate-ping relative inline-flex w-[150px] h-[150px]  bg-gradient-to-r from-[#6183e7] to-[#1ec4c4] left-[42.2vw] opacity-75"></span>}
+        <div className="popup flex flex-col w-[100vw] items-center">
           
           
       {toggle && <PopUpComponent toggle={toggle}/>}
