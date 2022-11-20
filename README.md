@@ -1,7 +1,6 @@
 # README
 
 ![8.png](./READMEIMGS/있슈_m.png)
-
 # 📰 책상 앞에서 세상을 알다
 
 
@@ -31,6 +30,10 @@
 ### New Tab
 
 ![Untitled](./READMEIMGS/Untitled.png)
+
+### ADD Keyword
+
+![키워드 추가](./READMEIMGS/add_keyword.gif)
 
 ### Dashboard
 
