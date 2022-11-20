@@ -27,9 +27,9 @@ public class ScheduledTasks {
 
     /**
      * 네이트 트렌드 불러와서 DB에 저장
-     *  10분 마다 갱신
+     *  1시간 마다 갱신
      */
-    @Scheduled(cron = "0 0/10 * * * *")
+    @Scheduled(cron = "0 0 0/1 * * *")
     @Transactional
     public void getNateTrends(){
         log.info("[Starting request] Scheduled - getNateTrends");
