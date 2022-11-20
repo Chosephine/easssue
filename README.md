@@ -139,7 +139,7 @@ Data
 
 Backend
 
-### 한유빈 ([GitHub link](https://github.com/mintfrog1209)
+### 한유빈 ([GitHub link](https://github.com/mintfrog1209))
 
 ---
 
