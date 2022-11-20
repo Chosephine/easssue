@@ -72,7 +72,7 @@
 
 # 🛠️ Dev skills
 
-## Backend
+### Backend
 
 ![https://img.shields.io/badge/java-17.0.4.1-blue?style=for-the-badge&logo=java](https://img.shields.io/badge/java-17.0.4.1-blue?style=for-the-badge&logo=java)
 
@@ -80,7 +80,7 @@
 
 ![https://img.shields.io/badge/spring_data_jpa-2.7.4-green?style=for-the-badge&logo=spring](https://img.shields.io/badge/spring_data_jpa-2.7.4-green?style=for-the-badge&logo=spring)
 
-## Frontend
+### Frontend
 
 ![https://img.shields.io/badge/react-18.0.0-blue?style=for-the-badge&logo=react](https://img.shields.io/badge/react-18.0.0-blue?style=for-the-badge&logo=react)
 
@@ -96,7 +96,7 @@
 
 ![https://img.shields.io/badge/webpack5-5.75.0-lightblue?style=for-the-badge&logo=webpack](https://img.shields.io/badge/webpack5-5.75.0-lightblue?style=for-the-badge&logo=webpack)
 
-## Data
+### Data
 
 ![https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python](https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python)
 
@@ -106,7 +106,7 @@
 
 ![https://img.shields.io/badge/scikit_learn-1.1.3-orange?style=for-the-badge&logo=scikitlearn](https://img.shields.io/badge/scikit_learn-1.1.3-orange?style=for-the-badge&logo=scikitlearn)
 
-## Infra
+### Infra
 
 ![https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql](https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql)
 
