@@ -9,20 +9,6 @@
 
 **있슈 easssue** : 쉬운 ***easy*** + 이슈 ***issue***, 여기에 모든 이슈가 ***있슈***!
 
-## 💙 Show
-
-### New Tab
-
-![Untitled](./READMEIMGS/Untitled.png)
-
-### Dashboard
-
-![Untitled](./READMEIMGS/Untitled%201.png)
-
-### Pop Up
-
-![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
-
 ## 💡 Description
 
 ### 프로젝트 기획 배경
@@ -40,6 +26,19 @@
 - 사용자가 읽은 기사에 대한 정보를 확인할 수 있는 대쉬보드
 - 직접 내용을 구성하고 꾸밀 수 있는 크롬 브라우저 새 탭
 - 기사를 바탕으로 구성된 워드 클라우드와 3줄 요약을 실시간으로 제공하는 크롬 팝업
+## 💙 Show
+
+### New Tab
+
+![Untitled](./READMEIMGS/Untitled.png)
+
+### Dashboard
+
+![Untitled](./READMEIMGS/Untitled%201.png)
+
+### Pop Up
+
+![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
 ## 🧭 Base
 
@@ -75,47 +74,32 @@
 ### Backend
 
 ![https://img.shields.io/badge/java-17.0.4.1-blue?style=for-the-badge&logo=java](https://img.shields.io/badge/java-17.0.4.1-blue?style=for-the-badge&logo=java)
-
 ![https://img.shields.io/badge/spring_boot-2.7.4-green?style=for-the-badge&logo=spring](https://img.shields.io/badge/spring_boot-2.7.4-green?style=for-the-badge&logo=spring)
-
 ![https://img.shields.io/badge/spring_data_jpa-2.7.4-green?style=for-the-badge&logo=spring](https://img.shields.io/badge/spring_data_jpa-2.7.4-green?style=for-the-badge&logo=spring)
 
 ### Frontend
 
 ![https://img.shields.io/badge/react-18.0.0-blue?style=for-the-badge&logo=react](https://img.shields.io/badge/react-18.0.0-blue?style=for-the-badge&logo=react)
-
 ![https://img.shields.io/badge/typescript-4.2.4-blue?style=for-the-badge&logo=typescript](https://img.shields.io/badge/typescript-4.2.4-blue?style=for-the-badge&logo=typescript)
-
 ![https://img.shields.io/badge/redux-8.0.4-orange?style=for-the-badge&logo=redux](https://img.shields.io/badge/redux-8.0.4-orange?style=for-the-badge&logo=redux)
-
 ![https://img.shields.io/badge/axios-1.1.3-orange?style=for-the-badge&logo=axios](https://img.shields.io/badge/axios-1.1.3-orange?style=for-the-badge&logo=axios)
-
 ![https://img.shields.io/badge/tailwind_css-3.2.0-lightblue?style=for-the-badge&logo=tailwindcss](https://img.shields.io/badge/tailwind_css-3.2.0-lightblue?style=for-the-badge&logo=tailwindcss)
-
 ![https://img.shields.io/badge/chart.js-3.9.1-orange?style=for-the-badge&logo=chartdotjs](https://img.shields.io/badge/chart.js-3.9.1-orange?style=for-the-badge&logo=chartdotjs)
-
 ![https://img.shields.io/badge/webpack5-5.75.0-lightblue?style=for-the-badge&logo=webpack](https://img.shields.io/badge/webpack5-5.75.0-lightblue?style=for-the-badge&logo=webpack)
 
 ### Data
 
 ![https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python](https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python)
-
 ![https://img.shields.io/badge/apache_airflow-2.1.2-blue?style=for-the-badge&logo=apacheairflow](https://img.shields.io/badge/apache_airflow-2.1.2-blue?style=for-the-badge&logo=apacheairflow)
-
 ![https://img.shields.io/badge/konlpy-0.6.0-orange?style=for-the-badge&logo=konlpy](https://img.shields.io/badge/konlpy-0.6.0-orange?style=for-the-badge&logo=konlpy)
-
 ![https://img.shields.io/badge/scikit_learn-1.1.3-orange?style=for-the-badge&logo=scikitlearn](https://img.shields.io/badge/scikit_learn-1.1.3-orange?style=for-the-badge&logo=scikitlearn)
 
 ### Infra
 
 ![https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql](https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql)
-
 ![https://img.shields.io/badge/aws-EC2-orange?style=for-the-badge&logo=amazonaws](https://img.shields.io/badge/aws-EC2-orange?style=for-the-badge&logo=amazonaws)
-
 ![https://img.shields.io/badge/ubuntu-20.04_LTS-orange?style=for-the-badge&logo=ubuntu](https://img.shields.io/badge/ubuntu-20.04_LTS-orange?style=for-the-badge&logo=ubuntu)
-
 ![https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker](https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker)
-
 ![https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins](https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins)
 
 # 🍋 Team. Limemul
