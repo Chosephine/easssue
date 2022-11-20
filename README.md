@@ -107,37 +107,39 @@
 
 # 🍋 Team. Limemul
 
-### 김효은
+### ![Notion](./READMEIMGS/icons8-notion-24.png) [Team Notion](https://www.notion.so/easssue-093a7d08efb54fb9b61b7fce93cedd85)
+
+### 김효은 ([GitHub link](https://github.com/Chosephine))
 
 ---
 
 팀장 Backend
 
-### 엄성현
+### 엄성현 ([GitHub link](https://github.com/eomsteve))
 
 ---
 
 부팀장 Frontend
 
-### 임소연
+### 임소연 ([GitHub link](https://github.com/Im-sy))
 
 ---
 
 Data
 
-### 지승영
+### 지승영 ([GitHub link](https://github.com/jisy2718))
 
 ---
 
 Data
 
-### 전효인
+### 전효인 ([GitHub link](https://github.com/zaq1290))
 
 ---
 
 Backend
 
-### 한유빈
+### 한유빈 ([GitHub link](https://github.com/mintfrog1209)
 
 ---
 
