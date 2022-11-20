@@ -1,6 +1,6 @@
 # README
 
-![8.png](./READMEIGMS/../READMEIMGS/있슈_m.png)
+![8.png](./READMEIMGS/있슈_m.png)
 
 # 📰 책상 앞에서 세상을 알다
 
@@ -13,15 +13,15 @@
 
 ### New Tab
 
-![Untitled](README%206eb94b65de384ed8bbe0f4291548e9fa/Untitled.png)
+![Untitled](./READMEIMGS/Untitled.png)
 
 ### Dashboard
 
-![Untitled](README%206eb94b65de384ed8bbe0f4291548e9fa/Untitled%201.png)
+![Untitled](./READMEIMGS/Untitled%201.png)
 
 ### Pop Up
 
-![easssue_popup.gif](README%206eb94b65de384ed8bbe0f4291548e9fa/easssue_popup.gif)
+![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
 ## 💡 Description
 
@@ -45,11 +45,11 @@
 
 ### Mockup
 
-![Untitled](README%206eb94b65de384ed8bbe0f4291548e9fa/Untitled%202.png)
+![Untitled](./READMEIMGS/Untitled%202.png)
 
 ### ERD
 
-![Untitled](README%206eb94b65de384ed8bbe0f4291548e9fa/Untitled%203.png)
+![Untitled](./READMEIMGS/Untitled%203.png)
 
 # 🏁 Run
 
@@ -63,7 +63,7 @@
     2. 있슈 또는 easssue 검색
     3. Chrome에 추가 클릭
     
-    ![Untitled](README%206eb94b65de384ed8bbe0f4291548e9fa/Untitled%204.png)
+    ![Untitled](./READMEIMGS/Untitled%204.png)
     
     ⬇️ 있슈 easssue 확장 프로그램 Chrome에 추가 바로가기 링크
     
