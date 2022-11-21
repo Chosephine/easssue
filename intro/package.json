@@ -1,0 +1,53 @@
+{
+  "name": "intro",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-gsap": "^3.2.1",
+    "react-scripts": "5.0.1",
+    "react-scrollmagic": "^2.3.0",
+    "react-slick": "^0.29.0",
+    "scrollmagic": "^2.0.8",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "chart.js": "^4.0.1",
+    "gsap": "^3.11.3",
+    "postcss": "^8.4.19",
+    "react-calendar-heatmap": "^1.9.0",
+    "react-chartjs-2": "^4.3.1",
+    "styled-components": "^5.3.6",
+    "tailwindcss": "^3.2.4"
+  }
+}

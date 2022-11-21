@@ -1,0 +1,38 @@
+{
+  "name": "있슈 easssue",
+  "description": "실시간 이슈 확인 확장 프로그램",
+  "version": "1.3.0",
+  "manifest_version": 3,
+  "oauth2": {
+    "client_id": "900377591657-g44asicjjvhlbibbhfuhjenosejli4ba.apps.googleusercontent.com",
+    "scopes":["https://www.googleapis.com/auth/userinfo.email"]
+  },
+  "icons": {
+    "16": "smalllogo.png",
+    "48": "smalllogo.png",
+    "128": "biglogo.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "easssue",
+    "default_icon": "smalllogo.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newTab.html"
+  },
+  "host_permissions": [
+    "https://*/*"
+  ],
+
+  "permissions": ["storage", "bookmarks", "unlimitedStorage", "tabs"],
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*","https://www.naver.com/*","https://www.easssue.com/*", "https://search.naver.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
