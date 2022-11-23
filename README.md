@@ -9,6 +9,7 @@
 ---
 
 ### 목차
+
 - [📰 책상 앞에서 세상을 알다](#-책상-앞에서-세상을-알다)
     - [목차](#목차)
   - [💡 프로젝트 기획](#-프로젝트-기획)
@@ -21,18 +22,18 @@
     - [ADD Keyword](#add-keyword)
     - [Dashboard](#dashboard)
     - [Pop Up](#pop-up)
-- [🏁 Run](#-run)
-- [🛠️ Dev skills](#️-dev-skills)
+  - [🏁 Run](#-run)
+  - [🛠️ Dev skills](#️-dev-skills)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Data](#data)
     - [Infra](#infra)
-  - [🔨 System Architecture](#-system-architecture)
+    - [시스템 아키텍처](#시스템-아키텍처)
   - [🍋 팀 소개](#-팀-소개)
     - [Team. Limemul](#team-limemul)
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
----
+
 
 ## 💡 프로젝트 기획
 
@@ -81,7 +82,7 @@
 
 ![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
-# 🏁 Run
+## 🏁 Run
 
 - 프로그램 서비스 소개 페이지 ([link](https://www.easssue.com/))
 
@@ -95,7 +96,7 @@
   ⬇️ 있슈 easssue 확장 프로그램 Chrome에 추가 바로가기 링크
   [있슈 easssue](https://chrome.google.com/webstore/detail/%EC%9E%88%EC%8A%88-easssue/cmnmdjpabceejnbkdlijepkmcdpdohjl)
 
-# 🛠️ Dev skills
+## 🛠️ Dev skills
 
 ### Backend
 
@@ -128,7 +129,7 @@
 ![https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker](https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker)
 ![https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins](https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins)
 
-## 🔨 System Architecture
+### 시스템 아키텍처
 
 ![easssue.png](/READMEIMGS/easssue.png)
 
