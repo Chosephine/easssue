@@ -9,7 +9,6 @@
 ---
 
 ### 목차
-
 - [📰 책상 앞에서 세상을 알다](#-책상-앞에서-세상을-알다)
     - [목차](#목차)
   - [💡 프로젝트 기획](#-프로젝트-기획)
@@ -22,7 +21,7 @@
     - [ADD Keyword](#add-keyword)
     - [Dashboard](#dashboard)
     - [Pop Up](#pop-up)
-  - [🏁실행](#실행)
+  - [🏁 Run](#-run)
   - [🛠️ Dev skills](#️-dev-skills)
     - [Backend](#backend)
     - [Frontend](#frontend)
@@ -33,6 +32,9 @@
     - [Team. Limemul](#team-limemul)
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 
 ## 💡 프로젝트 기획
@@ -82,7 +84,7 @@
 
 ![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
-## 🏁실행
+## 🏁 Run
 
 - 프로그램 서비스 소개 페이지 ([link](https://www.easssue.com/))
 
