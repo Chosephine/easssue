@@ -28,7 +28,8 @@
     - [Data](#data)
     - [Infra](#infra)
   - [🔨 System Architecture](#-system-architecture)
-- [🍋 Team. Limemul](#-team-limemul)
+  - [🍋 팀 소개](#-팀-소개)
+    - [Team. Limemul](#team-limemul)
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
 ---
@@ -131,7 +132,12 @@
 
 ![easssue.png](/READMEIMGS/easssue.png)
 
-# 🍋 Team. Limemul
+## 🍋 팀 소개
+
+### Team. Limemul
+
+한잔의 🍋라임물🍋로 시작하는 갓생을 사는 그/그녀들에게 꽂혀버린 팀원들
+
 
 ### ![Notion](./READMEIMGS/icons8-notion-24.png) [Team Notion](https://www.notion.so/easssue-093a7d08efb54fb9b61b7fce93cedd85)
 
