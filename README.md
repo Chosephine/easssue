@@ -1,5 +1,4 @@
 # README
-
 ![8.png](./READMEIMGS/있슈_m.png)
 # 📰 책상 앞에서 세상을 알다
 
@@ -8,9 +7,26 @@
 
 **있슈 easssue** : 쉬운 ***easy*** + 이슈 ***issue***, 여기에 모든 이슈가 ***있슈***!
 
-## 💡 Description
+---
 
-### 프로젝트 기획 배경
+### 목차
+
+[프로젝트 기획](#💡-프로젝트-기획)
+- 기획 배경
+- 주요 서비스 기능
+- Mockup
+- ERD
+
+[결과물](#💙-결과물)
+
+[기술스택](#🛠️-기술-스택)
+
+[팀소개](#팀-소개)
+
+---
+## 💡 프로젝트 기획
+
+### 기획 배경
 
 - 시시각각 변하고, 그에 따라 많은 뉴스도 생산되는 현대 사회에서 원하는 키워드에 대한 이슈 트래킹을 할 수 있는 서비스 제공
 - 뉴스를 통해 전문성있고 빠른 이슈를 습득할 수 있는 기회 제공
@@ -25,7 +41,15 @@
 - 사용자가 읽은 기사에 대한 정보를 확인할 수 있는 대쉬보드
 - 직접 내용을 구성하고 꾸밀 수 있는 크롬 브라우저 새 탭
 - 기사를 바탕으로 구성된 워드 클라우드와 3줄 요약을 실시간으로 제공하는 크롬 팝업
-## 💙 Show
+
+### Mockup
+
+![Untitled](./READMEIMGS/Untitled%202.png)
+
+### ERD
+
+![Untitled](./READMEIMGS/Untitled%203.png)
+## 💙 결과물
 
 ### New Tab
 
@@ -43,15 +67,6 @@
 
 ![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
-## 🧭 Base
-
-### Mockup
-
-![Untitled](./READMEIMGS/Untitled%202.png)
-
-### ERD
-
-![Untitled](./READMEIMGS/Untitled%203.png)
 
 # 🏁 Run
 
@@ -105,42 +120,18 @@
 ![https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker](https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker)
 ![https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins](https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins)
 
+## 🔨 System Architecture
+
+![easssue.png](/READMEIMGS/easssue.png)
+
 # 🍋 Team. Limemul
 
 ### ![Notion](./READMEIMGS/icons8-notion-24.png) [Team Notion](https://www.notion.so/easssue-093a7d08efb54fb9b61b7fce93cedd85)
 
-### 김효은 ([GitHub link](https://github.com/Chosephine))
 
----
+### Teammates
 
-팀장 Backend
-
-### 엄성현 ([GitHub link](https://github.com/eomsteve))
-
----
-
-부팀장 Frontend
-
-### 임소연 ([GitHub link](https://github.com/Im-sy))
-
----
-
-Data
-
-### 지승영 ([GitHub link](https://github.com/jisy2718))
-
----
-
-Data
-
-### 전효인 ([GitHub link](https://github.com/zaq1290))
-
----
-
-Backend
-
-### 한유빈 ([GitHub link](https://github.com/mintfrog-1209))
-
----
-
-Frontend
+| 이름     | 엄성현                                     | 임소연                               | 지승영                                     | 한유빈                                   | 전효인                                   | 김효은                                         |
+|:------:|:---------------------------------------:|:---------------------------------:|:---------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------------:|
+| 포지션    | FE                                      | Data                              | Data                                    | FE                            | BE                                    | BE, 팀장                                      |
+| Github | [eomsteve](https://github.com/eomsteve) | [Im-sy](https://github.com/Im-sy) | [jisy2718](https://github.com/jisy2718) | [mintfrog1209](https://github.com/mintfrog-1209) | [zaq1290](https://github.com/zaq1290) | [Chosephine](https://github.com/Chosephine) |
