@@ -22,7 +22,7 @@
     - [ADD Keyword](#add-keyword)
     - [Dashboard](#dashboard)
     - [Pop Up](#pop-up)
-  - [🏁 Run](#-run)
+  - [🏁실행](#실행)
   - [🛠️ Dev skills](#️-dev-skills)
     - [Backend](#backend)
     - [Frontend](#frontend)
@@ -82,7 +82,7 @@
 
 ![easssue_popup.gif](./READMEIMGS/easssue_popup.gif)
 
-## 🏁 Run
+## 🏁실행
 
 - 프로그램 서비스 소개 페이지 ([link](https://www.easssue.com/))
 
