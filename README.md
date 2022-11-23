@@ -33,10 +33,6 @@
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-
 ## 💡 프로젝트 기획
 
 ### 기획 배경
@@ -136,6 +132,7 @@
 ![easssue.png](/READMEIMGS/easssue.png)
 
 ## 🍋 팀 소개
+
 
 ### Team. Limemul
 
