@@ -9,7 +9,6 @@
 ---
 
 ### 목차
-
 - [📰 책상 앞에서 세상을 알다](#-책상-앞에서-세상을-알다)
     - [목차](#목차)
   - [💡 프로젝트 기획](#-프로젝트-기획)
@@ -32,7 +31,6 @@
 - [🍋 Team. Limemul](#-team-limemul)
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
-
 ---
 
 ## 💡 프로젝트 기획
